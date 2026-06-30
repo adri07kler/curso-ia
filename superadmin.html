@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Admin - CleverLabs Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Panel Header -->
+  <header class="panel-header">
+    <div class="panel-header-left">
+      <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+      <span class="panel-title-btn" style="font-weight:bold;color:#fff;font-size:1.2rem">Admin CleverLabs</span>
+      <span class="admin-badge-header" id="adminRoleBadge" style="background:#dc2626">SUPER ADMIN</span>
+    </div>
+    <div class="panel-header-center" style="flex:1"></div>
+    <div class="panel-header-right">
+      <div class="profile-trigger" id="profileTrigger">
+        <img id="profilePic" src="img/default-avatar.svg" alt="Admin">
+      </div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="dropdown-pic-wrap">
+          <img id="dropdownPic" src="img/default-avatar.svg">
+        </div>
+        <div class="dropdown-info">
+          <p style="font-weight:bold;text-align:center;font-size:1.05rem" id="dropdownAdminName">Super Administrador</p>
+          <p id="dropdownAdminEmail" class="dropdown-email">superadmin@cleverlabs.com</p>
+        </div>
+        <a href="index.html" class="dropdown-link" onclick="cerrarSesionAdmin()">🚪 Cerrar sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Body -->
+  <div class="panel-body admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="sidebar-btn" data-section="dashboard">📊 Dashboard</button></li>
+          <li><button class="sidebar-btn" data-section="usuarios">👥 Usuarios</button></li>
+          <li><button class="sidebar-btn" data-section="modulos">📚 Módulos</button></li>
+          <li><button class="sidebar-btn" data-section="lecciones">📝 Lecciones</button></li>
+          <li><button class="sidebar-btn" data-section="calificaciones">📊 Calificaciones</button></li>
+          <li><button class="sidebar-btn" data-section="config">⚙️ Configuración</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Admin Content -->
+    <main class="admin-content" id="adminContent">
+      <div class="loading">Cargando panel de administración...</div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" style="display:none" onclick="cerrarModalOutside(event)">
+    <div class="modal" id="modalContent">
+      <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initAdminPanel)
+  </script>
+</body>
+</html>

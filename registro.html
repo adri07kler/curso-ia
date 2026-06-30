@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - Curso Desarrollo con IA</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <h2>CleverLabs Academy</h2>
+    <div class="nav-hamburger">
+      <button class="menu-btn" onclick="document.getElementById('navMenu').classList.toggle('show')">☰</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="login.html">Iniciar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="form-section">
+  <div class="form-box">
+    <h2>Registro</h2>
+    <form id="registroForm">
+      <input type="text" id="regName" placeholder="Nombre completo" required>
+      <input type="email" id="regEmail" placeholder="Correo electrónico" required>
+      <input type="password" id="regPassword" placeholder="Contraseña" required>
+      <button>Registrarse</button>
+    </form>
+    <p class="form-link">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 CleverLabs Academy</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

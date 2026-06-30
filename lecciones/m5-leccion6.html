@@ -1,0 +1,31 @@
+<div class="lesson-content">
+<h1>5.6 Auditar una solución generada por IA</h1>
+<p class="subtitle">Módulo 5 · Ejercicio</p>
+<div class="highlight"><strong>Objetivo:</strong> Practicar la auditoría completa de una solución generada por IA.</div>
+<h2>Enunciado</h2>
+<p><strong>Requerimiento:</strong> Función que recibe un archivo CSV y devuelve un JSON con el promedio de cada columna numérica.</p>
+<p><strong>Solución generada:</strong></p>
+<pre><code>import csv, json
+
+def csv_to_json_promedios(ruta_archivo):
+    datos = []
+    with open(ruta_archivo, 'r') as archivo:
+        lector = csv.DictReader(archivo)
+        for fila in lector:
+            datos.append(fila)
+    promedios = {}
+    for columna in datos[0].keys():
+        suma = 0; count = 0
+        for fila in datos:
+            try:
+                suma += float(fila[columna])
+                count += 1
+            except:
+                pass
+        if count > 0:
+            promedios[columna] = suma / count
+    return json.dumps(promedios)</code></pre>
+<h2>Tareas</h2>
+<ol><li>Identifica al menos 3 problemas (crítico o menor)</li><li>Propón correcciones</li><li>Escribe las pruebas mínimas</li><li>Decide: ¿Apruebas, requieres cambios o rechazas?</li></ol>
+<p><strong>Problemas a identificar:</strong> Error si CSV vacío, no maneja archivos inexistentes, mezcla columnas no numéricas.</p>
+</div>

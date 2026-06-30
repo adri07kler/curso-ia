@@ -1,0 +1,20 @@
+<div class="lesson-content">
+<h1>2.3 Requerimientos funcionales</h1>
+<p class="subtitle">Módulo 2 · Documento</p>
+<div class="highlight"><strong>Objetivo:</strong> Aprender a escribir requerimientos funcionales claros y accionables.</div>
+<h2>Características de un buen requerimiento funcional</h2>
+<ul><li><strong>Claro:</strong> Una sola interpretación posible</li><li><strong>Verificable:</strong> Se puede probar (pasa/no pasa)</li><li><strong>Completo:</strong> Incluye toda la información necesaria</li><li><strong>Consistente:</strong> No contradice otros requerimientos</li><li><strong>Necesario:</strong> Realmente se necesita</li></ul>
+<h2>Ejemplo bien escrito</h2>
+<pre><code>RF-001: El sistema debe permitir que un usuario registrado inicie sesión
+con su correo electrónico y contraseña.
+- El campo de correo debe aceptar formatos estándar (ej: usuario@dominio.com)
+- La contraseña debe tener al menos 8 caracteres
+- Tras 3 intentos fallidos, la cuenta debe bloquearse por 30 minutos
+- El sistema debe devolver un mensaje de error específico para cada tipo de fallo</code></pre>
+<h2>Comparación: vago vs claro</h2>
+<table><thead><tr><th>Vago</th><th>Claro</th></tr></thead><tbody>
+<tr><td>"El sistema debe ser rápido"</td><td>"Debe responder en &lt;500ms para el 95% de las solicitudes"</td></tr>
+<tr><td>"Los usuarios pueden subir archivos"</td><td>"Pueden subir PDF e imágenes (jpg, png) de hasta 10MB"</td></tr>
+<tr><td>"Debe haber seguridad"</td><td>"Debe usar HTTPS, bcrypt, JWT con expiración de 1 hora"</td></tr>
+</tbody></table>
+</div>

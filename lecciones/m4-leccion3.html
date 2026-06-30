@@ -1,0 +1,18 @@
+<div class="lesson-content">
+<h1>4.3 Implementar por pasos pequeños</h1>
+<p class="subtitle">Módulo 4 · Video</p>
+<div class="highlight"><strong>Objetivo:</strong> Aprender a dividir la implementación en fragmentos pequeños y manejables.</div>
+<h2>Estrategia</h2>
+<ol><li><strong>Divide por funcionalidad:</strong> Cada prompt implementa UNA funcionalidad atómica</li><li><strong>Divide por capas:</strong> Primero modelo de datos, luego lógica, luego API, luego interfaz</li><li><strong>Revisa cada paso antes de continuar:</strong> No acumules errores</li><li><strong>Usa el resultado anterior como contexto del siguiente</strong></li></ol>
+<h2>Ejemplo de secuenciación</h2>
+<table><thead><tr><th>Paso</th><th>Tarea</th><th>Tamaño</th></tr></thead><tbody>
+<tr><td>1</td><td>Definir modelo de datos</td><td>~5 líneas</td></tr>
+<tr><td>2</td><td>Crear endpoint GET</td><td>~15 líneas</td></tr>
+<tr><td>3</td><td>Crear endpoint POST</td><td>~15 líneas</td></tr>
+<tr><td>4</td><td>Añadir validación</td><td>~10 líneas</td></tr>
+<tr><td>5</td><td>Añadir pruebas</td><td>~20 líneas</td></tr>
+<tr><td>6</td><td>Añadir documentación</td><td>~10 líneas</td></tr>
+</tbody></table>
+<h2>Ventajas</h2>
+<ul><li>Cada paso es fácil de revisar</li><li>Si un paso falla, solo afecta a ese paso</li><li>Puedes corregir sobre la marcha</li><li>El código es más coherente</li></ul>
+</div>

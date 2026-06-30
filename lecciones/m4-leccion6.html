@@ -1,0 +1,25 @@
+<div class="lesson-content">
+<h1>4.6 Corregir una mala salida de IA</h1>
+<p class="subtitle">Módulo 4 · Ejercicio</p>
+<div class="highlight"><strong>Objetivo:</strong> Practicar la identificación y corrección de errores en código generado por IA.</div>
+<h2>Enunciado</h2>
+<p><strong>Requerimiento:</strong> Función que recibe una lista de números y devuelve la suma de los pares.</p>
+<p><strong>Prompt usado:</strong> "Haz una función que sume números pares de una lista"</p>
+<p><strong>Respuesta de IA:</strong></p>
+<pre><code>def suma_pares(lista):
+    suma = 0
+    for num in lista:
+        if num % 2 == 0:
+            suma += num
+    return suma</code></pre>
+<h2>Tareas</h2>
+<ol><li>¿El código cumple el requerimiento? Identifica problemas</li><li>¿Qué casos borde no maneja?</li><li>¿Qué corregirías o mejorarías?</li><li>¿Qué pruebas escribirías?</li></ol>
+<h2>Problemas a identificar</h2>
+<ul><li>No maneja lista vacía</li><li>No maneja tipos no numéricos</li><li>No maneja números negativos</li></ul>
+<h2>Solución mejorada</h2>
+<pre><code>def suma_pares(numeros):
+    if not isinstance(numeros, list):
+        raise TypeError("Se esperaba una lista")
+    return sum(num for num in numeros
+               if isinstance(num, (int, float)) and num % 2 == 0)</code></pre>
+</div>

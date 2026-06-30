@@ -1,0 +1,12 @@
+<div class="lesson-content">
+<h1>2.4 Criterios de aceptación</h1>
+<p class="subtitle">Módulo 2 · Video</p>
+<div class="highlight"><strong>Objetivo:</strong> Definir criterios de aceptación que permitan verificar objetivamente si un requerimiento está cumplido.</div>
+<h2>Formato Given-When-Then (BDD)</h2>
+<ul><li><strong>Given</strong> (Contexto): Dado un escenario inicial</li><li><strong>When</strong> (Acción): Cuando ocurre un evento</li><li><strong>Then</strong> (Resultado): Entonces esperamos un resultado específico</li></ul>
+<h2>Ejemplos</h2>
+<div class="highlight"><strong>Inicio de sesión exitoso:</strong><br>Given: Un usuario registrado con correo "a@b.com" y contraseña "12345678"<br>When: El usuario ingresa credenciales correctas<br>Then: El sistema le muestra el dashboard principal</div>
+<div class="highlight"><strong>Contraseña incorrecta:</strong><br>Given: Un usuario registrado con correo "a@b.com"<br>When: El usuario ingresa una contraseña incorrecta<br>Then: El sistema muestra "Contraseña incorrecta" y no inicia sesión</div>
+<div class="highlight"><strong>Cuenta bloqueada:</strong><br>Given: Un usuario ha fallado 3 intentos de inicio de sesión<br>When: El usuario intenta iniciar sesión nuevamente<br>Then: El sistema muestra "Cuenta bloqueada por 30 minutos"</div>
+<p>Los criterios de aceptación son directamente convertibles en pruebas automatizadas.</p>
+</div>

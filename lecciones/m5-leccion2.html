@@ -1,0 +1,24 @@
+<div class="lesson-content">
+<h1>5.2 Pruebas mínimas necesarias</h1>
+<p class="subtitle">Módulo 5 · Documento</p>
+<div class="highlight"><strong>Objetivo:</strong> Definir el conjunto mínimo de pruebas para validar código generado por IA.</div>
+<h2>Tipos de pruebas mínimas</h2>
+<table><thead><tr><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td>Prueba de humo</td><td>Verifica que se ejecuta sin errores</td><td>Llamar con datos válidos</td></tr>
+<tr><td>Prueba de caso feliz</td><td>Verifica el resultado esperado</td><td>suma_pares([2,4,6]) == 12</td></tr>
+<tr><td>Prueba de caso borde</td><td>Verifica límites</td><td>suma_pares([]) == 0</td></tr>
+<tr><td>Prueba de error</td><td>Verifica fallo correcto</td><td>suma_pares("texto") → TypeError</td></tr>
+<tr><td>Prueba de regresión</td><td>No rompe nada existente</td><td>Ejecutar tests existentes</td></tr>
+</tbody></table>
+<h2>Ejemplo mínimo</h2>
+<pre><code>def test_suma_pares_caso_feliz():
+    assert suma_pares([1, 2, 3, 4]) == 6
+
+def test_suma_pares_lista_vacia():
+    assert suma_pares([]) == 0
+
+def test_suma_pares_error_tipo():
+    with pytest.raises(TypeError):
+        suma_pares("no es lista")</code></pre>
+<div class="highlight"><strong>Regla:</strong> Por cada función generada por IA, debe haber al menos una prueba de caso feliz y una de caso borde o error.</div>
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Administrativo - CleverLabs Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .superadmin-form { max-width: 380px; margin: 0 auto; }
+    .superadmin-lock { text-align: center; margin-bottom: 20px; font-size: 2.5rem; }
+    .superadmin-login-link { display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; color: #94a3b8; text-decoration: none; }
+    .superadmin-login-link:hover { color: #64748b; }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <h2>CleverLabs Academy</h2>
+    <div class="nav-hamburger">
+      <button class="menu-btn" onclick="document.getElementById('navMenu').classList.toggle('show')">☰</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="form-section">
+  <div class="form-box superadmin-form">
+    <div class="superadmin-lock">🔐</div>
+    <h2>Acceso administrativo</h2>
+    <p style="text-align:center;color:#94a3b8;font-size:0.85rem;margin-bottom:20px">Portal exclusivo para administradores</p>
+    <form id="superadminLoginForm">
+      <input type="email" id="superadminEmail" placeholder="Correo administrativo" required>
+      <input type="password" id="superadminPassword" placeholder="Contraseña" required>
+      <button>Ingresar al panel</button>
+    </form>
+    <p id="superadminMsg" class="config-msg"></p>
+    <a href="index.html" class="superadmin-login-link">← Volver al inicio</a>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 CleverLabs Academy</p>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+  document.getElementById('superadminLoginForm').addEventListener('submit', function(e) {
+    e.preventDefault()
+    handleSuperAdminLogin(e)
+  })
+</script>
+</body>
+</html>

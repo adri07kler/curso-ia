@@ -1,0 +1,17 @@
+<div class="lesson-content">
+<h1>5.3 Casos borde y errores esperados</h1>
+<p class="subtitle">Módulo 5 · Documento</p>
+<div class="highlight"><strong>Objetivo:</strong> Aprender a identificar y probar sistemáticamente los casos borde.</div>
+<h2>Estrategia para encontrar casos borde</h2>
+<ol><li><strong>Entrada vacía/nula:</strong> ¿Qué pasa si no hay datos?</li><li><strong>Entrada mínima/máxima:</strong> ¿Valores en los límites?</li><li><strong>Entrada inválida:</strong> ¿Tipos incorrectos?</li><li><strong>Estado del sistema:</strong> ¿BD caída? ¿Red lenta?</li><li><strong>Concurrencia:</strong> ¿Dos peticiones simultáneas?</li><li><strong>Dependencias:</strong> ¿API externa devuelve error?</li><li><strong>Tiempo:</strong> ¿Timeout?</li></ol>
+<h2>Ejemplo</h2>
+<pre><code>def get_usuario_por_id(db, usuario_id):
+    if not db:
+        raise ConnectionError("BD no disponible")
+    if not isinstance(usuario_id, int):
+        raise TypeError("ID debe ser entero")
+    if usuario_id <= 0:
+        raise ValueError("ID debe ser positivo")
+    resultado = db.query("SELECT * FROM usuarios WHERE id = ?", usuario_id)
+    return resultado[0] if resultado else None</code></pre>
+</div>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración - CleverLabs Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="panel-header">
+    <div class="panel-header-left">
+      <h2>CleverLabs Academy</h2>
+    </div>
+    <div class="panel-header-right">
+      <a href="panel.html" class="back-link">← Volver al panel</a>
+    </div>
+  </header>
+
+  <main class="config-main">
+    <div class="config-box">
+      <h2>Configuración de perfil</h2>
+
+      <div class="config-avatar">
+        <img id="configPic" src="img/default-avatar.svg">
+        <label for="configPhotoInput" class="boton" style="margin-top:10px;cursor:pointer">Cambiar foto</label>
+        <input type="file" id="configPhotoInput" accept="image/*" hidden>
+      </div>
+
+      <form id="configForm">
+        <label>Nombre completo</label>
+        <input type="text" id="configName" required>
+
+        <label>Correo electrónico</label>
+        <input type="email" id="configEmail" required>
+
+        <label>Nueva contraseña (dejar vacío para no cambiar)</label>
+        <input type="password" id="configPassword">
+
+        <button type="submit">Guardar cambios</button>
+      </form>
+
+      <p id="configMsg" class="config-msg"></p>
+
+      <!-- ===== SECCIÓN PREFERENCIAS ===== -->
+      <div class="pref-section">
+        <h3>⚙️ Preferencias</h3>
+
+        <!-- Modo Oscuro -->
+        <div class="pref-row">
+          <label>Modo Oscuro</label>
+          <label class="toggle">
+            <input type="checkbox" id="prefDarkMode">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Tamaño de fuente -->
+        <div class="pref-row">
+          <label>Tamaño de fuente</label>
+          <div class="font-selector">
+            <button class="font-btn" data-size="small">Pequeña</button>
+            <button class="font-btn active" data-size="medium">Mediana</button>
+            <button class="font-btn" data-size="large">Grande</button>
+          </div>
+        </div>
+
+        <!-- Animaciones -->
+        <div class="pref-row">
+          <label>Animaciones</label>
+          <label class="toggle">
+            <input type="checkbox" id="prefAnimations" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Vista previa -->
+        <div class="preview-box">
+          <p><strong>Vista previa</strong></p>
+          <div class="preview-card">
+            <h4>Ejemplo de tarjeta</h4>
+            <p>Así se verán las tarjetas, textos y fondos con la configuración actual.</p>
+          </div>
+        </div>
+        <p id="prefMsg" class="config-msg"></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

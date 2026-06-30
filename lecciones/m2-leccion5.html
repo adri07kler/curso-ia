@@ -1,0 +1,21 @@
+<div class="lesson-content">
+<h1>2.5 Casos borde</h1>
+<p class="subtitle">Módulo 2 · Documento</p>
+<div class="highlight"><strong>Objetivo:</strong> Identificar y documentar casos borde que pueden romper una implementación ingenua.</div>
+<h2>¿Qué son los casos borde?</h2>
+<p>Situaciones que ocurren en los límites del comportamiento esperado. No son errores, sino condiciones especiales que deben manejarse.</p>
+<h2>Categorías comunes de casos borde</h2>
+<table><thead><tr><th>Categoría</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td>Valores vacíos</td><td>Lista vacía, string vacío, archivo de 0 bytes</td></tr>
+<tr><td>Valores máximo/mínimo</td><td>Número máximo entero, fecha límite</td></tr>
+<tr><td>Valores nulos</td><td>Campo null, referencia undefined</td></tr>
+<tr><td>Concurrencia</td><td>Dos usuarios editando el mismo recurso</td></tr>
+<tr><td>Dependencias fallidas</td><td>API externa caída, BD desconectada</td></tr>
+<tr><td>Formatos inválidos</td><td>Email sin @, teléfono con letras</td></tr>
+<tr><td>Límites de sistema</td><td>Archivo demasiado grande, demasiadas conexiones</td></tr>
+<tr><td>Tiempos</td><td>Timeout, operación que nunca termina</td></tr>
+<tr><td>Permisos</td><td>Usuario sin acceso intentando acceder</td></tr>
+</tbody></table>
+<h2>Cómo encontrar casos borde</h2>
+<ol><li>Piensa en lo que el usuario normal haría → luego en lo que haría un usuario malicioso</li><li>Revisa cada "if" y considera el caso contrario</li><li>Prueba con entradas vacías, enormes, y mal formateadas</li><li>Pregunta: "¿Qué pasa si esto falla?"</li></ol>
+</div>

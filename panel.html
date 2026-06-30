@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel - CleverLabs Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="panel-header">
+    <div class="panel-header-left">
+      <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+      <button class="panel-title-btn" onclick="renderInitialView()">CleverLabs Academy</button>
+    </div>
+    <div class="panel-header-center">
+      <div class="progress-container">
+        <span>Progreso: <span id="progressPercent">0%</span></span>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="panel-header-right">
+      <div class="profile-trigger" id="profileTrigger">
+        <img id="profilePic" src="img/default-avatar.svg" alt="Perfil">
+      </div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="dropdown-pic-wrap">
+          <img id="dropdownPic" src="img/default-avatar.svg">
+          <label class="dropdown-cam" for="photoInput">📷</label>
+          <input type="file" id="photoInput" accept="image/*" hidden>
+        </div>
+        <div class="dropdown-info">
+          <input type="text" id="dropdownName" class="dropdown-name-input" value="Usuario">
+          <p id="dropdownEmail" class="dropdown-email">correo@ejemplo.com</p>
+        </div>
+        <button class="dropdown-btn" onclick="guardarPerfil()">Guardar cambios</button>
+        <a href="configuracion.html" class="dropdown-link">⚙️ Configuración</a>
+        <a href="index.html" class="dropdown-link" onclick="cerrarSesion()">🚪 Cerrar sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="panel-body">
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="sidebar-btn" data-section="modulos">📚 Módulos</button></li>
+          <li><button class="sidebar-btn" data-section="herramientas">🔧 Herramientas</button></li>
+          <li><button class="sidebar-btn" data-section="calificaciones">📊 Calificaciones</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="panel-content" id="panelContent">
+      <div class="loading">Cargando...</div>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
