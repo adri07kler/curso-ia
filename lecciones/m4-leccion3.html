@@ -15,4 +15,163 @@
 </tbody></table>
 <h2>Ventajas</h2>
 <ul><li>Cada paso es fácil de revisar</li><li>Si un paso falla, solo afecta a ese paso</li><li>Puedes corregir sobre la marcha</li><li>El código es más coherente</li></ul>
+
+<h2>Introducción</h2>
+<p>La clave del éxito en el desarrollo asistido por IA está en la granularidad. Cuanto más pequeños sean tus pasos, mejor podrá la IA entender el contexto y generar código preciso. En esta lección dominarás la estrategia de dividir la implementación en fragmentos atómicos, una habilidad esencial para obtener resultados profesionales.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+  <li>Comprender por qué los pasos pequeños producen mejor código con IA.</li>
+  <li>Aplicar la estrategia de división por funcionalidad y por capas.</li>
+  <li>Secuenciar correctamente una implementación completa en pasos manejables.</li>
+  <li>Utilizar el resultado de cada paso como contexto para el siguiente.</li>
+  <li>Evaluar el tamaño adecuado de cada paso según la complejidad.</li>
+</ul>
+
+<h2>Desarrollo del contenido</h2>
+
+<h3>¿Por qué funciona dividir en pasos pequeños?</h3>
+<p>Los modelos de lenguaje son excelentes para tareas específicas y acotadas. Cuando reciben un problema pequeño, pueden concentrar toda su capacidad en producir una solución precisa. Además, los pasos pequeños permiten al ingeniero mantener el control: cada fragmento es verificable, testeable y, si falla, el impacto es mínimo.</p>
+
+<h3>Estrategia de división por funcionalidad</h3>
+<p>Consiste en identificar las funcionalidades atómicas de tu sistema y pedir una por vez. Cada prompt debe producir UNA funcionalidad completa: un endpoint, un componente, una función de validación. No mezcles responsabilidades en un mismo prompt.</p>
+
+<h3>Estrategia de división por capas</h3>
+<p>Otra dimensión de división es la arquitectura. Primero defines la capa de datos (modelos, esquemas), luego la lógica de negocio, luego la API, y finalmente la interfaz. Este orden permite construir sobre bases sólidas y mantener la coherencia arquitectónica.</p>
+
+<h2>Ejemplos</h2>
+
+<h3>Ejemplo: Sistema de autenticación completo</h3>
+<table>
+  <thead>
+    <tr><th>Paso</th><th>Tarea</th><th>Detalle</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Modelo de usuario</td><td>Schema con email, password_hash, rol, fechas</td></tr>
+    <tr><td>2</td><td>Función de hash</td><td>bcrypt con salt automático</td></tr>
+    <tr><td>3</td><td>Endpoint de registro</td><td>POST /register con validaciones</td></tr>
+    <tr><td>4</td><td>Endpoint de login</td><td>POST /login con JWT</td></tr>
+    <tr><td>5</td><td>Middleware JWT</td><td>Protección de rutas</td></tr>
+    <tr><td>6</td><td>Pruebas de autenticación</td><td>Tests de registro, login, expiración</td></tr>
+  </tbody>
+</table>
+
+<h3>Ejemplo: Componente React de búsqueda</h3>
+<table>
+  <thead>
+    <tr><th>Paso</th><th>Tarea</th><th>Tamaño estimado</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Estado y tipado del componente</td><td>~10 líneas</td></tr>
+    <tr><td>2</td><td>Input de búsqueda controlado</td><td>~15 líneas</td></tr>
+    <tr><td>3</td><td>Lógica de debounce</td><td>~10 líneas</td></tr>
+    <tr><td>4</td><td>Llamada a API de búsqueda</td><td>~15 líneas</td></tr>
+    <tr><td>5</td><td>Renderizado de resultados</td><td>~20 líneas</td></tr>
+    <tr><td>6</td><td>Manejo de errores y loading</td><td>~15 líneas</td></tr>
+  </tbody>
+</table>
+
+<h2>Comparación: Paso grande vs. Paso pequeño</h2>
+<table>
+  <thead>
+    <tr><th>Aspecto</th><th>Paso grande (+100 líneas)</th><th>Paso pequeño (~15 líneas)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Precisión de la IA</td><td>Baja, tiende a divagar</td><td>Alta, se enfoca en lo específico</td></tr>
+    <tr><td>Facilidad de revisión</td><td>Difícil, requiere mucho tiempo</td><td>Rápida, se revisa en segundos</td></tr>
+    <tr><td>Aislamiento de errores</td><td>El error está mezclado</td><td>El error está localizado</td></tr>
+    <tr><td>Reutilización</td><td>Baja, código muy acoplado</td><td>Alta, funciones atómicas</td></tr>
+    <tr><td>Contexto necesario</td><td>Mucho, desperdicia tokens</td><td>Poco, optimiza el uso</td></tr>
+  </tbody>
+</table>
+
+<h2>Diagrama: Secuenciación de implementación</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:25px;margin:20px 0;text-align:center;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:12px;">
+    <div style="flex:1;min-width:120px;background:#2563eb;color:white;padding:15px;border-radius:8px;">
+      <div style="font-weight:bold;font-size:1.1rem;">Capa de Datos</div>
+      <div style="font-size:0.8rem;margin-top:8px;">Modelos<br>Schemas<br>Migraciones</div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:1.5rem;color:#94a3b8;">→</div>
+    <div style="flex:1;min-width:120px;background:#f59e0b;color:white;padding:15px;border-radius:8px;">
+      <div style="font-weight:bold;font-size:1.1rem;">Lógica de Negocio</div>
+      <div style="font-size:0.8rem;margin-top:8px;">Validaciones<br>Cálculos<br>Reglas</div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:1.5rem;color:#94a3b8;">→</div>
+    <div style="flex:1;min-width:120px;background:#22c55e;color:white;padding:15px;border-radius:8px;">
+      <div style="font-weight:bold;font-size:1.1rem;">API</div>
+      <div style="font-size:0.8rem;margin-top:8px;">Endpoints<br>Middleware<br>Seguridad</div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:1.5rem;color:#94a3b8;">→</div>
+    <div style="flex:1;min-width:120px;background:#8b5cf6;color:white;padding:15px;border-radius:8px;">
+      <div style="font-weight:bold;font-size:1.1rem;">Interfaz</div>
+      <div style="font-size:0.8rem;margin-top:8px;">Componentes<br>UX<br>Visual</div>
+    </div>
+  </div>
+  <div style="margin-top:15px;font-size:0.85rem;color:#64748b;">Cada capa se implementa en múltiples pasos pequeños antes de avanzar a la siguiente</div>
+</div>
+
+<div class="highlight">
+  <strong>💡 Consejo del instructor:</strong> Antes de escribir un prompt, pregúntate: "¿Puedo generar esto en menos de 30 líneas?" Si la respuesta es no, divídelo. Esta métrica simple te ahorrará horas de depuración.
+</div>
+
+<div class="highlight" style="border-left-color:#f59e0b;">
+  <strong>⚠ Errores comunes:</strong>
+  <ul>
+    <li><strong>Subestimar el tamaño del paso:</strong> Pensar que "solo es un endpoint" cuando en realidad involucra validación, persistencia, autorización y formato de respuesta.</li>
+    <li><strong>Saltar pasos:</strong> Ir directo a la interfaz sin tener los datos y la lógica listos.</li>
+    <li><strong>No probar cada paso:</strong> Acumular 10 pasos sin verificar ninguno y descubrir que el paso 1 tenía un error fundamental.</li>
+  </ul>
+</div>
+
+<h2>Buenas prácticas</h2>
+<ul>
+  <li>✔ Cada paso debe producir una funcionalidad atómica y comprobable.</li>
+  <li>✔ Revisa y prueba cada paso antes de escribir el siguiente prompt.</li>
+  <li>✔ Mantén un registro de los pasos completados para compartir contexto.</li>
+  <li>✔ Si un paso genera más de 50 líneas, considera subdividirlo.</li>
+  <li>✔ Usa nombres consistentes entre pasos para mantener coherencia.</li>
+  <li>✔ Documenta la secuencia completa al terminar para futuras referencias.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Toma una funcionalidad que hayas implementado recientemente y descomponla en pasos pequeños siguiendo la estrategia por capas. Documenta la secuencia de prompts que usarías con la IA, indicando para cada paso: nombre, objetivo, tamaño estimado y resultado esperado. Mínimo 5 pasos.</p>
+
+<h2>Mini reto</h2>
+<p>Implementa un script que divida automáticamente un prompt grande en sub-prompts. El script debe recibir un texto largo con múltiples requerimientos y generar una lista de prompts pequeños, cada uno con un objetivo específico y el contexto necesario. Puedes usar Python o JavaScript.</p>
+
+<h2>Resumen</h2>
+<ul>
+  <li>Dividir la implementación en pasos pequeños mejora la precisión de la IA.</li>
+  <li>La división por funcionalidad asegura que cada prompt tenga un objetivo único.</li>
+  <li>La división por capas (datos → lógica → API → interfaz) mantiene la coherencia arquitectónica.</li>
+  <li>Cada paso debe ser revisado y probado antes de continuar.</li>
+  <li>Un paso ideal no supera las 30 líneas de código generado.</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

@@ -1,8 +1,25 @@
 <div class="lesson-content">
 <h1>3.4 Plantilla de contexto</h1>
 <p class="subtitle">Módulo 3 · Documento</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Proporcionar una plantilla reutilizable para estructurar el contexto.</div>
+
+<h2>Introducción</h2>
+<p>Hasta ahora has aprendido qué información incluir y qué eliminar. El siguiente paso es estandarizar ese conocimiento en una plantilla reutilizable: el <strong>Context Packet</strong>. Esta plantilla te permitirá iniciar cualquier sesión con IA de manera estructurada y profesional, asegurando que nunca olvides ningún elemento esencial.</p>
+<p>En esta lección aprenderás a usar y personalizar el Context Packet para cualquier proyecto de desarrollo.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+  <li>Utilizar la plantilla Context Packet para estructurar información para la IA.</li>
+  <li>Personalizar la plantilla según el tipo de proyecto (web, automatización, análisis de datos, etc.).</li>
+  <li>Mantener y versionar el Context Packet como parte de la documentación del proyecto.</li>
+  <li>Compartir el Context Packet con el equipo para estandarizar la interacción con IA.</li>
+</ul>
+
 <h2>Context Packet</h2>
+<p>El Context Packet es un documento estructurado que contiene toda la información que la IA necesita para entender tu proyecto. Piénsalo como el README de tu proyecto, pero orientado a la IA.</p>
+
 <pre><code>## Objetivo:
 [¿Qué vamos a construir/lograr?]
 
@@ -34,4 +51,249 @@
 
 ## Punto de revisión humana:
 [¿Qué debe revisar el humano?]</code></pre>
+
+<h2>Cómo usar el Context Packet</h2>
+
+<h3>Paso 1: Crear el archivo</h3>
+<p>Crea un archivo llamado <code>context-packet.md</code> en la raíz de tu proyecto y complétalo con la información de tu proyecto.</p>
+
+<h3>Paso 2: Iniciar la sesión</h3>
+<p>Al iniciar una sesión con la IA, pega el contenido completo del Context Packet como primer mensaje.</p>
+
+<h3>Paso 3: Refrescar cuando sea necesario</h3>
+<p>Cuando cambien las condiciones del proyecto (nuevas dependencias, cambios de versión, etc.), actualiza el Context Packet.</p>
+
+<h2>Plantillas por tipo de proyecto</h2>
+
+<h3>Plantilla para proyecto web</h3>
+<pre><code>## Objetivo:
+App web para [descripción del negocio]
+
+## Rol:
+Desarrollador full-stack senior
+
+## Contexto:
+Proyecto en desarrollo activo, rama main en producción
+
+## Estado actual:
+Frontend: [framework] con [librerías]
+Backend: [lenguaje/framework] con [BD]
+Autenticación: [sistema]
+Despliegue: [plataforma]
+
+## Restricciones:
+- Versiones: [especificar]
+- Testing: [framework]
+- CI/CD: [plataforma]
+
+## Criterios de aceptación:
+- Pasa tests existentes
+- Sigue guías de estilo del proyecto
+- Sin breaking changes
+
+## Formato:
+Código completo + tests
+
+## No hacer:
+- No tocar configuraciones de infraestructura
+- No modificar variables de entorno
+
+## Revisión humana:
+- Validar seguridad
+- Validar rendimiento</code></pre>
+
+<h3>Plantilla para automatización/scripts</h3>
+<pre><code>## Objetivo:
+Script para [tarea específica]
+
+## Rol:
+Desarrollador de automatización Python
+
+## Contexto:
+Scripts existentes en /scripts, entrada estándar y salida a consola/archivo
+
+## Estado actual:
+[scripts existentes]
+
+## Restricciones:
+- Python 3.11+ estándar
+- Sin dependencias externas no listadas
+- Manejo de errores obligatorio
+- Logging básico
+
+## Criterios:
+- Ejecución sin errores
+- Tiempo de ejecución menor a [X] segundos
+- Log claro de cada paso
+
+## Formato:
+Script Python autocontenido
+
+## No hacer:
+- No borrar archivos de entrada
+- No sobrescribir sin confirmación
+
+## Revisión:
+- Probar con datos reales
+- Validar edge cases</code></pre>
+
+<h2>Ejemplo completo: Dashboard financiero</h2>
+<pre><code>## Objetivo:
+Dashboard financiero personal que muestra gastos, ingresos y proyecciones mensuales
+
+## Rol:
+Desarrollador frontend senior especializado en visualización de datos
+
+## Contexto del proyecto:
+App web en React 18 con Vite. Diseño mobile-first. Usuarios individuales (sin auth).
+
+## Estado actual:
+- Proyecto creado con Vite + React 18 + TypeScript
+- Tailwind CSS configurado
+- Estructura de carpetas: /components, /hooks, /utils, /types
+- Datos mock en /data/mockTransactions.ts
+
+## Restricciones técnicas:
+- React 18, TypeScript strict mode
+- Tailwind CSS (no CSS puro ni módulos)
+- Recharts para gráficos (ya instalado)
+- No usar Redux ni Zustand (preferir useState + useContext)
+- Node 20 LTS
+
+## Criterios de aceptación:
+- Componentes tipados con TypeScript
+- Responsive (mobile y desktop)
+- Gráficos responsivos
+- Datos mock actualizados al mes actual
+- Sin errores de compilación
+
+## Formato de salida:
+Código completo de cada componente nuevo o modificado
+
+## Qué no debe hacer:
+- No modificar package.json
+- No agregar dependencias
+- No tocar configuración de Vite o Tailwind
+
+## Punto de revisión humana:
+- Validar que los tipos sean correctos
+- Verificar que los gráficos se rendericen correctamente
+- Revisar accesibilidad básica</code></pre>
+
+<h2>Tabla comparativa: Context Packet vs Documentación tradicional</h2>
+<div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;margin:15px 0;">
+    <thead>
+      <tr style="background:#eef2ff;">
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Aspecto</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Documentación tradicional</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Context Packet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Propósito</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Entender el proyecto como humano</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Preparar el contexto óptimo para IA</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Estructura</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Libre, narrativa, variable</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Estandarizada con secciones fijas</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Contenido típico</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Historial del proyecto, decisiones de negocio, diagramas UML</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Stack, rol, restricciones, criterios de aceptación</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Frecuencia de uso</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Lectura esporádica por nuevos miembros</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Cada sesión de IA, múltiples veces al día</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Actualización</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Cuando alguien recuerda o cambia de versión</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Por sprint o cada cambio tecnológico</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Diagrama: Anatomía del Context Packet</h2>
+<div style="background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:30px;margin:20px 0;">
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:600px;margin:auto;">
+    <div style="background:#2563eb;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">1. Objetivo del proyecto</div>
+    <div style="background:#3b82f6;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">2. Rol esperado de la IA</div>
+    <div style="background:#6366f1;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">3. Estado actual del proyecto</div>
+    <div style="background:#8b5cf6;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">4. Restricciones técnicas</div>
+    <div style="background:#a855f7;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">5. Criterios de aceptación</div>
+    <div style="background:#d946ef;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">6. Formato de salida esperado</div>
+    <div style="background:#ec4899;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">7. Lo que NO debe hacer</div>
+    <div style="background:#f43f5e;color:white;padding:12px 20px;border-radius:8px;font-weight:bold;text-align:center;">8. Punto de revisión humana</div>
+  </div>
+  <div style="text-align:center;margin-top:15px;font-size:0.85rem;color:#64748b;">El Context Packet contiene 8 secciones que preparan a la IA para generar respuestas precisas</div>
+</div>
+
+<div class="highlight"><strong>Consejo del instructor:</strong> Guarda tu Context Packet en un servicio de notas sincronizado (Notion, Obsidian, etc.) para tenerlo siempre disponible. Si trabajas en equipo, súbelo al repositorio del proyecto para que todos usen la misma versión.</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+  <li><strong>Context Packet demasiado genérico:</strong> Si tu plantilla sirve para cualquier proyecto, no está haciendo su trabajo. Personaliza cada sección con información específica.</li>
+  <li><strong>No actualizar el Context Packet:</strong> Un packet desactualizado es peor que no tenerlo, porque la IA confiará en información incorrecta.</li>
+  <li><strong>Olvidar la sección de revisión humana:</strong> La IA no debe tomar decisiones críticas sin supervisión. Especifica claramente qué debe validar un humano.</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+  <li>Versiona el Context Packet junto con el código (commitea los cambios).</li>
+  <li>Incluye enlaces a documentación relevante dentro del packet.</li>
+  <li>Usa el mismo packet para todas las sesiones de IA del mismo proyecto.</li>
+  <li>Revisa y actualiza el packet al menos una vez por sprint.</li>
+  <li>Comparte la plantilla con tu equipo para estandarizar la interacción con IA.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Crea un Context Packet completo para uno de los siguientes proyectos:</p>
+<ol>
+  <li>Una API REST para gestión de inventario de una tienda.</li>
+  <li>Un script de automatización que descargue, procese y envíe por correo reportes diarios.</li>
+  <li>Un componente React de calendario con eventos arrastrables.</li>
+</ol>
+<p>Incluye todas las secciones del Context Packet y asegúrate de que cada campo contenga información específica y útil.</p>
+
+<h2>Mini reto</h2>
+<p>Toma un proyecto tuyo existente y crea su Context Packet. Luego, pídele a la IA que realice una tarea de ese proyecto usando solo el Context Packet como información de fondo. Compara la respuesta con una sesión anterior donde no usaste el packet. ¿Cuál fue mejor?</p>
+
+<h2>Resumen</h2>
+<ul>
+  <li>El Context Packet estandariza la información que le das a la IA.</li>
+  <li>Debe ser específico para cada proyecto, no genérico.</li>
+  <li>Se versiona junto con el código y se actualiza periódicamente.</li>
+  <li>Incluye siempre la sección de revisión humana para tareas críticas.</li>
+  <li>Usar el mismo packet en todas las sesiones garantiza consistencia.</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
 </div>

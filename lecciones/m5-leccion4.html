@@ -1,9 +1,182 @@
 <div class="lesson-content">
 <h1>5.4 Revisión de código generado</h1>
 <p class="subtitle">Módulo 5 · Video</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Aprender técnicas de code review específicas para código generado por IA.</div>
+
+<h2>Introducción</h2>
+<p>El code review tradicional entre humanos asume que el autor tenía una intención y aplicó criterio al escribir cada línea. Con código generado por IA, no hay intención — solo patrones estadísticos. Esto exige un enfoque de revisión diferente, más metódico y con énfasis en áreas donde la IA falla sistemáticamente. Esta lección te dará un proceso de 4 pasadas para revisar código de IA de forma eficiente y completa.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Aplicar un proceso de revisión de código de 4 pasadas específico para código generado por IA</li>
+<li>Identificar señales de alerta comunes en código generado por IA</li>
+<li>Detectar código muerto, dependencias ficticias y funciones comodín</li>
+<li>Evaluar si el código generado cumple con los estándares del proyecto</li>
+</ul>
+
 <h2>Proceso de revisión</h2>
-<ol><li><strong>Primera pasada — Estructural:</strong> ¿Sigue los patrones del proyecto? ¿Respeta convenciones?</li><li><strong>Segunda pasada — Lógica:</strong> ¿La lógica es correcta? ¿Faltan condiciones? ¿Los bucles terminan?</li><li><strong>Tercera pasada — Seguridad:</strong> ¿Validación de entrada? ¿Sanitización? ¿Credenciales?</li><li><strong>Cuarta pasada — Mantenibilidad:</strong> ¿Será fácil de modificar? ¿Funciones con una sola responsabilidad?</li></ol>
+<ol>
+<li><strong>Primera pasada — Estructural:</strong> ¿Sigue los patrones del proyecto? ¿Respeta convenciones?</li>
+<li><strong>Segunda pasada — Lógica:</strong> ¿La lógica es correcta? ¿Faltan condiciones? ¿Los bucles terminan?</li>
+<li><strong>Tercera pasada — Seguridad:</strong> ¿Validación de entrada? ¿Sanitización? ¿Credenciales?</li>
+<li><strong>Cuarta pasada — Mantenibilidad:</strong> ¿Será fácil de modificar? ¿Funciones con una sola responsabilidad?</li>
+</ol>
+
+<h3>Primera pasada — Estructural</h3>
+<p>Verifica que el código siga las convenciones del proyecto: nombres de variables en el idioma correcto, indentación consistente, estructura de archivos según el estándar del equipo. La IA mezcla estilos porque se entrena con código de miles de fuentes diferentes.</p>
+
+<h3>Segunda pasada — Lógica</h3>
+<p>Traza mentalmente la ejecución con diferentes entradas. ¿Los bucles tienen condición de término? ¿Las recursiones tienen caso base? ¿Los condicionales cubren todos los casos? Esta es la pasada donde más bugs encuentra la IA.</p>
+
+<h3>Tercera pasada — Seguridad</h3>
+<p>Busca vulnerabilidades específicas: entradas de usuario sin validar, consultas SQL concatenadas, credenciales hardcodeadas, falta de rate limiting, tokens expuestos. La IA no diferencia entre código seguro e inseguro.</p>
+
+<h3>Cuarta pasada — Mantenibilidad</h3>
+<p>Evalúa si el código será fácil de mantener en 6 meses: funciones con una sola responsabilidad, nombres descriptivos, ausencia de números mágicos, comentarios útiles (no genéricos). La IA genera código funcional pero rara vez mantenible.</p>
+
 <h2>Señales de alerta específicas de IA</h2>
-<ul><li>Funciones "comodín" que hacen demasiado</li><li>Código muerto (variables no usadas)</li><li>Dependencias que no existen</li><li>Código que parece de otro lenguaje</li><li>Comentarios genéricos ("# Add your code here")</li></ul>
+<ul>
+<li>Funciones "comodín" que hacen demasiado</li>
+<li>Código muerto (variables no usadas)</li>
+<li>Dependencias que no existen</li>
+<li>Código que parece de otro lenguaje</li>
+<li>Comentarios genéricos ("# Add your code here")</li>
+<li>Importaciones redundantes o incorrectas</li>
+<li>Funciones sin docstring o con documentación genérica</li>
+<li>Uso de librerías obsoletas o deprecadas</li>
+<li>Manejo de errores ausente o genérico (except: pass)</li>
+<li>Código duplicado (la IA repite patrones innecesariamente)</li>
+</ul>
+
+<h2>Comparación: Code review humano vs. IA</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Revisión humana</th><th>Revisión de código IA</th></tr>
+</thead>
+<tbody>
+<tr><td>Intención</td><td>El autor quiso hacer X</td><td>No hay intención, solo patrones</td></tr>
+<tr><td>Errores comunes</td><td>Typos, lógica descuidada</td><td>Funciones inventadas, dependencias falsas</td></tr>
+<tr><td>Estilo</td><td>Consistente dentro del equipo</td><td>Mezcla de estilos de miles fuentes</td></tr>
+<tr><td>Seguridad</td><td>Varía según seniority</td><td>Sistemáticamente descuidada</td></tr>
+<tr><td>Documentación</td><td>Puede faltar</td><td>Genérica o engañosa</td></tr>
+<tr><td>Enfoque de revisión</td><td>Confiar pero verificar</td><td>Desconfiar y verificar todo</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Proceso de revisión de 4 pasadas</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:650px;margin:0 auto;">
+    <div style="flex:1;min-width:120px;background:#2563eb;color:#fff;padding:12px;border-radius:8px;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">🏗️</div>
+      <div style="font-weight:bold;">1. Estructural</div>
+      <div style="font-size:0.8rem;opacity:0.9;">Convenciones · Estilo</div>
+    </div>
+    <div style="flex:1;min-width:120px;background:#f59e0b;color:#fff;padding:12px;border-radius:8px;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">🧠</div>
+      <div style="font-weight:bold;">2. Lógica</div>
+      <div style="font-size:0.8rem;opacity:0.9;">Condiciones · Bucles</div>
+    </div>
+    <div style="flex:1;min-width:120px;background:#ef4444;color:#fff;padding:12px;border-radius:8px;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">🔒</div>
+      <div style="font-weight:bold;">3. Seguridad</div>
+      <div style="font-size:0.8rem;opacity:0.9;">Validación · SQLi · XSS</div>
+    </div>
+    <div style="flex:1;min-width:120px;background:#8b5cf6;color:#fff;padding:12px;border-radius:8px;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">📦</div>
+      <div style="font-weight:bold;">4. Mantenibilidad</div>
+      <div style="font-size:0.8rem;opacity:0.9;">SRP · Nombres · Docs</div>
+    </div>
+  </div>
+  <p style="margin-top:12px;color:#64748b;font-size:0.85rem;">Aplica las 4 pasadas en orden. No saltes ninguna — cada una detecta un tipo distinto de problema.</p>
+</div>
+
+<div class="highlight">
+<strong>Consejo del instructor:</strong> Crea una checklist física (papel o archivo) con las 4 pasadas y las señales de alerta. Revisa cada función generada por IA contra esa checklist antes de integrarla. En equipos, incluye la revisión de código IA como un paso obligatorio en el proceso de merge request.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Revisar solo la primera pasada:</strong> Detectar problemas de estilo es fácil; los errores graves están en la lógica y seguridad</li>
+<li><strong>Confiar en que "la IA ya lo revisó":</strong> La IA no revisa su propio código; cada respuesta es independiente</li>
+<li><strong>No probar después de revisar:</strong> La revisión manual encuentra problemas, pero las pruebas encuentran los que pasaron desapercibidos</li>
+<li><strong>Aprobar código que no se entiende completamente:</strong> Si no entiendes cada línea, no deberías aprobarlo</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Siempre las 4 pasadas sin saltarse ninguna:</strong> Cada pasada tiene un propósito específico</li>
+<li><strong>Usar linters y análisis estático:</strong> ESLint, Pylint, SonarQube para detectar problemas automáticos</li>
+<li><strong>Ejecutar las pruebas antes de revisar:</strong> Si las pruebas fallan, ni siquiera empieces la revisión manual</li>
+<li><strong>Documentar cada cambio aceptado o rechazado:</strong> Lleva un registro de qué modificaste y por qué</li>
+<li><strong>Revisar en pares cuando sea posible:</strong> Dos pares ven más que uno, especialmente con código de IA</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Revisa el siguiente código generado por IA usando las 4 pasadas:</p>
+<pre><code>def process_data(data):
+    result = []
+    for i in data:
+        # TODO: implement
+        pass
+    return result
+
+def get_user(id):
+    import sqlite3
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM users WHERE id = {id}")
+    return cursor.fetchone()
+
+def calculate(x, y):
+    z = x + y
+    return z</code></pre>
+<ol>
+<li>Pasada estructural: ¿qué problemas ves?</li>
+<li>Pasada lógica: ¿qué errores de lógica hay?</li>
+<li>Pasada seguridad: ¿qué vulnerabilidades encuentras?</li>
+<li>Pasada mantenibilidad: ¿qué dificultaría el mantenimiento?</li>
+</ol>
+
+<div class="highlight">
+<strong>Solución:</strong> <code>process_data</code> está incompleta (pass). <code>get_user</code> tiene SQL injection (f-string). <code>calculate</code> mezcla suma con nombre "calculate". La conexión SQL no se cierra. No hay manejo de errores en ninguna función.
+</div>
+
+<h2>Mini reto</h2>
+<p>Pide a una IA que genere una función para autenticar usuarios con email y contraseña. Aplica las 4 pasadas de revisión. Documenta al menos 3 problemas que encuentres en cada pasada. Luego compara: ¿cuántos problemas encontró la revisión humana vs. los que encontraría un scanner automático?</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>El proceso de 4 pasadas cubre: estructura, lógica, seguridad y mantenibilidad</li>
+<li>La IA tiene señales de alerta específicas: dependencias falsas, código muerto, funciones comodín</li>
+<li>La revisión de código IA requiere más atención que la revisión humana</li>
+<li>Usar linters y análisis estático complementa la revisión manual</li>
+<li>No aprobar código que no se entiende completamente</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

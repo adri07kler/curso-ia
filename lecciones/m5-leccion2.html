@@ -1,7 +1,22 @@
 <div class="lesson-content">
 <h1>5.2 Pruebas mínimas necesarias</h1>
 <p class="subtitle">Módulo 5 · Documento</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Definir el conjunto mínimo de pruebas para validar código generado por IA.</div>
+
+<h2>Introducción</h2>
+<p>Cuando un desarrollador escribe código manualmente, el proceso de pensar en casos de prueba ocurre de forma natural durante la implementación. Con código generado por IA, este paso se omite: la IA produce una solución y el desarrollador tiende a aceptarla sin cuestionarla. Establecer un conjunto mínimo de pruebas obligatorias —<em>smoke test, caso feliz, caso borde, error y regresión</em>— es la red de seguridad que separa un borrador de IA de código listo para producción.</p>
+<p>Esta lección te dará una checklist práctica que puedes aplicar en menos de 5 minutos por función generada, reduciendo drásticamente la probabilidad de bugs.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Definir los 5 tipos de pruebas mínimas para código generado por IA</li>
+<li>Escribir pruebas de humo, caso feliz, caso borde, error y regresión</li>
+<li>Aplicar la regla de "al menos una prueba de caso feliz y una de caso borde o error"</li>
+<li>Identificar qué tipo de prueba cubre cada posible fallo en código de IA</li>
+</ul>
+
 <h2>Tipos de pruebas mínimas</h2>
 <table><thead><tr><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody>
 <tr><td>Prueba de humo</td><td>Verifica que se ejecuta sin errores</td><td>Llamar con datos válidos</td></tr>
@@ -10,6 +25,7 @@
 <tr><td>Prueba de error</td><td>Verifica fallo correcto</td><td>suma_pares("texto") → TypeError</td></tr>
 <tr><td>Prueba de regresión</td><td>No rompe nada existente</td><td>Ejecutar tests existentes</td></tr>
 </tbody></table>
+
 <h2>Ejemplo mínimo</h2>
 <pre><code>def test_suma_pares_caso_feliz():
     assert suma_pares([1, 2, 3, 4]) == 6
@@ -20,5 +36,106 @@ def test_suma_pares_lista_vacia():
 def test_suma_pares_error_tipo():
     with pytest.raises(TypeError):
         suma_pares("no es lista")</code></pre>
-<div class="highlight"><strong>Regla:</strong> Por cada función generada por IA, debe haber al menos una prueba de caso feliz y una de caso borde o error.</div>
+
+<h3>Explicación del ejemplo</h3>
+<p>La prueba de humo está implícita en la de caso feliz (si se ejecuta sin error, pasa humo). El caso borde (lista vacía) verifica que la función no falle con entrada límite. La prueba de error asegura que la función rechace entradas inválidas. Con estas 3 pruebas cubrimos los 5 tipos mínimos.</p>
+
+<h2>Comparación: Sin pruebas vs. Con pruebas mínimas</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Sin pruebas</th><th>Con pruebas mínimas</th></tr>
+</thead>
+<tbody>
+<tr><td>Confianza en el código</td><td>0-30%</td><td>70-90%</td></tr>
+<tr><td>Tiempo por función generada</td><td>1-2 min (copiar y pegar)</td><td>5-7 min (generar + probar)</td></tr>
+<tr><td>Bugs detectados antes de producción</td><td>&lt; 10%</td><td>&gt; 80%</td></tr>
+<tr><td>Deuda técnica acumulada</td><td>Alta</td><td>Baja</td></tr>
+<tr><td>Facilidad de refactorización</td><td>Miedo a romper todo</td><td>Tests como red de seguridad</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Pirámide de pruebas mínimas</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="max-width:400px;margin:0 auto;">
+    <div style="background:#22c55e;color:#fff;padding:10px;border-radius:6px;margin:3px 0;font-weight:bold;">🥇 Prueba de humo — ¿Ejecuta sin errores?</div>
+    <div style="background:#16a34a;color:#fff;padding:10px;border-radius:6px;margin:3px 0;font-weight:bold;">🥇 Caso feliz — ¿Resultado correcto?</div>
+    <div style="background:#f59e0b;color:#fff;padding:10px;border-radius:6px;margin:3px 0;font-weight:bold;">⚠️ Caso borde — ¿Maneja límites?</div>
+    <div style="background:#ef4444;color:#fff;padding:10px;border-radius:6px;margin:3px 0;font-weight:bold;">❌ Prueba de error — ¿Falla correctamente?</div>
+    <div style="background:#8b5cf6;color:#fff;padding:10px;border-radius:6px;margin:3px 0;font-weight:bold;">🔄 Prueba de regresión — ¿Sigue funcionando?</div>
+  </div>
+  <p style="margin-top:12px;color:#64748b;font-size:0.85rem;">Cada función generada por IA necesita al menos: <strong>caso feliz + caso borde o error</strong></p>
+</div>
+
+<div class="highlight">
+<strong>Consejo del instructor:</strong> No necesitas un framework de testing elaborado. Un simple <code>assert</code> en Python o <code>console.assert</code> en JavaScript ya es mejor que nada. La meta es tener al menos 2 pruebas por función generada: caso feliz + caso borde o error.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Solo probar el caso feliz:</strong> Es la prueba más común pero la menos útil sola. Sin casos borde, no sabes si la función maneja entradas límite.</li>
+<li><strong>Confiar en que "si compila, funciona":</strong> El código sintácticamente válido puede ser semánticamente erróneo. Las pruebas verifican comportamiento, no sintaxis.</li>
+<li><strong>Escribir pruebas después de implementar en producción:</strong> Las pruebas deben hacerse antes de integrar el código, no cuando ya está desplegado.</li>
+<li><strong>Pruebas que prueban la implementación, no el comportamiento:</strong> Probar que se llamó a una función interna no es lo mismo que probar que el resultado es correcto.</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Escribir pruebas antes de integrar:</strong> Genera el código con IA, escribe las pruebas, verifica que pasen</li>
+<li><strong>Una prueba por tipo de fallo posible:</strong> Cada tipo de entrada incorrecta merece su propia prueba</li>
+<li><strong>Automatizar las pruebas:</strong> Integra las pruebas en un pipeline CI/CD para que se ejecuten en cada cambio</li>
+<li><strong>Documentar qué prueba cada caso:</strong> Usa nombres descriptivos como <code>test_suma_pares_lista_vacia</code></li>
+<li><strong>Re-ejecutar pruebas al regenerar:</strong> Si pides a la IA que modifique el código, ejecuta todas las pruebas de nuevo</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>La IA ha generado esta función que debe contar cuántas vocales tiene una cadena:</p>
+<pre><code>def contar_vocales(texto):
+    return sum(1 for c in texto if c in "aeiou")</code></pre>
+<p>Escribe las pruebas mínimas (humo, caso feliz, caso borde y error) para esta función. Considera:</p>
+<ol>
+<li>¿Qué pasa si el texto está vacío?</li>
+<li>¿Qué pasa si no hay vocales?</li>
+<li>¿Qué pasa si hay mayúsculas?</li>
+<li>¿Qué pasa si el argumento no es string?</li>
+</ol>
+
+<div class="highlight">
+<strong>Solución:</strong> La función falla con mayúsculas (<code>"AEIOU"</code> no contiene <code>"aeiou"</code>). Debería usarse <code>c.lower() in "aeiou"</code>. Además, la prueba de error debe verificar que entrada numérica lance <code>TypeError</code> o se maneje adecuadamente.
+</div>
+
+<h2>Mini reto</h2>
+<p>Genera con IA una función que encuentre el número más frecuente en una lista. Sin revisar el código, escribe las 5 pruebas mínimas (humo, caso feliz, caso borde, error, regresión). Luego ejecuta el código generado contra tus pruebas. ¿Cuántas pruebas fallaron? Ese es el número de bugs que la IA introdujo.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>Las 5 pruebas mínimas son: humo, caso feliz, caso borde, error y regresión</li>
+<li>Por cada función generada por IA debe haber al menos una prueba de caso feliz y una de caso borde o error</li>
+<li>Las pruebas son la red de seguridad que detecta bugs antes de producción</li>
+<li>El tiempo invertido en pruebas se recupera evitando incidentes en producción</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

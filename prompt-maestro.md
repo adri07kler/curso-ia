@@ -168,7 +168,7 @@ Ejemplo:
 
 Agregar una actividad relacionada con la lección.
 
-No debe ser un Quiz.
+Si la lección es un Quiz, omitir completamente esta sección.
 
 Debe requerir que el estudiante aplique lo aprendido.
 
@@ -176,7 +176,9 @@ Debe requerir que el estudiante aplique lo aprendido.
 
 ## Mini reto
 
-Agregar un desafío adicional para reforzar el aprendizaje.
+Agregar un desafío adicional para reforzar el aprendizaje únicamente cuando la lección NO sea un Quiz.
+
+Si la lección corresponde a un Quiz o Evaluación, no crear un Mini Reto.
 
 --------------------------------------------
 
@@ -218,14 +220,6 @@ Las preguntas deben evaluar comprensión, no memorización.
 
 --------------------------------------------
 
-## Botón final
-
-Conservar el botón:
-
-✓ Marcar lección como completada
-
---------------------------------------------
-
 DISEÑO
 
 No modificar el diseño actual.
@@ -257,3 +251,81 @@ Si una sección ya existe, simplemente enriquécela.
 Si no existe, créala.
 
 El resultado final debe verse como una versión mucho más completa y profesional de la misma lección, sin perder el contenido original.
+
+--------------------------------------------
+
+## Entrega de Evidencias
+
+Si la lección contiene una Actividad (ya sea Práctica, Mini Reto o un ejercicio) agregar automáticamente al final de esa sección una nueva área llamada:
+
+📤 Entrega de Evidencia
+
+Esta sección deberá integrarse con el mismo diseño visual de CleverLabs Academy y contener:
+
+- Un campo para subir archivos.
+- Tipos de archivo permitidos:
+  - PDF (.pdf)
+  - Word (.docx)
+  - ZIP (.zip)
+  - Imagen JPG (.jpg)
+  - Imagen JPEG (.jpeg)
+  - Imagen PNG (.png)
+
+- Un área de texto donde el estudiante explique:
+
+  "¿Qué aprendiste al realizar esta actividad?"
+
+- Un contador de caracteres en tiempo real.
+
+- Un botón principal llamado:
+
+  "Enviar Evidencia"
+
+--------------------------------------------
+
+### Validaciones
+
+Antes de enviar la evidencia:
+
+- Validar que el estudiante haya seleccionado un archivo.
+- Validar que haya escrito una reflexión sobre su aprendizaje.
+- Mostrar mensajes claros en caso de que falte algún dato.
+
+--------------------------------------------
+
+### Funcionamiento
+
+Al presionar "Enviar Evidencia":
+
+- Mostrar un mensaje de confirmación indicando que la evidencia fue enviada correctamente.
+- Guardar temporalmente la información utilizando LocalStorage.
+- Si el estudiante vuelve a abrir la lección, recuperar automáticamente la evidencia previamente enviada.
+- Mostrar el nombre del archivo cargado.
+- Mostrar la fecha y hora del envío.
+- Permitir reemplazar la evidencia por una nueva si el estudiante desea actualizarla.
+
+--------------------------------------------
+
+### Integración con el progreso
+
+Una vez enviada correctamente la evidencia:
+
+- Marcar automáticamente la Actividad Práctica o Mini Reto como entregado.
+- Actualizar el progreso de la lección.
+- Mantener la compatibilidad con el sistema de progreso existente.
+
+--------------------------------------------
+
+### Diseño
+
+La nueva sección debe utilizar exactamente el mismo estilo visual de CleverLabs Academy.
+
+No modificar:
+
+- Colores.
+- Tipografía.
+- Clases CSS existentes.
+- Diseño general.
+- Estructura HTML.
+
+--------------------------------------------

@@ -1,10 +1,36 @@
 <div class="lesson-content">
 <h1>5.3 Casos borde y errores esperados</h1>
 <p class="subtitle">Módulo 5 · Documento</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Aprender a identificar y probar sistemáticamente los casos borde.</div>
+
+<h2>Introducción</h2>
+<p>La IA suele generar código que funciona perfectamente con la entrada "típica" pero falla estrepitosamente cuando recibe datos inesperados. Un usuario que ingresa un número negativo, un archivo vacío, o una conexión de red que se cae — la IA rara vez anticipa estos escenarios. Esta lección te enseñará una estrategia sistemática para encontrar casos borde antes de que tus usuarios los encuentren por ti.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Aplicar una estrategia de 7 pasos para identificar casos borde</li>
+<li>Escribir código robusto que maneje entradas vacías, inválidas y límites</li>
+<li>Anticipar fallos en dependencias externas, concurrencia y tiempo</li>
+<li>Implementar validaciones defensivas en código generado por IA</li>
+</ul>
+
 <h2>Estrategia para encontrar casos borde</h2>
-<ol><li><strong>Entrada vacía/nula:</strong> ¿Qué pasa si no hay datos?</li><li><strong>Entrada mínima/máxima:</strong> ¿Valores en los límites?</li><li><strong>Entrada inválida:</strong> ¿Tipos incorrectos?</li><li><strong>Estado del sistema:</strong> ¿BD caída? ¿Red lenta?</li><li><strong>Concurrencia:</strong> ¿Dos peticiones simultáneas?</li><li><strong>Dependencias:</strong> ¿API externa devuelve error?</li><li><strong>Tiempo:</strong> ¿Timeout?</li></ol>
-<h2>Ejemplo</h2>
+<ol>
+<li><strong>Entrada vacía/nula:</strong> ¿Qué pasa si no hay datos? <em>Ej: lista vacía, string vacío, None, null</em></li>
+<li><strong>Entrada mínima/máxima:</strong> ¿Valores en los límites? <em>Ej: 0, 1, -1, MAX_INT, Infinity</em></li>
+<li><strong>Entrada inválida:</strong> ¿Tipos incorrectos? <em>Ej: string donde se espera número, objeto donde se espera array</em></li>
+<li><strong>Estado del sistema:</strong> ¿BD caída? ¿Red lenta? <em>Ej: timeout, conexión rechazada</em></li>
+<li><strong>Concurrencia:</strong> ¿Dos peticiones simultáneas? <em>Ej: race conditions, datos corruptos</em></li>
+<li><strong>Dependencias:</strong> ¿API externa devuelve error? <em>Ej: 500, 404, rate limit</em></li>
+<li><strong>Tiempo:</strong> ¿Timeout? <em>Ej: operación que excede el tiempo máximo permitido</em></li>
+</ol>
+
+<h3>Aplicación práctica de la estrategia</h3>
+<p>Cada vez que generes código con IA, recorre mentalmente estos 7 puntos y pregúntate: "¿Qué pasaría aquí?". Si la IA no manejó un escenario, agrega la validación manualmente. Con la práctica, este chequeo toma menos de 2 minutos.</p>
+
+<h2>Ejemplo completo</h2>
 <pre><code>def get_usuario_por_id(db, usuario_id):
     if not db:
         raise ConnectionError("BD no disponible")
@@ -14,4 +40,113 @@
         raise ValueError("ID debe ser positivo")
     resultado = db.query("SELECT * FROM usuarios WHERE id = ?", usuario_id)
     return resultado[0] if resultado else None</code></pre>
+
+<h3>Análisis de casos borde en el ejemplo</h3>
+<ul>
+<li><strong>Entrada vacía/nula:</strong> <code>db=None</code> → raise ConnectionError ✓; <code>usuario_id=None</code> → raise TypeError ✓</li>
+<li><strong>Entrada mínima/máxima:</strong> <code>usuario_id=0</code> → raise ValueError ✓; <code>usuario_id=-5</code> → raise ValueError ✓</li>
+<li><strong>Entrada inválida:</strong> <code>usuario_id="abc"</code> → raise TypeError ✓</li>
+<li><strong>Dependencias:</strong> <code>db.query()</code> falla → no hay try/except ⚠️ posible mejora</li>
+<li><strong>Resultado vacío:</strong> <code>resultado=[]</code> → retorna None ✓ (manejado correctamente)</li>
+</ul>
+
+<h2>Comparación: Código sin manejo de bordes vs. Código robusto</h2>
+<table>
+<thead>
+<tr><th>Escenario</th><th>Código sin bordes (IA típica)</th><th>Código robusto</th></tr>
+</thead>
+<tbody>
+<tr><td>Entrada vacía</td><td>Error críptico o crash</td><td>Mensaje claro o valor por defecto</td></tr>
+<tr><td>ID negativo</td><td>SQL ejecutada con ID negativo (posible error)</td><td>Validación temprana con ValueError</td></tr>
+<tr><td>BD caída</td><td>Traceback de conexión</td><td>ConnectionError manejado con mensaje amigable</td></tr>
+<tr><td>Tipos incorrectos</td><td>Error en tiempo de ejecución</td><td>TypeError con validación explícita</td></tr>
+<tr><td>API externa timeout</td><td>Se cuelga indefinidamente</td><td>Timeout con reintento y fallback</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Estrategia de 7 pasos para casos borde</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:700px;margin:0 auto;">
+    <div style="background:#2563eb;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">1. Entrada vacía/nula</div>
+    <div style="background:#2563eb;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">2. Valores mín/máx</div>
+    <div style="background:#2563eb;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">3. Tipo inválido</div>
+    <div style="background:#f59e0b;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">4. Estado del sistema</div>
+    <div style="background:#f59e0b;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">5. Concurrencia</div>
+    <div style="background:#ef4444;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">6. Dependencias externas</div>
+    <div style="background:#ef4444;color:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:0.85rem;">7. Tiempo / Timeout</div>
+  </div>
+  <div style="margin-top:15px;padding:12px;background:#dbeafe;border-radius:8px;display:inline-block;">
+    <span style="font-weight:bold;color:#1e40af;">💡 Pregunta clave:</span>
+    <span style="color:#1e3a5f;">¿Qué pasaría aquí si la entrada fuera inesperada?</span>
+  </div>
+</div>
+
+<div class="highlight">
+<strong>Consejo del instructor:</strong> Aplica el Principio de Robustez (Postel's Law): "Sé conservador en lo que envías, sé liberal en lo que aceptas". Para código generado por IA, esto significa: valida estrictamente las entradas y maneja gracefully cualquier escenario inesperado.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Validar solo el tipo:</strong> No basta con verificar que es entero; también hay que verificar rango y valores válidos</li>
+<li><strong>Ignorar el contexto:</strong> Un caso borde en desarrollo web (header malformado) es distinto a uno en data science (NaN en datos)</li>
+<li><strong>Manejar errores genéricamente:</strong> Un <code>except: pass</code> oculta errores que deberían ser visibles</li>
+<li><strong>No probar los casos borde:</strong> Identificarlos no basta; hay que escribir pruebas que los verifiquen</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Validar al inicio de la función:</strong> Antes de cualquier operación, verifica todas las entradas (fail fast)</li>
+<li><strong>Usar tipos específicos de excepción:</strong> Prefiere <code>ValueError</code>, <code>TypeError</code>, <code>ConnectionError</code> sobre <code>Exception</code> genérico</li>
+<li><strong>Documentar los casos borde:</strong> En el docstring de la función, menciona qué entradas pueden fallar</li>
+<li><strong>Aplicar la estrategia de 7 pasos:</strong> Recorre la lista mentalmente cada vez que generes código con IA</li>
+<li><strong>Escribir pruebas para cada borde:</strong> Por cada caso borde identificado, escribe una prueba automatizada</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>La IA ha generado esta función que divide dos números:</p>
+<pre><code>def dividir(a, b):
+    return a / b</code></pre>
+<p>Aplica la estrategia de 7 pasos para identificar los casos borde. Luego:</p>
+<ol>
+<li>Escribe una versión mejorada que maneje todos los casos borde</li>
+<li>Escribe pruebas para cada caso borde identificado</li>
+<li>¿Qué pasa con <code>b = 0</code>? ¿Y si <code>a</code> o <code>b</code> son <code>None</code>? ¿Y si son strings numéricos?</li>
+</ol>
+
+<h2>Mini reto</h2>
+<p>Genera con IA una función que lea un archivo JSON y devuelva la suma de los valores numéricos. Sin modificar el código generado, aplica la estrategia de 7 pasos para encontrar todos los casos borde. Documenta cada caso borde y escribe las pruebas correspondientes. ¿Cuántos casos encontraste? Comparte tu lista con un compañero y comparen resultados.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>La estrategia de 7 pasos cubre: entrada vacía, valores límite, tipos inválidos, estado del sistema, concurrencia, dependencias y tiempo</li>
+<li>El código generado por IA típicamente no maneja casos borde; es responsabilidad del desarrollador agregarlos</li>
+<li>Validar al inicio (fail fast) evita errores complejos más adelante</li>
+<li>Usar excepciones específicas mejora la legibilidad y el debugging</li>
+<li>Cada caso borde identificado debe tener una prueba automatizada</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

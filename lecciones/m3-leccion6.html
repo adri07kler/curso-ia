@@ -1,11 +1,217 @@
 <div class="lesson-content">
 <h1>3.6 Crear una cadena de prompts</h1>
 <p class="subtitle">Módulo 3 · Ejercicio</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Practicar la creación de cadenas de prompts para un problema real.</div>
+
+<h2>Introducción</h2>
+<p>En la lección anterior aprendiste la teoría de la encadenación de prompts. Ahora es momento de aplicarlo. Este ejercicio te guiará paso a paso para que construyas tu propia cadena de prompts a partir de un requerimiento realista del mundo del desarrollo de software.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+  <li>Aplicar la cadena mínima de 6 pasos a un problema real de desarrollo.</li>
+  <li>Redactar prompts específicos y efectivos para cada paso de la cadena.</li>
+  <li>Construir un Context Packet coherente para el problema planteado.</li>
+  <li>Evaluar críticamente la calidad de su propia cadena de prompts.</li>
+</ul>
+
 <h2>Enunciado</h2>
 <p>Dado el requerimiento:</p>
 <div class="highlight">"Dashboard para usuarios que muestra sus últimas 10 transacciones, su saldo actual, y un gráfico de gastos por categoría del mes actual. Solo datos de los últimos 30 días. Debe actualizarse cada 5 minutos."</div>
 <p>Crea una cadena de 6 prompts:</p>
-<ol><li><strong>Prompt 1:</strong> Analiza el requerimiento y detecta ambigüedades</li><li><strong>Prompt 2:</strong> Convierte en especificación clara</li><li><strong>Prompt 3:</strong> Propón plan de implementación por pasos</li><li><strong>Prompt 4:</strong> Implementa solo el primer paso</li><li><strong>Prompt 5:</strong> Genera pruebas para validar</li><li><strong>Prompt 6:</strong> Revisa críticamente el resultado</li></ol>
+<ol>
+  <li><strong>Prompt 1:</strong> Analiza el requerimiento y detecta ambigüedades</li>
+  <li><strong>Prompt 2:</strong> Convierte en especificación clara</li>
+  <li><strong>Prompt 3:</strong> Propón plan de implementación por pasos</li>
+  <li><strong>Prompt 4:</strong> Implementa solo el primer paso</li>
+  <li><strong>Prompt 5:</strong> Genera pruebas para validar</li>
+  <li><strong>Prompt 6:</strong> Revisa críticamente el resultado</li>
+</ol>
 <p>Incluye también el context packet necesario.</p>
+
+<h2>Guía paso a paso</h2>
+
+<h3>Paso 1: Context Packet</h3>
+<p>Antes de empezar la cadena, define el Context Packet del proyecto. Esto asegura que la IA tenga toda la información de fondo necesaria.</p>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>## Objetivo:
+Dashboard financiero para usuarios de una app de banca personal
+
+## Rol:
+Desarrollador frontend senior especializado en dashboards
+
+## Contexto:
+App web React 18 con TypeScript, datos simulados (mock API)
+
+## Estado actual:
+Proyecto Vite + React 18 + TypeScript + Tailwind CSS
+Estructura: /components, /hooks, /services, /types
+Mock API en /services/api.ts con datos de prueba
+
+## Restricciones:
+- React 18, TypeScript strict mode
+- Recharts para gráficos
+- Tailwind CSS
+- Sin backend real (datos mock)
+- Actualización cada 5 minutos (setInterval)
+
+## Criterios de aceptación:
+- Muestra últimas 10 transacciones
+- Muestra saldo actual
+- Gráfico de gastos por categoría del mes actual
+- Datos filtrados a últimos 30 días
+- Actualización automática cada 5 minutos
+- Diseño responsive
+
+## Formato:
+Código completo de cada componente
+
+## No hacer:
+- No modificar configuraciones existentes
+- No agregar dependencias nuevas
+- No implementar backend real
+
+## Revisión humana:
+- Verificar que los datos mostrados sean correctos
+- Validar que el gráfico se renderice adecuadamente</code></pre>
+
+<h3>Paso 2: Prompt 1 - Analizar ambigüedades</h3>
+<p>El primer prompt debe detectar qué información falta o es ambigua en el requerimiento.</p>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Con el siguiente Context Packet, analiza el requerimiento del dashboard financiero y detecta TODAS las ambigüedades que encuentres.
+
+Requerimiento: "Dashboard para usuarios que muestra sus últimas 10 transacciones, su saldo actual, y un gráfico de gastos por categoría del mes actual. Solo datos de los últimos 30 días. Debe actualizarse cada 5 minutos."
+
+Para cada ambigüedad, explica por qué es relevante y qué información adicional necesitamos.</code></pre>
+
+<h3>Paso 3: Prompt 2 - Especificación clara</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Basándote en el análisis anterior, escribe una especificación técnica clara y completa del dashboard financiero. La especificación debe incluir: componentes, datos, interacciones y reglas de negocio.</code></pre>
+
+<h3>Paso 4: Prompt 3 - Plan de implementación</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Propón un plan de implementación detallado paso a paso. Cada paso debe incluir: archivos a modificar/crear, componentes involucrados y criterios para considerar el paso completado.</code></pre>
+
+<h3>Paso 5: Prompt 4 - Implementar paso 1</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Implementa solo el primer paso del plan de implementación. Debes generar el código completo siguiendo las restricciones del Context Packet.</code></pre>
+
+<h3>Paso 6: Prompt 5 - Generar pruebas</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Genera pruebas unitarias con Jest para validar el código del paso 1. Las pruebas deben cubrir: casos normales, casos borde y errores esperados.</code></pre>
+
+<h3>Paso 7: Prompt 6 - Revisión crítica</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Revisa críticamente el código generado en el paso 1. Identifica: problemas de rendimiento, violaciones de las restricciones del proyecto, oportunidades de mejora en legibilidad y mantenibilidad. Sé específico: menciona archivos y líneas.</code></pre>
+
+<h2>Tabla comparativa: Sin cadena vs Con cadena de prompts</h2>
+<div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;margin:15px 0;">
+    <thead>
+      <tr style="background:#eef2ff;">
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Aspecto</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Sin cadena (prompt directo)</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Con cadena de prompts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Enfoque</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Resolver todo de una vez</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Dividir y vencerás</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Claridad del requerimiento</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Se asume que el requerimiento es claro</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Se detectan y resuelven ambigüedades primero</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Verificación</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Solo al final, si hay error se descarta todo</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">En cada paso, corriges antes de avanzar</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Documentación del proceso</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">No queda registro del proceso</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Cada paso queda documentado</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Aprendizaje</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">No se aprende del proceso</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Cada paso enseña algo sobre el dominio</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Diagrama: Pipeline de la cadena de prompts</h2>
+<div style="background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:30px;margin:20px 0;">
+  <div style="display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;">
+    <div style="background:#0f172a;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">Context Packet</div>
+    <div style="font-size:1rem;color:#2563eb;">→</div>
+    <div style="background:#2563eb;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">P1: Analizar<br>ambigüedades</div>
+    <div style="font-size:1rem;color:#2563eb;">→</div>
+    <div style="background:#3b82f6;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">P2: Especificación<br>clara</div>
+    <div style="font-size:1rem;color:#2563eb;">→</div>
+    <div style="background:#6366f1;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">P3: Plan de<br>implementación</div>
+    <div style="font-size:1rem;color:#2563eb;">→</div>
+    <div style="background:#22c55e;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">P4: Código<br>(paso 1)</div>
+    <div style="font-size:1rem;color:#2563eb;">→</div>
+    <div style="background:#10b981;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">P5: Pruebas</div>
+    <div style="font-size:1rem;color:#2563eb;">→</div>
+    <div style="background:#f59e0b;color:white;padding:8px 14px;border-radius:6px;font-weight:bold;font-size:0.8rem;text-align:center;">P6: Revisión<br>crítica</div>
+  </div>
+  <div style="text-align:center;margin-top:15px;font-size:0.85rem;color:#64748b;">Cada prompt (P1-P6) recibe el resultado del anterior y construye sobre él</div>
+</div>
+
+<div class="highlight"><strong>Consejo del instructor:</strong> No copies y pegues estos prompts sin entenderlos. Personaliza cada prompt según el problema específico. La calidad de la cadena depende de la precisión de cada eslabón.</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+  <li><strong>Prompts demasiado genéricos:</strong> "Analiza esto" sin indicar el formato de respuesta esperado. Sé específico: "Analiza y lista en formato de viñetas".</li>
+  <li><strong>Saltar la revisión entre pasos:</strong> Si no revisas el resultado de cada paso, los errores se acumulan. Detente después de cada respuesta de la IA y evalúa.</li>
+  <li><strong>No proporcionar el Context Packet:</strong> Sin contexto, la IA asumirá tecnologías y decisiones que pueden no coincidir con tu proyecto.</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+  <li>Revisa el resultado de cada prompt antes de enviar el siguiente.</li>
+  <li>Si un resultado no es satisfactorio, ajusta el prompt y vuelve a intentarlo.</li>
+  <li>Documenta los 6 prompts y sus resultados como referencia futura.</li>
+  <li>Comparte la cadena completa con tu equipo para estandarizar procesos.</li>
+  <li>Mide el tiempo total vs la calidad obtenida para iterar y mejorar.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Completa los 6 prompts de la cadena para el dashboard financiero. No es necesario que ejecutes los prompts con una IA (aunque puedes hacerlo si lo deseas), pero debes redactar cada prompt con el nivel de detalle necesario para obtener una respuesta de calidad.</p>
+<p>Adicionalmente, incluye el Context Packet que hayas definido para el proyecto.</p>
+
+<h2>Mini reto</h2>
+<p>Sin usar el Context Packet proporcionado en esta lección, crea tu propio Context Packet para el dashboard financiero desde cero. Luego compara tu versión con la de la lección. ¿Qué agregaste? ¿Qué omitiste? ¿Cuál versión crees que produciría mejores resultados con la IA?</p>
+
+<h2>Resumen</h2>
+<ul>
+  <li>La cadena de 6 prompts transforma un requerimiento vago en un resultado de alta calidad.</li>
+  <li>El Context Packet es el cimiento de toda la cadena.</li>
+  <li>Cada prompt debe ser específico, con formato de respuesta definido.</li>
+  <li>La revisión entre pasos es obligatoria, no opcional.</li>
+  <li>Documentar la cadena completa permite reutilizarla en proyectos similares.</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
 </div>

@@ -365,8 +365,10 @@ async function loadLesson(modId, lesId) {
     // Completion button
     renderCompleteButton(wrapper, modId, lesId)
 
-    // Evidence section
-    initEvidenceSection(wrapper, key)
+    // Evidence section (skip for quiz lessons)
+    if (!subtitleEl || !/quiz/i.test(subtitleEl.textContent)) {
+      initEvidenceSection(wrapper, key)
+    }
 
     const nav = document.createElement('div')
     nav.className = 'lesson-nav'
@@ -600,6 +602,7 @@ function initQuiz(container, modId, lesId) {
     let questionP = null
     const options = []
     let answerFound = null
+    let explanation = ''
 
     while (el && el.tagName !== 'H2') {
       if (el.tagName === 'P' && !el.querySelector('strong')) {
@@ -609,7 +612,6 @@ function initQuiz(container, modId, lesId) {
         const items = el.querySelectorAll('li')
         items.forEach(function(li) {
           const txt = li.textContent.trim()
-          // Check if this is listing items (options start with a), b), etc.)
           if (/^[a-z][\)\.]/.test(txt)) {
             options.push({ letter: txt[0], text: txt.substring(2).trim() })
           }
@@ -619,16 +621,17 @@ function initQuiz(container, modId, lesId) {
         const strong = el.querySelector('strong')
         const strongText = strong.textContent.trim()
         if (/respuesta/i.test(strongText)) {
-          // Extract answer letter
           const match = strongText.match(/[:\s]+([a-dA-D])/i) || strongText.match(/\b([a-dA-D])\b/)
           if (match) answerFound = match[1].toLowerCase()
+        } else if (/explicación/i.test(strongText)) {
+          explanation = el.textContent.replace(/^Explicación:\s*/i, '').trim()
         }
       }
       el = el.nextElementSibling
     }
 
     if (options.length > 0) {
-      quizData.push({ questionText: questionP || qText, options: options, answer: answerFound })
+      quizData.push({ questionText: questionP || qText, options: options, answer: answerFound, explanation: explanation })
       validQuiz = true
     }
   })
@@ -646,9 +649,11 @@ function initQuiz(container, modId, lesId) {
       html += '<label for="quiz-q' + idx + '-' + opt.letter + '">' + opt.letter + ') ' + opt.text + '</label>'
       html += '</div>'
     })
+    html += '<div class="quiz-explanation" id="quiz-explanation-' + idx + '" style="display:none;"></div>'
     html += '</div>'
   })
   html += '<button class="btn-quiz-submit" id="btnQuizSubmit">Enviar respuestas</button>'
+  html += '<button class="btn-quiz-retry" id="btnQuizRetry" style="display:none;">Volver a intentar</button>'
   html += '<div id="quizResult" class="quiz-result" style="display:none"></div>'
 
   // Hide original questions
@@ -671,11 +676,27 @@ function initQuiz(container, modId, lesId) {
   document.getElementById('btnQuizSubmit').addEventListener('click', function() {
     let correct = 0
     const total = quizData.length
+    let allAnswered = true
 
     // Clear previous results
     document.querySelectorAll('.quiz-option').forEach(function(opt) {
       opt.classList.remove('correct', 'wrong', 'disabled')
     })
+    document.querySelectorAll('.quiz-explanation').forEach(function(d) { d.style.display = 'none' })
+
+    // Check all answered
+    quizData.forEach(function(q, idx) {
+      const selected = document.querySelector('input[name="quiz-q' + idx + '"]:checked')
+      if (!selected) allAnswered = false
+    })
+
+    if (!allAnswered) {
+      const resultDiv = document.getElementById('quizResult')
+      resultDiv.style.display = 'block'
+      resultDiv.textContent = '⚠️ Debes responder todas las preguntas antes de verificar.'
+      resultDiv.className = 'quiz-result reprobado'
+      return
+    }
 
     quizData.forEach(function(q, idx) {
       const selected = document.querySelector('input[name="quiz-q' + idx + '"]:checked')
@@ -687,30 +708,42 @@ function initQuiz(container, modId, lesId) {
           optDiv.classList.add('correct')
         } else {
           optDiv.classList.add('wrong')
-          // Highlight correct answer
           document.querySelectorAll('.quiz-option[data-q="' + idx + '"]').forEach(function(o) {
             if (o.dataset.letter === q.answer) o.classList.add('correct')
           })
         }
       } else {
-        // Show correct answer if no selection
         document.querySelectorAll('.quiz-option[data-q="' + idx + '"]').forEach(function(o) {
           if (o.dataset.letter === q.answer) o.classList.add('correct')
         })
       }
+      // Show explanation
+      const explDiv = document.getElementById('quiz-explanation-' + idx)
+      if (explDiv && q.explanation) {
+        explDiv.style.display = 'block'
+        explDiv.innerHTML = '<strong>Explicación:</strong> ' + q.explanation
+      }
     })
 
-    // Disable all inputs
     document.querySelectorAll('.quiz-option').forEach(function(o) { o.classList.add('disabled') })
     document.querySelectorAll('.quiz-option input').forEach(function(i) { i.disabled = true })
     this.disabled = true
 
     const pct = Math.round((correct / total) * 100)
-    const passed = pct >= 60
+    const passed = pct >= 80
     const resultDiv = document.getElementById('quizResult')
     resultDiv.style.display = 'block'
-    resultDiv.textContent = 'Calificación: ' + pct + '% (' + correct + '/' + total + ') — ' + (passed ? '✅ Aprobado' : '❌ Reprobado')
+
+    let msg = 'Calificación: ' + pct + '% (' + correct + '/' + total + ')'
+    if (passed) {
+      msg += ' — ✅ Aprobado'
+    } else {
+      msg += ' — ❌ Reprobado. Puedes volver a intentarlo.'
+    }
+    resultDiv.textContent = msg
     resultDiv.className = 'quiz-result ' + (passed ? 'aprobado' : 'reprobado')
+
+    document.getElementById('btnQuizRetry').style.display = passed ? 'none' : 'inline-block'
 
     // Save grade record
     const mod = MODULES.find(function(m) { return m.id === modId })
@@ -734,6 +767,27 @@ function initQuiz(container, modId, lesId) {
       }
       saveGradeRecords(records)
     }
+
+    if (passed) {
+      marcarCompletada(modId, lesId)
+      renderCompleteButton(document.querySelector('.lesson-view'), modId, lesId)
+    }
+  })
+
+  // Retry handler
+  document.getElementById('btnQuizRetry').addEventListener('click', function() {
+    quizData.forEach(function(q, idx) {
+      const inputs = document.querySelectorAll('input[name="quiz-q' + idx + '"]')
+      inputs.forEach(function(i) { i.checked = false; i.disabled = false })
+      document.querySelectorAll('.quiz-option[data-q="' + idx + '"]').forEach(function(o) {
+        o.classList.remove('correct', 'wrong', 'disabled')
+      })
+      const explDiv = document.getElementById('quiz-explanation-' + idx)
+      if (explDiv) explDiv.style.display = 'none'
+    })
+    document.getElementById('btnQuizSubmit').disabled = false
+    document.getElementById('btnQuizRetry').style.display = 'none'
+    document.getElementById('quizResult').style.display = 'none'
   })
 
   return quizWrap
@@ -1636,107 +1690,4 @@ function initConfig() {
   })
 }
 
-// ============================================================
-// EJERCICIO: CLASIFICAR TAREAS (interactive table)
-// ============================================================
 
-function verificarClasificacion() {
-  const table = document.getElementById('tablaClasificacion')
-  if (!table) return
-
-  const rows = table.querySelectorAll('tbody tr')
-  let allAnswered = true
-  let correctCount = 0
-  const total = rows.length
-
-  rows.forEach(function(row) {
-    const select = row.querySelector('select')
-    if (!select.value) allAnswered = false
-  })
-
-  if (!allAnswered) {
-    document.getElementById('resultadoClasificacion').innerHTML =
-      '<div class="highlight" style="border-left-color:#ef4444;background:#fef2f2;">⚠️ Debes responder todas las tareas antes de verificar.</div>'
-    return
-  }
-
-  rows.forEach(function(row) {
-    const select = row.querySelector('select')
-    const correct = row.dataset.correct
-    const explanation = row.dataset.explicacion
-    const iconSpan = row.querySelector('.icon-resultado')
-    const explSpan = row.querySelector('.explanation-text')
-
-    select.disabled = true
-
-    if (select.value === correct) {
-      correctCount++
-      row.classList.add('correcto')
-      iconSpan.innerHTML = '&#10004;'
-      iconSpan.className = 'icon-resultado icon-correcto'
-      explSpan.textContent = ''
-    } else {
-      row.classList.add('incorrecto')
-      iconSpan.innerHTML = '&#10008;'
-      iconSpan.className = 'icon-resultado icon-incorrecto'
-      explSpan.textContent = 'Respuesta correcta: ' + select.options[select.selectedIndex].text.split(' - ')[0] + ' → ' + correct + '. ' + explanation
-    }
-  })
-
-  const pct = Math.round((correctCount / total) * 100)
-  const passed = pct >= 80
-
-  document.getElementById('resultadoClasificacion').innerHTML =
-    '<div class="resultado-score' + (passed ? ' resultado-aprobado' : ' resultado-reprobado') + '">' +
-    '<strong>Resultado:</strong> ' + correctCount + '/' + total + ' (' + pct + '%)<br>' +
-    (passed
-      ? '<span class="aprobado-msg">&#10004; Ejercicio aprobado</span>'
-      : '<span class="reprobado-msg">&#10008; Ejercicio no aprobado (mínimo 80%)</span>') +
-    '</div>'
-
-  document.querySelector('.btn-verificar').disabled = true
-  document.getElementById('btnReintentar').style.display = 'inline-block'
-
-  if (passed) {
-    const records = getGradeRecords()
-    const key = 'm1-l5'
-    const existing = records.findIndex(function(r) { return r.lessonKey === key })
-    const record = {
-      lessonKey: key,
-      module: 1,
-      moduleTitle: 'Cambio de paradigma y uso responsable de IA',
-      lesson: 'Escenarios de decisión (Quiz)',
-      grade: pct,
-      date: getTodayStr(),
-      status: 'Aprobado'
-    }
-    if (existing !== -1) {
-      records[existing] = record
-    } else {
-      records.push(record)
-    }
-    saveGradeRecords(records)
-  }
-}
-
-function reiniciarClasificacion() {
-  const table = document.getElementById('tablaClasificacion')
-  if (!table) return
-
-  const rows = table.querySelectorAll('tbody tr')
-  rows.forEach(function(row) {
-    row.classList.remove('correcto', 'incorrecto')
-    const select = row.querySelector('select')
-    select.disabled = false
-    select.value = ''
-    const iconSpan = row.querySelector('.icon-resultado')
-    iconSpan.innerHTML = ''
-    iconSpan.className = 'icon-resultado'
-    const explSpan = row.querySelector('.explanation-text')
-    explSpan.textContent = ''
-  })
-
-  document.getElementById('resultadoClasificacion').innerHTML = ''
-  document.getElementById('btnReintentar').style.display = 'none'
-  document.querySelector('.btn-verificar').disabled = false
-}

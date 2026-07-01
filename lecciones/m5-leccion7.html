@@ -1,22 +1,275 @@
 <div class="lesson-content">
 <h1>5.7 Quiz de validación</h1>
 <p class="subtitle">Módulo 5 · Quiz</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Evaluar conocimientos sobre validación, pruebas y documentación.</div>
-<h2>Pregunta 1</h2>
-<p>¿Cuál es la prueba mínima que DEBE tener cualquier función generada por IA?</p>
-<ul><li>a) Prueba de carga</li><li>b) Prueba de humo (caso feliz)</li><li>c) Prueba de seguridad</li></ul>
-<p><strong>Respuesta: b</strong></p>
-<h2>Pregunta 2</h2>
-<p>Encuentras un bug en código generado por IA en producción. ¿Cuál es la primera acción?</p>
-<ul><li>a) Culpar a la IA</li><li>b) Arreglarlo y hacer retrospectiva</li><li>c) Dejarlo porque ya está en producción</li></ul>
-<p><strong>Respuesta: b</strong></p>
-<h2>Pregunta 3</h2>
-<p>¿Cuánto tiempo deberías dedicar a revisar código generado por IA?</p>
-<ul><li>a) Menos que el humano (la IA es mejor)</li><li>b) Más que el humano (la IA comete errores diferentes)</li><li>c) El mismo que a código de un junior</li></ul>
-<p><strong>Respuesta: b</strong></p>
-<h2>Pregunta 4</h2>
-<p>¿Qué haces si la IA genera código que no entiendes completamente?</p>
-<ul><li>a) Lo aceptas si pasa las pruebas</li><li>b) Pides explicación, si no entiendes no lo aceptas</li><li>c) Lo buscas en Stack Overflow</li></ul>
-<p><strong>Respuesta: b</strong></p>
-<div class="conclusion"><p><strong>Entregable:</strong> Reporte de validación del ejercicio 5.6.</p></div>
+
+<h2>Introducción</h2>
+<p>Este quiz pondrá a prueba los conceptos fundamentales que has aprendido en el Módulo 5: los riesgos de confiar ciegamente en la IA, las pruebas mínimas necesarias, la identificación de casos borde, las técnicas de code review para código generado, y la documentación de prompts y decisiones. Cada pregunta está diseñada para evaluar comprensión, no memorización — piensa cuidadosamente antes de responder.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar este quiz el estudiante será capaz de:</p>
+<ul>
+<li>Demostrar comprensión de los riesgos y limitaciones del código generado por IA</li>
+<li>Aplicar criterios de validación y prueba a situaciones reales de desarrollo</li>
+<li>Evaluar decisiones sobre cuándo y cómo usar IA en proyectos de software</li>
+</ul>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Confundir "prueba de humo" con "prueba de seguridad":</strong> La prueba de humo verifica ejecución básica; la seguridad se revisa por separado</li>
+<li><strong>Pensar que la IA requiere menos revisión:</strong> Es lo opuesto — la IA comete errores poco convencionales que requieren más atención</li>
+<li><strong>Aceptar código que no se entiende:</strong> Aunque pase pruebas, si no entiendes el código, no puedes mantenerlo ni auditarlo</li>
+<li><strong>Subestimar los casos borde:</strong> Un código que falla con entrada vacía no está listo para producción, incluso si funciona con datos válidos</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Siempre escribir pruebas mínimas:</strong> Caso feliz + caso borde por cada función generada por IA</li>
+<li><strong>Revisar código de IA con más atención que código humano:</strong> La IA comete errores inesperados</li>
+<li><strong>Documentar prompts, decisiones y pruebas:</strong> Para trazabilidad y mejora continua</li>
+<li><strong>Nunca integrar código sin entenderlo:</strong> Si no lo entiendes, pide explicación o no lo uses</li>
+<li><strong>Aplicar el criterio de auditoría:</strong> Problemas críticos = requiere cambios, no aprobar</li>
+</ul>
+
+<h2>Comparación: Enfoque tradicional vs. Enfoque con IA en validación</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Validación tradicional</th><th>Validación con IA</th></tr>
+</thead>
+<tbody>
+<tr><td>Velocidad inicial</td><td>Lenta (escribir todo manualmente)</td><td>Rápida (IA genera código base)</td></tr>
+<tr><td>Riesgo de errores</td><td>Errores humanos conocidos</td><td>Errores impredecibles (alucinaciones)</td></tr>
+<tr><td>Cobertura de pruebas</td><td>Depende del desarrollador</td><td>IA omite casos borde sistemáticamente</td></tr>
+<tr><td>Tiempo de revisión</td><td>Menos necesario (código propio)</td><td>Más necesario (código desconocido)</td></tr>
+<tr><td>Documentación</td><td>Se documenta lo que se entiende</td><td>Requiere documentar prompts y decisiones</td></tr>
+<tr><td>Seguridad</td><td>El dev es responsable consciente</td><td>IA replica vulnerabilidades de datos de entrenamiento</td></tr>
+<tr><td>Aprendizaje del equipo</td><td>Cada error es una lección</td><td>Sin documentación, los errores se repiten</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Ciclo de validación de código generado por IA</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;max-width:650px;margin:0 auto;">
+    <div style="background:#2563eb;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">🤖 Generar con IA</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">→</div>
+    <div style="background:#2563eb;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">🔍 Revisar código</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">→</div>
+    <div style="background:#f59e0b;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">🧪 Escribir pruebas</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">→</div>
+    <div style="background:#22c55e;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">✅ ¿Pruebas pasan?</div>
+    <div style="width:100%;margin:4px 0;"></div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+      <div style="background:#22c55e;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;">Sí → Documentar e integrar</div>
+      <div style="background:#ef4444;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;">No → Depurar y regenerar</div>
+    </div>
+  </div>
+  <p style="margin-top:12px;color:#64748b;font-size:0.85rem;">Este ciclo debe aplicarse a cada función generada por IA antes de integrarla a producción.</p>
+</div>
+
+<div class="highlight">
+  <strong>Consejo del instructor:</strong> Si obtuviste menos del 80%, revisa las lecciones donde tengas dudas. El objetivo no es solo aprobar, sino comprender cada concepto para aplicarlo en proyectos reales. La validación de código generado por IA es una habilidad que se perfecciona con la práctica.
+</div>
+
+<div class="quiz-wrap" id="quiz-container">
+  <div id="quiz-questions">
+    <div class="quiz-question">
+      <h3>Pregunta 1 de 8</h3>
+      <p>¿Cuál es la prueba mínima que DEBE tener cualquier función generada por IA?</p>
+      <div class="quiz-option"><input type="radio" name="q1" id="q1_a" value="0"><label for="q1_a">a) Prueba de carga</label></div>
+      <div class="quiz-option"><input type="radio" name="q1" id="q1_b" value="1"><label for="q1_b">b) Prueba de humo (caso feliz)</label></div>
+      <div class="quiz-option"><input type="radio" name="q1" id="q1_c" value="2"><label for="q1_c">c) Prueba de seguridad</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 2 de 8</h3>
+      <p>Encuentras un bug en código generado por IA en producción. ¿Cuál es la primera acción?</p>
+      <div class="quiz-option"><input type="radio" name="q2" id="q2_a" value="0"><label for="q2_a">a) Culpar a la IA</label></div>
+      <div class="quiz-option"><input type="radio" name="q2" id="q2_b" value="1"><label for="q2_b">b) Arreglarlo y hacer retrospectiva</label></div>
+      <div class="quiz-option"><input type="radio" name="q2" id="q2_c" value="2"><label for="q2_c">c) Dejarlo porque ya está en producción</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 3 de 8</h3>
+      <p>¿Cuánto tiempo deberías dedicar a revisar código generado por IA?</p>
+      <div class="quiz-option"><input type="radio" name="q3" id="q3_a" value="0"><label for="q3_a">a) Menos que el humano (la IA es mejor)</label></div>
+      <div class="quiz-option"><input type="radio" name="q3" id="q3_b" value="1"><label for="q3_b">b) Más que el humano (la IA comete errores diferentes)</label></div>
+      <div class="quiz-option"><input type="radio" name="q3" id="q3_c" value="2"><label for="q3_c">c) El mismo que a código de un junior</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 4 de 8</h3>
+      <p>¿Qué haces si la IA genera código que no entiendes completamente?</p>
+      <div class="quiz-option"><input type="radio" name="q4" id="q4_a" value="0"><label for="q4_a">a) Lo aceptas si pasa las pruebas</label></div>
+      <div class="quiz-option"><input type="radio" name="q4" id="q4_b" value="1"><label for="q4_b">b) Pides explicación, si no entiendes no lo aceptas</label></div>
+      <div class="quiz-option"><input type="radio" name="q4" id="q4_c" value="2"><label for="q4_c">c) Lo buscas en Stack Overflow</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 5 de 8</h3>
+      <p>¿Cuál de los siguientes NO es un tipo de prueba mínima recomendada para código generado por IA?</p>
+      <div class="quiz-option"><input type="radio" name="q5" id="q5_a" value="0"><label for="q5_a">a) Prueba de caso borde</label></div>
+      <div class="quiz-option"><input type="radio" name="q5" id="q5_b" value="1"><label for="q5_b">b) Prueba de error</label></div>
+      <div class="quiz-option"><input type="radio" name="q5" id="q5_c" value="2"><label for="q5_c">c) Prueba de rendimiento</label></div>
+      <div class="quiz-option"><input type="radio" name="q5" id="q5_d" value="3"><label for="q5_d">d) Prueba de regresión</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 6 de 8</h3>
+      <p>Una función generada por IA usa <code>except: pass</code>. ¿Cuál es el riesgo principal?</p>
+      <div class="quiz-option"><input type="radio" name="q6" id="q6_a" value="0"><label for="q6_a">a) Oculta errores que deberían ser visibles, dificultando el debugging</label></div>
+      <div class="quiz-option"><input type="radio" name="q6" id="q6_b" value="1"><label for="q6_b">b) Hace el código más lento</label></div>
+      <div class="quiz-option"><input type="radio" name="q6" id="q6_c" value="2"><label for="q6_c">c) No tiene riesgo, es una práctica válida</label></div>
+      <div class="quiz-option"><input type="radio" name="q6" id="q6_d" value="3"><label for="q6_d">d) Solo afecta a Python, otros lenguajes no tienen este problema</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 7 de 8</h3>
+      <p>¿Cuál es la mejor práctica al documentar el uso de IA en un proyecto?</p>
+      <div class="quiz-option"><input type="radio" name="q7" id="q7_a" value="0"><label for="q7_a">a) Solo documentar cuando el código tiene errores</label></div>
+      <div class="quiz-option"><input type="radio" name="q7" id="q7_b" value="1"><label for="q7_b">b) No documentar, el código habla por sí mismo</label></div>
+      <div class="quiz-option"><input type="radio" name="q7" id="q7_c" value="2"><label for="q7_c">c) Registrar el prompt, cambios aceptados, rechazados y pruebas realizadas</label></div>
+      <div class="quiz-option"><input type="radio" name="q7" id="q7_d" value="3"><label for="q7_d">d) Documentar solo los prompts exitosos</label></div>
+    </div>
+
+    <div class="quiz-question">
+      <h3>Pregunta 8 de 8</h3>
+      <p>Durante una auditoría de código generado por IA, encuentras que la función funciona perfectamente con datos válidos pero falla con un archivo vacío. ¿Cuál es tu decisión?</p>
+      <div class="quiz-option"><input type="radio" name="q8" id="q8_a" value="0"><label for="q8_a">a) Aprobar, porque funciona en el caso feliz</label></div>
+      <div class="quiz-option"><input type="radio" name="q8" id="q8_b" value="1"><label for="q8_b">b) Requerir cambios, porque no maneja un caso borde crítico</label></div>
+      <div class="quiz-option"><input type="radio" name="q8" id="q8_c" value="2"><label for="q8_c">c) Rechazar completamente la solución</label></div>
+      <div class="quiz-option"><input type="radio" name="q8" id="q8_d" value="3"><label for="q8_d">d) Dejarlo para otro sprint</label></div>
+    </div>
+  </div>
+
+  <button class="btn-quiz-submit" id="btn-quiz-submit" onclick="verificarQuiz()">Verificar respuestas</button>
+  <button class="btn-quiz-retry" id="btn-quiz-retry" onclick="reiniciarQuiz()" style="display:none;">Reintentar quiz</button>
+
+  <div id="quiz-result" class="quiz-result" style="display:none;"></div>
+
+  <div id="quiz-explanations" style="margin-top:20px;"></div>
+</div>
+
+<script>
+const quizData = [
+  { correct: 1, explanation: 'La prueba de humo (caso feliz) es la mínima indispensable. Verifica que la función se ejecuta sin errores con datos válidos. Sin ella, no sabes si el código siquiera funciona.' },
+  { correct: 1, explanation: 'La prioridad es arreglar el bug para minimizar el impacto en producción. La retrospectiva identifica cómo prevenir que vuelva a ocurrir. Culpar a la IA no soluciona el problema.' },
+  { correct: 1, explanation: 'La IA comete errores diferentes a los humanos, a menudo más sutiles. Requiere más tiempo de revisión, no menos, porque sus fallos son menos predecibles.' },
+  { correct: 1, explanation: 'Si no entiendes el código, no puedes mantenerlo, depurarlo ni evaluar su seguridad. Aceptar código que no comprendes es una deuda técnica peligrosa.' },
+  { correct: 2, explanation: 'Las pruebas mínimas son: humo, caso feliz, caso borde, error y regresión. La prueba de rendimiento es importante pero no es parte del conjunto mínimo.' },
+  { correct: 0, explanation: 'except: pass silencia todas las excepciones, incluidos errores que deberían notificarse. Esto oculta bugs y hace el código imposible de depurar.' },
+  { correct: 2, explanation: 'La documentación completa debe incluir el prompt usado, qué cambios se aceptaron y por qué, qué se rechazó, y las pruebas realizadas. Esto permite trazabilidad y aprendizaje.' },
+  { correct: 1, explanation: 'Un caso borde crítico (archivo vacío) es un problema bloqueante. La solución "funciona" solo en el caso feliz, lo que no es suficiente para producción. Requiere cambios antes de aprobar.' }
+];
+
+function verificarQuiz() {
+  let todasRespondidas = true;
+  for (let i = 0; i < quizData.length; i++) {
+    const name = 'q' + (i + 1);
+    const selected = document.querySelector('input[name="' + name + '"]:checked');
+    if (!selected) {
+      todasRespondidas = false;
+      break;
+    }
+  }
+
+  if (!todasRespondidas) {
+    const resultDiv = document.getElementById('quiz-result');
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'quiz-result reprobado';
+    resultDiv.innerHTML = '⚠ Responde todas las preguntas antes de verificar.';
+    return;
+  }
+
+  let aciertos = 0;
+  for (let i = 0; i < quizData.length; i++) {
+    const name = 'q' + (i + 1);
+    const selected = document.querySelector('input[name="' + name + '"]:checked');
+    const selectedValue = parseInt(selected.value);
+    const qDiv = document.querySelectorAll('.quiz-question')[i];
+    const options = qDiv.querySelectorAll('.quiz-option');
+
+    options.forEach(opt => opt.classList.add('disabled'));
+
+    if (selectedValue === quizData[i].correct) {
+      aciertos++;
+      options[selectedValue].classList.add('correct');
+    } else {
+      options[selectedValue].classList.add('wrong');
+      options[quizData[i].correct].classList.add('correct');
+    }
+  }
+
+  const btnSubmit = document.getElementById('btn-quiz-submit');
+  btnSubmit.disabled = true;
+  btnSubmit.style.display = 'none';
+
+  const btnRetry = document.getElementById('btn-quiz-retry');
+  btnRetry.style.display = 'block';
+
+  const total = quizData.length;
+  const porcentaje = Math.round((aciertos / total) * 100);
+  const resultDiv = document.getElementById('quiz-result');
+  resultDiv.style.display = 'block';
+
+  let mensaje = '';
+  let aprobado = porcentaje >= 80;
+
+  if (aprobado) {
+    resultDiv.className = 'quiz-result aprobado';
+    mensaje = '🎉 ¡Excelente! Has aprobado el quiz.';
+  } else {
+    resultDiv.className = 'quiz-result reprobado';
+    mensaje = '📖 Puedes volver a intentarlo. Revisa los temas donde fallaste.';
+  }
+
+  resultDiv.innerHTML = mensaje + '<br><strong>' + aciertos + '/' + total + ' aciertos (' + porcentaje + '%)</strong>';
+
+  const explanationsDiv = document.getElementById('quiz-explanations');
+  explanationsDiv.innerHTML = '<h3 style="margin-bottom:10px;">Explicaciones</h3>';
+  for (let i = 0; i < quizData.length; i++) {
+    const name = 'q' + (i + 1);
+    const selected = document.querySelector('input[name="' + name + '"]:checked');
+    const selectedValue = parseInt(selected.value);
+    const esCorrecta = selectedValue === quizData[i].correct;
+    explanationsDiv.innerHTML += '<div class="quiz-explanation" style="border-left-color:' + (esCorrecta ? '#22c55e' : '#ef4444') + ';"><strong>Pregunta ' + (i + 1) + ':</strong> ' + (esCorrecta ? '✅ Correcto' : '❌ Incorrecto') + '<br>' + quizData[i].explanation + '</div>';
+  }
+
+  if (aprobado) {
+    if (typeof marcarCompletada === 'function') {
+      marcarCompletada('5.7');
+    }
+    localStorage.setItem('quiz_m5_result', JSON.stringify({ aciertos: aciertos, total: total, porcentaje: porcentaje, aprobado: true }));
+  } else {
+    localStorage.setItem('quiz_m5_result', JSON.stringify({ aciertos: aciertos, total: total, porcentaje: porcentaje, aprobado: false }));
+  }
+}
+
+function reiniciarQuiz() {
+  const options = document.querySelectorAll('.quiz-option');
+  options.forEach(opt => {
+    opt.classList.remove('correct', 'wrong', 'disabled');
+  });
+
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach(r => r.checked = false);
+
+  document.getElementById('btn-quiz-submit').disabled = false;
+  document.getElementById('btn-quiz-submit').style.display = 'block';
+  document.getElementById('btn-quiz-retry').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-explanations').innerHTML = '';
+}
+</script>
+<h2>Resumen</h2>
+<ul>
+<li>La prueba mínima indispensable es la de humo (caso feliz)</li>
+<li>El código generado por IA requiere más revisión que el código humano, no menos</li>
+<li>Nunca aceptes código que no entiendes completamente</li>
+<li>Documentar el uso de IA es esencial para trazabilidad y aprendizaje del equipo</li>
+<li>Un caso borde no manejado es razón suficiente para no aprobar código en producción</li>
+<li>La responsabilidad final del código siempre es del desarrollador, no de la IA</li>
+</ul>
+
+
 </div>

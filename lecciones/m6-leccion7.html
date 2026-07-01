@@ -1,9 +1,176 @@
 <div class="lesson-content">
 <h1>6.7 Documentar el proceso completo</h1>
 <p class="subtitle">Módulo 6 · Documento</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Documentar todo el flujo de trabajo para trazabilidad.</div>
-<h2>Actividad</h2>
+
+<h2>Introducción</h2>
+<p>La documentación es la última etapa del flujo de desarrollo asistido por IA, pero una de las más importantes. Sin documentación, el conocimiento adquirido durante el proyecto se pierde: no sabes qué prompts funcionaron, qué decisiones tomaste, qué errores encontraste ni por qué rechazaste ciertas soluciones.</p>
+<p>En proyectos reales, la documentación del uso de IA es lo que diferencia un proyecto profesional de un experimento. Cuando otro desarrollador (o tú mismo en 6 meses) necesite entender por qué el código funciona de cierta manera, la documentación será su guía.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Documentar cada etapa del flujo de trabajo con IA de manera estructurada</li>
+<li>Registrar prompts, respuestas y decisiones para trazabilidad completa</li>
+<li>Justificar cambios aceptados y rechazados con criterios objetivos</li>
+<li>Crear un informe final que integre requerimiento, contexto, generación, validación y resultados</li>
+</ul>
+
+<h2>Desarrollo del contenido</h2>
+
+<h3>¿Por qué documentar el uso de IA?</h3>
+<p>La documentación del uso de IA cumple múltiples funciones:</p>
+<ul>
+<li><strong>Trazabilidad:</strong> Saber exactamente qué generó la IA y qué modificó el desarrollador</li>
+<li><strong>Reproducibilidad:</strong> Poder repetir el proceso si es necesario</li>
+<li><strong>Auditoría:</strong> Demostrar que el código fue revisado y validado</li>
+<li><strong>Aprendizaje:</strong> Identificar patrones de errores para mejorar prompts futuros</li>
+<li><strong>Transparencia:</strong> En equipos, todos saben qué partes son generadas por IA</li>
+</ul>
+
+<h3>Estructura de documentación recomendada</h3>
+<p>Usando la plantilla del Módulo 5, cada sección debe incluir:</p>
+
+<div class="highlight">
+<strong>1. Objetivo de la tarea:</strong> ¿Qué se esperaba lograr con este prompt?<br>
+<strong>2. Requerimiento usado:</strong> El RF específico que se estaba implementando<br>
+<strong>3. Contexto entregado:</strong> Extracto del context packet relevante para este paso<br>
+<strong>4. Prompts utilizados:</strong> Texto exacto del prompt enviado a la IA<br>
+<strong>5. Respuesta generada:</strong> Salida completa de la IA (o enlace si es muy larga)<br>
+<strong>6. Cambios aceptados y por qué:</strong> Qué se integró y la razón técnica<br>
+<strong>7. Cambios rechazados y por qué:</strong> Qué se descartó y el criterio usado<br>
+<strong>8. Pruebas realizadas:</strong> Resultados de humo, caso feliz, borde y error<br>
+<strong>9. Errores encontrados:</strong> Bugs, alertas o comportamientos inesperados<br>
+<strong>10. Conclusión:</strong> ¿Funciona? ¿Listo para producción? ¿Qué mejoraría?
+</div>
+
+<h3>Ejemplo de entrada de documentación</h3>
+<div class="highlight">
+<strong>Paso:</strong> Implementar modelo de datos (Prompt 4 de 8)<br>
+<strong>Prompt:</strong> "Basándote en la especificación técnica, implementa las estructuras de datos para Proyecto, Tarea y Etiqueta usando JavaScript vanilla y localStorage..."<br>
+<strong>✅ Aceptado:</strong> Estructura de Proyecto y Tarea (correcta, completa)<br>
+<strong>❌ Rechazado:</strong> La IA incluyó un campo 'color' en Tarea que no estaba en el requerimiento<br>
+<strong>🧪 Pruebas:</strong> Crear proyecto ✓ | Crear tarea ✓ | Tarea sin proyecto ❌ (no validaba) — se agregó validación manual<br>
+<strong>Conclusión:</strong> Aceptado con cambios menores (validación de proyecto padre)
+</div>
+
+<h2>Comparación: Proyecto documentado vs. No documentado</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Sin documentación</th><th>Con documentación completa</th></tr>
+</thead>
+<tbody>
+<tr><td>Mantenibilidad</td><td>Baja (no se sabe qué hace cada parte)</td><td>Alta (cada decisión explicada)</td></tr>
+<tr><td>Curva de onboarding</td><td>Alta (nuevos devs sin contexto)</td><td>Baja (la documentación guía)</td></tr>
+<tr><td>Detección de errores</td><td>Reactiva (cuando ya falló)</td><td>Preventiva (se documentan riesgos)</td></tr>
+<tr><td>Mejora continua</td><td>No hay base para mejorar</td><td>Los errores documentados mejoran prompts futuros</td></tr>
+<tr><td>Responsabilidad</td><td>No se sabe quién generó qué</td><td>Cada línea tiene origen conocido</td></tr>
+<tr><td>Valor a largo plazo</td><td>El código se vuelve legacy sin contexto</td><td>El código se entiende y evoluciona</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Ciclo de documentación en el flujo IA</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;max-width:500px;margin:0 auto;">
+    <div style="background:#2563eb;color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;width:100%;">📝 Por cada paso de la cadena de prompts:</div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:6px;">
+      <div style="background:#3b82f6;color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;">📤 Documentar prompt</div>
+      <div style="font-size:1rem;color:#94a3b8;">→</div>
+      <div style="background:#f59e0b;color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;">📥 Documentar respuesta</div>
+      <div style="font-size:1rem;color:#94a3b8;">→</div>
+      <div style="background:#22c55e;color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;">✅ Decisión y cambios</div>
+      <div style="font-size:1rem;color:#94a3b8;">→</div>
+      <div style="background:#8b5cf6;color:#fff;padding:6px 12px;border-radius:8px;font-weight:bold;">🧪 Pruebas y resultados</div>
+    </div>
+    <div style="background:#1e293b;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;margin-top:8px;width:100%;">📋 Documentación completa del proyecto</div>
+  </div>
+  <p style="margin-top:10px;color:#64748b;font-size:0.85rem;">La documentación no es un paso final — se construye en paralelo a cada paso de la cadena.</p>
+</div>
+
+<h2>Ejemplo de documentación en distintos contextos</h2>
+<ul>
+<li><strong>Desarrollo web:</strong> "Prompt 5: Implementar dashboard de estadísticas. Respuesta IA: Generó gráfico con Chart.js... Decisión: Rechazado — no usamos librerías externas. Se implementó con CSS y HTML nativo."</li>
+<li><strong>Automatización:</strong> "Prompt 3: Conexión IMAP. Respuesta IA: Usó imaplib correctamente... Decisión: Aceptado. Pruebas: Conexión exitosa con Gmail, timeout correcto con servidor caído."</li>
+<li><strong>IA generativa:</strong> "Prompt 2: Prompt optimizado. Respuesta IA: Redujo tokens en un 40%... Decisión: Aceptado con cambios. Se mejoró la claridad del prompt resultante."</li>
+</ul>
+
+<div class="highlight">
+<strong>💡 Consejo del instructor:</strong> No documentes al final — documenta mientras ejecutas. Cuando terminas un paso, es el momento perfecto para registrar lo que pasó. Si esperas al final, olvidarás detalles importantes como por qué rechazaste cierta solución o qué prueba encontraste un bug específico. La documentación en caliente es más precisa y requiere menos esfuerzo.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Documentar solo los aciertos:</strong> Omitir errores y rechazos pierde lecciones valiosas</li>
+<li><strong>No documentar el "por qué":</strong> "Se rechazó" sin explicación no sirve para aprendizaje futuro</li>
+<li><strong>Documentación genérica:</strong> "Se usó IA para generar código" no aporta información útil</li>
+<li><strong>No incluir las pruebas:</strong> Sin evidencia de pruebas, la documentación es solo una historia</li>
+<li><strong>Documentar en el lugar equivocado:</strong> La documentación debe estar cerca del código, no en un documento separado que nadie leerá</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Documentar cada prompt y respuesta:</strong> Incluye el texto exacto, no un resumen</li>
+<li><strong>Registrar decisiones con criterios objetivos:</strong> "Rechazado porque no maneja el caso borde X" no "Rechazado porque no me gustó"</li>
+<li><strong>Incluir evidencias de pruebas:</strong> Capturas, logs o resultados de ejecución</li>
+<li><strong>Usar un formato consistente:</strong> Misma estructura para todos los pasos</li>
+<li><strong>Revisar la documentación al final:</strong> Asegúrate de que alguien más pueda entender el flujo completo</li>
+</ul>
+
+<h2>Actividad práctica</h2>
 <p>Usando la plantilla de documentación del Módulo 5, documenta:</p>
-<ol><li>Objetivo de la tarea</li><li>Requerimiento usado</li><li>Contexto entregado</li><li>Prompts utilizados</li><li>Respuesta generada por IA</li><li>Cambios aceptados (y por qué)</li><li>Cambios rechazados (y por qué)</li><li>Pruebas realizadas</li><li>Errores encontrados</li><li>Conclusión</li></ol>
+<ol>
+<li>Objetivo de la tarea</li>
+<li>Requerimiento usado</li>
+<li>Contexto entregado</li>
+<li>Prompts utilizados</li>
+<li>Respuesta generada por IA</li>
+<li>Cambios aceptados (y por qué)</li>
+<li>Cambios rechazados (y por qué)</li>
+<li>Pruebas realizadas</li>
+<li>Errores encontrados</li>
+<li>Conclusión</li>
+</ol>
+
+<h2>Mini reto</h2>
+<p>Pide a otro compañero (o a la IA simulando ser un desarrollador nuevo) que lea tu documentación y trate de entender el flujo completo del proyecto. Pídele que identifique al menos 3 cosas que no quedan claras. Con esa retroalimentación, mejora tu documentación. Este ejercicio demuestra que la documentación no está completa hasta que alguien más puede seguirla sin tu ayuda.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>La documentación del uso de IA es esencial para trazabilidad, auditoría y aprendizaje</li>
+<li>Debe incluir prompts exactos, respuestas, decisiones y resultados de pruebas</li>
+<li>Documentar "en caliente" (inmediatamente después de cada paso) es más efectivo que al final</li>
+<li>Los errores y rechazos son tan valiosos de documentar como los aciertos</li>
+<li>La documentación debe ser comprensible para otros desarrolladores, no solo para ti</li>
+<li>Un proyecto bien documentado es mantenible, reproducible y profesional</li>
+</ul>
+
+
+
 <p><strong>Entrega:</strong> Documentación final completa.</p>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

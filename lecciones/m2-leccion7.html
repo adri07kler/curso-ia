@@ -2,21 +2,242 @@
 <h1>2.7 Detectar requerimientos incompletos</h1>
 <p class="subtitle">Módulo 2 · Quiz</p>
 <div class="highlight"><strong>Objetivo:</strong> Evaluar la capacidad de identificar fallas en un requerimiento.</div>
-<h2>Pregunta 1</h2>
-<p>¿Qué falta en "El usuario puede subir archivos"?</p>
-<ul><li>a) Tamaño máximo</li><li>b) Formatos permitidos</li><li>c) Ambos</li></ul>
-<p><strong>Respuesta: c</strong></p>
-<h2>Pregunta 2</h2>
-<p>¿Es verificable "La aplicación debe ser intuitiva"?</p>
-<ul><li>a) Sí, es claro</li><li>b) No, "intuitivo" es subjetivo</li></ul>
-<p><strong>Respuesta: b</strong></p>
-<h2>Pregunta 3</h2>
-<p>Identifica el problema: "El sistema debe ser rápido y seguro, y permitir a usuarios administradores y también a usuarios normales, pero solo algunos pueden borrar cosas, y debe funcionar en todos los navegadores"</p>
-<ul><li>a) Muy corto</li><li>b) Demasiados requerimientos mezclados sin estructura</li><li>c) Es correcto</li></ul>
-<p><strong>Respuesta: b</strong></p>
-<h2>Pregunta 4</h2>
-<p>¿Qué caso borde no está cubierto en "El sistema muestra los últimos 10 pedidos"?</p>
-<ul><li>a) ¿Y si hay menos de 10?</li><li>b) ¿Y si no hay pedidos?</li><li>c) Ambas</li></ul>
-<p><strong>Respuesta: c</strong></p>
-<div class="conclusion"><p><strong>Entregable:</strong> Requerimiento refinado del ejercicio 2.6 usando la plantilla completa.</p></div>
+
+<h2>Introducción</h2>
+<p>Detectar requerimientos incompletos es una habilidad que separa a los analistas experimentados de los principiantes. Un requerimiento con fallas es como un mapa con calles faltantes: el equipo de desarrollo avanzará en direcciones equivocadas, y el resultado final no cumplirá con las expectativas del cliente. En esta lección pondrás a prueba tu capacidad para identificar ambigüedades, omisiones y contradicciones en especificaciones realistas, una destreza esencial tanto para el desarrollo tradicional como para la generación de código con inteligencia artificial.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Identificar ambigüedades y omisiones en requerimientos de software</li>
+<li>Distinguir entre requerimientos verificables y no verificables</li>
+<li>Reconocer cuándo un requerimiento mezcla múltiples funcionalidades sin estructura</li>
+<li>Detectar casos borde que una especificación incompleta omitió</li>
+<li>Aplicar pensamiento crítico para evaluar la calidad de un requerimiento</li>
+</ul>
+
+<h2>Desarrollo del contenido</h2>
+<h3>¿Qué hace que un requerimiento esté incompleto?</h3>
+<p>Un requerimiento está incompleto cuando omite información necesaria para que un desarrollador —o una IA— pueda implementarlo sin tomar decisiones arbitrarias. Las omisiones más comunes incluyen: límites y restricciones (tamaño máximo, formatos permitidos), condiciones de error (qué pasa si algo falla), perfiles de usuario involucrados, y criterios de éxito medibles. Un requerimiento incompleto no es necesariamente corto; puede ser un párrafo extenso que carece de precisión en puntos clave.</p>
+<h3>El problema del lenguaje subjetivo</h3>
+<p>Palabras como "intuitivo", "rápido", "moderno", "fácil de usar" o "eficiente" son subjetivas: cada persona las interpreta de manera distinta. Un requerimiento verificable debe usar términos medibles u objetivos. Por ejemplo, en lugar de "la aplicación debe ser rápida", es preferible "la aplicación debe cargar la página principal en menos de 2 segundos en una conexión de 10 Mbps". La diferencia es sutil pero transforma un deseo vago en una especificación comprobable.</p>
+<h3>Requerimientos mezclados vs. separados</h3>
+<p>Un error recurrente es agrupar múltiples funcionalidades no relacionadas en un solo requerimiento. Esto dificulta la estimación, la implementación y las pruebas. Cada requerimiento debe describir una única funcionalidad atómica. Si ves "y también", "además", "por otro lado" dentro de un mismo requerimiento, es señal de que debes dividirlo.</p>
+<h3>Casos borde como indicador de completitud</h3>
+<p>La presencia o ausencia de casos borde es un indicador confiable de la calidad de un requerimiento. Un requerimiento que solo describe el "camino feliz" —el escenario donde todo sale bien— está incompleto. Los requerimientos profesionales siempre consideran: valores vacíos, valores extremos, condiciones de error, concurrencia, y permisos insuficientes.</p>
+
+<h2>Instrucciones del Quiz</h2>
+<p>Selecciona la respuesta correcta para cada pregunta. Al finalizar, presiona "Verificar respuestas". Debes responder todas las preguntas para recibir tu calificación. Necesitas al menos un 80% para aprobar.</p>
+
+<div class="quiz-wrap" id="quizContainer">
+  <div class="quiz-question" data-correct="4" data-explanation="Un requerimiento completo debe especificar tamaño máximo, formatos permitidos, límite de almacenamiento y qué ocurre si el archivo no cumple las condiciones. La opción 'Todas las anteriores' cubre todas las omisiones.">
+    <h3>Pregunta 1 de 10</h3>
+    <p>¿Qué falta en "El usuario puede subir archivos"?</p>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1a" value="1"><label for="q1a">1) Tamaño máximo</label></div>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1b" value="2"><label for="q1b">2) Formatos permitidos</label></div>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1c" value="3"><label for="q1c">3) Límite de almacenamiento por usuario</label></div>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1d" value="4"><label for="q1d">4) Todas las anteriores</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="2" data-explanation="'Intuitivo' es un término subjetivo que no tiene una medida objetiva. Lo que es intuitivo para una persona puede no serlo para otra. Un requerimiento verificable debe usar términos medibles.">
+    <h3>Pregunta 2 de 10</h3>
+    <p>¿Es verificable "La aplicación debe ser intuitiva"?</p>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2a" value="1"><label for="q2a">1) Sí, porque intuitivo es un estándar reconocido en UX</label></div>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2b" value="2"><label for="q2b">2) No, porque "intuitivo" es subjetivo y no tiene una medida objetiva</label></div>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2c" value="3"><label for="q2c">3) Sí, si se define mediante pruebas de usabilidad con métricas específicas</label></div>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2d" value="4"><label for="q2d">4) Depende exclusivamente del perfil del usuario final</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="2" data-explanation="El problema principal es que mezcla requerimientos de rendimiento, seguridad, roles de usuario, permisos y compatibilidad en una sola oración. Cada uno debería ser un requerimiento independiente.">
+    <h3>Pregunta 3 de 10</h3>
+    <p>Identifica el problema en: "El sistema debe ser rápido y seguro, y permitir a usuarios administradores y también a usuarios normales, pero solo algunos pueden borrar cosas, y debe funcionar en todos los navegadores"</p>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3a" value="1"><label for="q3a">1) Es demasiado corto y poco descriptivo</label></div>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3b" value="2"><label for="q3b">2) Demasiados requerimientos mezclados sin estructura separada</label></div>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3c" value="3"><label for="q3c">3) Es correcto, solo necesita más detalles técnicos</label></div>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3d" value="4"><label for="q3d">4) Falta especificar qué navegadores se consideran soportados</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="4" data-explanation="Los tres son casos borde válidos: menos de 10 pedidos (límite inferior), cero pedidos (valor vacío), y permisos insuficientes (seguridad). Un requerimiento completo debe considerar todos estos escenarios.">
+    <h3>Pregunta 4 de 10</h3>
+    <p>¿Qué caso borde no está cubierto en "El sistema muestra los últimos 10 pedidos"?</p>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4a" value="1"><label for="q4a">1) ¿Y si hay menos de 10 pedidos?</label></div>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4b" value="2"><label for="q4b">2) ¿Y si no hay pedidos?</label></div>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4c" value="3"><label for="q4c">3) ¿Y si el usuario no tiene permiso para ver pedidos?</label></div>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4d" value="4"><label for="q4d">4) Todas las anteriores son casos borde no cubiertos</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="2" data-explanation="La información crítica para implementar es: quién dispara el envío (el registro o un proceso manual), la plantilla del correo (qué contenido incluye) y qué pasa si el envío falla (reintentos, logging, notificación).">
+    <h3>Pregunta 5 de 10</h3>
+    <p>Un equipo recibe: "El sistema debe enviar un correo de bienvenida al nuevo usuario." ¿Qué información adicional es crítica para implementarlo?</p>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5a" value="1"><label for="q5a">1) El diseño visual del correo y los colores de la marca</label></div>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5b" value="2"><label for="q5b">2) Quién dispara el envío, la plantilla del correo y qué pasa si el envío falla</label></div>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5c" value="3"><label for="q5c">3) La frecuencia con la que se enviarán correos de bienvenida</label></div>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5d" value="4"><label for="q5d">4) El número máximo de correos que puede enviar el sistema por día</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="2" data-explanation="Un requerimiento bien formulado describe QUÉ debe hacer el sistema, no CÓMO implementarlo. Especificar una tecnología concreta (como React) es una decisión de implementación, no un requerimiento funcional.">
+    <h3>Pregunta 6 de 10</h3>
+    <p>¿Cuál de los siguientes NO es un elemento de un requerimiento bien formulado?</p>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6a" value="1"><label for="q6a">1) Criterios de aceptación verificables</label></div>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6b" value="2"><label for="q6b">2) Una descripción de la solución tecnológica concreta (ej: "usar React")</label></div>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6c" value="3"><label for="q6c">3) Reglas de negocio claras</label></div>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6d" value="4"><label for="q6d">4) Definición del usuario objetivo</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="2" data-explanation="Falta definir: qué productos aplican para descuento, qué porcentaje se descuenta (¿10%, 20%, variable?), y bajo qué condiciones (¿solo miembros? ¿solo en temporada? ¿monto mínimo?). Sin esto, la implementación es imposible.">
+    <h3>Pregunta 7 de 10</h3>
+    <p>"El sistema debe calcular el precio final aplicando un descuento." ¿Qué información esencial falta?</p>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7a" value="1"><label for="q7a">1) El tipo de moneda y el formato del precio</label></div>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7b" value="2"><label for="q7b">2) Qué productos tienen descuento, qué porcentaje se aplica y bajo qué condiciones</label></div>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7c" value="3"><label for="q7c">3) El diseño de la pantalla donde se mostrará el precio</label></div>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7d" value="4"><label for="q7d">4) El historial de precios anteriores del producto</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="1" data-explanation="El caso borde más crítico es qué pasa si el usuario no tiene transacciones en el período. ¿Se muestra un reporte vacío? ¿Un mensaje? ¿O simplemente no se habilita la descarga? Las demás opciones son detalles importantes pero secundarios.">
+    <h3>Pregunta 8 de 10</h3>
+    <p>Un requerimiento dice: "Los usuarios premium pueden descargar reportes en Excel de sus transacciones de los últimos 12 meses. Los reportes deben incluir fecha, monto, categoría y estado." ¿Qué caso borde importante NO se menciona?</p>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8a" value="1"><label for="q8a">1) Qué pasa si el usuario no tiene transacciones en los últimos 12 meses</label></div>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8b" value="2"><label for="q8b">2) Qué formato de Excel se debe usar (.xlsx o .xls)</label></div>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8c" value="3"><label for="q8c">3) Si el reporte puede descargarse en otros formatos además de Excel</label></div>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8d" value="4"><label for="q8d">4) Si el usuario puede seleccionar un rango de fechas personalizado</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="1" data-explanation="'8 caracteres' es una medida objetiva y directamente comprobable. Se puede escribir un test que verifique que una contraseña de 7 caracteres sea rechazada y una de 8 sea aceptada. Eso lo hace verificable.">
+    <h3>Pregunta 9 de 10</h3>
+    <p>"La contraseña debe tener al menos 8 caracteres." ¿Este requerimiento es verificable?</p>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9a" value="1"><label for="q9a">1) Sí, porque "8 caracteres" es una medida objetiva y comprobable</label></div>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9b" value="2"><label for="q9b">2) No, porque no especifica si incluye caracteres especiales</label></div>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9c" value="3"><label for="q9c">3) Sí, pero solo si se especifica también el máximo de caracteres</label></div>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9d" value="4"><label for="q9d">4) No, porque la seguridad de una contraseña no depende solo de su longitud</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="2" data-explanation="El formato Given-When-Then obliga a pensar en el contexto (Given), la acción (When) y el resultado esperado (Then), incluyendo escenarios de error. Esto fuerza la identificación temprana de fallas en la especificación.">
+    <h3>Pregunta 10 de 10</h3>
+    <p>¿Qué técnica ayuda a detectar fallas en un requerimiento antes de implementarlo?</p>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10a" value="1"><label for="q10a">1) Esperar a que el desarrollador pregunte si algo no está claro</label></div>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10b" value="2"><label for="q10b">2) Aplicar el formato Given-When-Then a cada criterio y verificar que cubra escenarios de error</label></div>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10c" value="3"><label for="q10c">3) Redactar el requerimiento una sola vez sin revisión para ahorrar tiempo</label></div>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10d" value="4"><label for="q10d">4) Usar términos amplios como "varios", "muchos" o "algunos" para dar flexibilidad</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <button class="btn-quiz-submit" onclick="verificarQuiz()">Verificar respuestas</button>
+  <div id="quizResult" class="quiz-result" style="display:none;"></div>
 </div>
+
+<div class="conclusion"><p><strong>Entregable:</strong> Requerimiento refinado del ejercicio 2.6 usando la plantilla completa.</p></div>
+
+<h2>💡 Consejo del instructor</h2>
+<div class="highlight"><strong>💡 Consejo profesional:</strong> Cuando revises un requerimiento, hazte tres preguntas: 1) ¿Puedo escribir un test para esto? 2) ¿Qué pasa si el usuario hace lo contrario de lo esperado? 3) ¿Qué información necesitaría un desarrollador nuevo —o una IA— que no está escrita aquí? Si alguna respuesta es "no lo sé", el requerimiento está incompleto. Entrena tu ojo crítico: con la práctica, detectarás ambigüedades en segundos.</div>
+
+<h2>⚠ Errores frecuentes</h2>
+<ul>
+<li><strong>Aceptar requerimientos con superlativos no medibles:</strong> "rápido", "óptimo", "eficiente" sin una línea base numérica.</li>
+<li><strong>Confundir "detallado" con "completo":</strong> Un requerimiento puede tener muchas líneas y aún así omitir información crítica como los casos borde.</li>
+<li><strong>Asumir que el cliente y el equipo comparten el mismo vocabulario:</strong> "Dashboard", "reporte" o "notificación" pueden significar cosas distintas para cada persona.</li>
+<li><strong>No preguntar "¿y qué pasa si...?":</strong> El pensamiento de casos borde debe aplicarse de manera sistemática, no improvisada.</li>
+<li><strong>Saltar directamente a la implementación:</strong> Cuando el requerimiento es vago, implementar es perder tiempo; hay que volver a la especificación primero.</li>
+</ul>
+
+<h2>✔ Buenas prácticas</h2>
+<ul>
+<li><strong>Aplica la prueba del "y si no":</strong> Para cada afirmación en un requerimiento, pregúntate qué pasa si la condición no se cumple.</li>
+<li><strong>Separa funcionalidades independientes:</strong> Si ves "y" o "también" en un requerimiento, divídelo en dos documentos.</li>
+<li><strong>Exige ejemplos concretos:</strong> Pídele al cliente que muestre un caso real de uso antes de redactar el requerimiento final.</li>
+<li><strong>Usa listas de verificación:</strong> Crea una checklist de completitud (límites, errores, permisos, formatos, concurrencia) y aplícala a cada requerimiento.</li>
+<li><strong>Involucra a QA en la revisión temprana:</strong> Los testers son expertos en encontrar fallas; que revisen los requerimientos antes de comenzar la implementación.</li>
+</ul>
+
+<h2>Resumen</h2>
+<ul>
+<li>Un requerimiento incompleto omite información crítica como límites, condiciones de error o perfiles de usuario.</li>
+<li>El lenguaje subjetivo ("intuitivo", "rápido") hace que un requerimiento no sea verificable.</li>
+<li>Los requerimientos deben ser atómicos: una funcionalidad por documento.</li>
+<li>Los casos borde son el mejor indicador de completitud; si no están definidos, el requerimiento está incompleto.</li>
+<li>La capacidad de detectar fallas en requerimientos es entrenable y se fortalece con la práctica sistemática.</li>
+</ul>
+
+<div class="conclusion"><p><strong>Conclusión:</strong> Detectar requerimientos incompletos es una habilidad que se fortalece con la práctica. Cada ambigüedad identificada a tiempo es un error de implementación evitado. Al dominar esta competencia, te conviertes en un puente confiable entre la visión del cliente y la ejecución del equipo de desarrollo —o de la IA.</p></div>
+
+</div>
+
+<script>
+function verificarQuiz() {
+  var preguntas = document.querySelectorAll('.quiz-question');
+  var sinResponder = [];
+  preguntas.forEach(function(p, i) {
+    var seleccionada = p.querySelector('input[type="radio"]:checked');
+    if (!seleccionada) sinResponder.push(i + 1);
+  });
+  if (sinResponder.length > 0) {
+    alert('Debes responder todas las preguntas. Faltan: ' + sinResponder.join(', '));
+    return;
+  }
+  var aciertos = 0;
+  var total = preguntas.length;
+  preguntas.forEach(function(p) {
+    var correcta = p.getAttribute('data-correct');
+    var explicacion = p.getAttribute('data-explanation');
+    var seleccionada = p.querySelector('input[type="radio"]:checked');
+    var valor = seleccionada.value;
+    var opciones = p.querySelectorAll('.quiz-option');
+    var feedback = p.querySelector('.quiz-feedback');
+    opciones.forEach(function(o) { o.classList.add('disabled'); });
+    opciones.forEach(function(o) {
+      var input = o.querySelector('input');
+      if (input.value === correcta) o.classList.add('correct');
+      if (input.checked && input.value !== correcta) o.classList.add('wrong');
+    });
+    feedback.style.display = 'block';
+    if (valor === correcta) {
+      aciertos++;
+      feedback.innerHTML = '<strong style="color:#22c55e;">Correcto.</strong> ' + explicacion;
+      feedback.style.color = '#166534';
+    } else {
+      feedback.innerHTML = '<strong style="color:#ef4444;">Incorrecto.</strong> ' + explicacion;
+      feedback.style.color = '#991b1b';
+    }
+  });
+  var porcentaje = Math.round((aciertos / total) * 100);
+  var resultado = document.getElementById('quizResult');
+  resultado.style.display = 'block';
+  if (porcentaje >= 80) {
+    resultado.className = 'quiz-result aprobado';
+    resultado.innerHTML = '<span style="font-size:1.3rem;">Aprobado</span><br><br>Obtuviste ' + aciertos + '/' + total + ' (' + porcentaje + '%). Has superado el mínimo del 80%.';
+    marcarAprobado();
+  } else {
+    resultado.className = 'quiz-result reprobado';
+    resultado.innerHTML = '<span style="font-size:1.3rem;">Intenta de nuevo</span><br><br>Obtuviste ' + aciertos + '/' + total + ' (' + porcentaje + '%). Necesitas al menos 80% para aprobar. Puedes volver a intentarlo.<br><br><button class="btn-quiz-submit" style="display:inline-block;margin:10px auto 0;" onclick="reiniciarQuiz()">Volver a intentar</button>';
+  }
+  document.querySelector('.btn-quiz-submit').style.display = 'none';
+}
+
+function reiniciarQuiz() {
+  var preguntas = document.querySelectorAll('.quiz-question');
+  preguntas.forEach(function(p) {
+    var inputs = p.querySelectorAll('input[type="radio"]');
+    inputs.forEach(function(i) { i.checked = false; });
+    var opciones = p.querySelectorAll('.quiz-option');
+    opciones.forEach(function(o) { o.classList.remove('correct', 'wrong', 'disabled'); });
+    var feedback = p.querySelector('.quiz-feedback');
+    feedback.style.display = 'none';
+  });
+  document.getElementById('quizResult').style.display = 'none';
+  document.querySelector('.btn-quiz-submit').style.display = 'block';
+}
+
+function marcarAprobado() {
+  var prog = JSON.parse(localStorage.getItem('progreso') || '{}');
+  prog['m2-leccion7'] = 'completado';
+  localStorage.setItem('progreso', JSON.stringify(prog));
+}
+</script>

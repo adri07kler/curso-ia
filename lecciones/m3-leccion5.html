@@ -1,13 +1,213 @@
 <div class="lesson-content">
 <h1>3.5 Encadenación de prompts</h1>
 <p class="subtitle">Módulo 3 · Video</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Aprender a dividir un problema grande en una secuencia de prompts pequeños y manejables.</div>
+
+<h2>Introducción</h2>
+<p>Cuando enfrentas un problema complejo, pedirle a la IA que lo resuelva todo en un solo prompt produce resultados genéricos, inconsistentes o directamente incorrectos. La técnica de encadenación de prompts divide el problema en pasos secuenciales, donde cada prompt se beneficia del resultado del anterior.</p>
+<p>En esta lección aprenderás a diseñar cadenas de prompts que produzcan resultados de alta calidad, paso a paso.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+  <li>Identificar cuándo un problema requiere múltiples prompts en lugar de uno solo.</li>
+  <li>Diseñar una cadena de prompts secuenciales donde cada paso dependa del anterior.</li>
+  <li>Explicar los beneficios de la encadenación frente al mega-prompt.</li>
+  <li>Aplicar la cadena mínima de 6 pasos a problemas reales de desarrollo.</li>
+</ul>
+
 <h2>Problema del mega-prompt</h2>
 <p>Un prompt enorme que pide todo a la vez produce respuestas genéricas, inconsistentes o con errores.</p>
+<p><strong>¿Por qué falla el mega-prompt?</strong></p>
+<ul>
+  <li>La IA pierde el foco cuando hay demasiadas instrucciones simultáneas.</li>
+  <li>No puede verificar la coherencia entre todas las partes del resultado.</li>
+  <li>Si una parte es incorrecta, todo el resultado se descarta.</li>
+  <li>Consume muchos tokens en una sola llamada sin posibilidad de corrección intermedia.</li>
+</ul>
+
 <h2>Encadenación</h2>
 <p>Dividir el trabajo en pasos secuenciales donde cada prompt usa el resultado del anterior.</p>
+<p>En lugar de pedir "crea un sistema de facturación completo", divides el problema en:</p>
+<ol>
+  <li>Analizar requerimientos</li>
+  <li>Diseñar la arquitectura</li>
+  <li>Implementar el modelo de datos</li>
+  <li>Implementar la lógica de negocio</li>
+  <li>Implementar la interfaz de usuario</li>
+  <li>Generar pruebas</li>
+</ol>
+
 <h2>Beneficios</h2>
-<ul><li>Cada prompt es simple y específico</li><li>Puedes revisar y corregir en cada paso</li><li>Mayor calidad en el resultado final</li><li>Menos tokens desperdiciados</li></ul>
+<ul>
+  <li>Cada prompt es simple y específico</li>
+  <li>Puedes revisar y corregir en cada paso</li>
+  <li>Mayor calidad en el resultado final</li>
+  <li>Menos tokens desperdiciados</li>
+  <li>Puedes reutilizar pasos intermedios en otras tareas</li>
+  <li>El proceso es reproducible y documentable</li>
+</ul>
+
 <h2>Cadena mínima de prompts</h2>
-<ol><li>Analiza el requerimiento y detecta ambigüedades</li><li>Convierte el requerimiento en especificación clara</li><li>Propón plan de implementación por pasos</li><li>Implementa solo el paso 1</li><li>Genera pruebas para validar</li><li>Revisa críticamente el resultado</li></ol>
+<ol>
+  <li>Analiza el requerimiento y detecta ambigüedades</li>
+  <li>Convierte el requerimiento en especificación clara</li>
+  <li>Propón plan de implementación por pasos</li>
+  <li>Implementa solo el paso 1</li>
+  <li>Genera pruebas para validar</li>
+  <li>Revisa críticamente el resultado</li>
+</ol>
+
+<h2>Tabla comparativa: Mega-prompt vs Cadena de prompts</h2>
+<div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;margin:15px 0;">
+    <thead>
+      <tr style="background:#eef2ff;">
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Aspecto</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Mega-prompt</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Cadena de prompts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Complejidad por prompt</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Muy alta (todo en uno)</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Baja (una tarea a la vez)</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Depuración de errores</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Difícil, un error invalida todo</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Fácil, cada paso se verifica individualmente</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Calidad del resultado</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Genérica e inconsistente</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Alta, validada paso a paso</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Reutilización</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Nula, el prompt es desechable</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Pasos individuales reutilizables en otros proyectos</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Tokens consumidos</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Altos por intento fallido (repetir todo)</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Menores, solo se repite el paso fallido</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;"><strong>Control humano</strong></td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Bajo, todo o nada</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Alto, revisas y apruebas cada paso</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Diagrama: Flujo de encadenación</h2>
+<div style="background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:30px;margin:20px 0;">
+  <div style="display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;">
+    <div style="background:#2563eb;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Requerimiento<br>crudo</div>
+    <div style="font-size:1.2rem;color:#2563eb;">→</div>
+    <div style="background:#3b82f6;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Detectar<br>ambigüedades</div>
+    <div style="font-size:1.2rem;color:#2563eb;">→</div>
+    <div style="background:#6366f1;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Especificación<br>clara</div>
+    <div style="font-size:1.2rem;color:#2563eb;">→</div>
+    <div style="background:#8b5cf6;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Plan de<br>implementación</div>
+    <div style="font-size:1.2rem;color:#2563eb;">→</div>
+    <div style="background:#22c55e;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Código<br>(paso 1)</div>
+    <div style="font-size:1.2rem;color:#2563eb;">→</div>
+    <div style="background:#10b981;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Pruebas</div>
+    <div style="font-size:1.2rem;color:#2563eb;">→</div>
+    <div style="background:#f59e0b;color:white;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:0.85rem;text-align:center;">Revisión<br>crítica</div>
+  </div>
+  <div style="text-align:center;margin-top:15px;font-size:0.85rem;color:#64748b;">Cada paso recibe el resultado del anterior y lo refina</div>
+</div>
+
+<h2>Ejemplo real: API de reservas</h2>
+
+<h3>Paso 1: Analizar requerimiento</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Prompt: "Analiza este requerimiento y lista las ambigüedades que encuentres:
+'API para reservar mesas en restaurantes. Los clientes reservan, el restaurante confirma.'"</code></pre>
+<p><strong>Respuesta esperada:</strong> ¿Cuántas mesas? ¿Horarios? ¿Capacidad? ¿Cómo se confirma? ¿Notificaciones?</p>
+
+<h3>Paso 2: Especificación clara</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Prompt: "Con base en las ambigüedades detectadas, escribe una especificación clara del sistema de reservas."</code></pre>
+
+<h3>Paso 3: Plan de implementación</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Prompt: "Propón un plan de implementación por pasos, empezando por el modelo de datos."</code></pre>
+
+<h3>Paso 4: Implementar paso 1</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Prompt: "Implementa solo el modelo de datos (Prisma schema) según la especificación."</code></pre>
+
+<h3>Paso 5: Pruebas</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Prompt: "Genera pruebas unitarias para el modelo de datos usando Jest."</code></pre>
+
+<h3>Paso 6: Revisión crítica</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Prompt: "Revisa críticamente el modelo de datos. Identifica problemas de normalización, rendimiento y escalabilidad."</code></pre>
+
+<div class="highlight"><strong>Consejo del instructor:</strong> No intentes saltarte pasos. Cada paso de la cadena tiene un propósito: detectar errores temprano, refinar la dirección y asegurar calidad. Saltar un paso es como construir una casa sin cimientos.</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+  <li><strong>Hacer pasos demasiado grandes:</strong> Si un paso aún requiere múltiples decisiones, divídelo en pasos más pequeños.</li>
+  <li><strong>No verificar el resultado intermedio:</strong> Cada paso produce un resultado que debes revisar antes de continuar. Si el paso 1 tiene errores, toda la cadena se contamina.</li>
+  <li><strong>Perder el contexto entre pasos:</strong> Asegúrate de que la IA recuerde el contexto del proyecto en cada paso de la cadena.</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+  <li>Define la cadena completa antes de empezar, no la improvises paso a paso.</li>
+  <li>Revisa y aprueba cada paso antes de enviar el siguiente prompt.</li>
+  <li>Documenta cada paso y su resultado para futuras referencias.</li>
+  <li>Usa la cadena mínima de 6 pasos como punto de partida y adáptala según el problema.</li>
+  <li>Si un paso produce un resultado insatisfactorio, repítelo con instrucciones más precisas antes de avanzar.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Toma el siguiente requerimiento incompleto y aplica la cadena mínima de 6 prompts:</p>
+<div class="highlight">"Sistema de gestión de inventario para un almacén. Debe controlar entradas y salidas de productos, generar alertas de stock bajo y reportes semanales."</div>
+<ol>
+  <li>Escribe el prompt para detectar ambigüedades.</li>
+  <li>Escribe la especificación clara resultante.</li>
+  <li>Escribe el plan de implementación.</li>
+  <li>Escribe el prompt para implementar solo el modelo de datos.</li>
+  <li>Escribe el prompt para generar pruebas.</li>
+  <li>Escribe el prompt para revisión crítica.</li>
+</ol>
+
+<h2>Mini reto</h2>
+<p>Selecciona un proyecto open-source que conozcas. Imagina que necesitas agregar una funcionalidad nueva (ej: "modo oscuro" en una app existente). Diseña una cadena de 6 prompts específicos para esa funcionalidad, considerando que ya existe el código base.</p>
+
+<h2>Resumen</h2>
+<ul>
+  <li>Los mega-prompts fallan porque la IA pierde el foco con instrucciones simultáneas.</li>
+  <li>La encadenación divide el problema en pasos secuenciales y manejables.</li>
+  <li>Cada paso recibe el resultado del anterior, mejorando la calidad progresivamente.</li>
+  <li>La cadena mínima son 6 pasos: analizar → especificar → planificar → implementar → probar → revisar.</li>
+  <li>Revisar cada paso antes de continuar es fundamental para el éxito de la cadena.</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
 </div>

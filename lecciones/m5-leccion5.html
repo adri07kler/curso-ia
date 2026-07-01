@@ -1,9 +1,159 @@
 <div class="lesson-content">
 <h1>5.5 Documentar prompts y decisiones</h1>
 <p class="subtitle">Módulo 5 · Documento</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Establecer la práctica de documentar el uso de IA para trazabilidad y mejora continua.</div>
+
+<h2>Introducción</h2>
+<p>Cuando un equipo usa IA para generar código, la falta de documentación crea un problema de trazabilidad: meses después, nadie sabe qué partes fueron generadas por IA, qué prompts se usaron, ni por qué se aceptaron o rechazaron ciertas soluciones. Esto convierte el código en una caja negra. Documentar el uso de IA no es burocracia — es una práctica de ingeniería que permite aprender de los errores, repetir los aciertos y auditar el proceso.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Comprender por qué documentar el uso de IA es crítico para trazabilidad y mejora continua</li>
+<li>Crear un registro estructurado de prompts, respuestas y decisiones</li>
+<li>Identificar patrones de error recurrentes en código generado por IA</li>
+<li>Aplicar un formato de documentación reusable en proyectos reales</li>
+</ul>
+
 <h2>¿Por qué documentar?</h2>
-<ul><li><strong>Trazabilidad:</strong> Saber qué partes fueron generadas por IA</li><li><strong>Reproducibilidad:</strong> Poder regenerar si se pierde el código</li><li><strong>Aprendizaje:</strong> Ver qué prompts funcionaron</li><li><strong>Auditoría:</strong> Para equipos que requieren cumplimiento</li><li><strong>Mejora continua:</strong> Identificar patrones de error recurrentes</li></ul>
+<ul>
+<li><strong>Trazabilidad:</strong> Saber qué partes fueron generadas por IA</li>
+<li><strong>Reproducibilidad:</strong> Poder regenerar si se pierde el código</li>
+<li><strong>Aprendizaje:</strong> Ver qué prompts funcionaron</li>
+<li><strong>Auditoría:</strong> Para equipos que requieren cumplimiento</li>
+<li><strong>Mejora continua:</strong> Identificar patrones de error recurrentes</li>
+</ul>
+
+<h3>El costo de no documentar</h3>
+<p>Sin documentación, cada miembro del equipo genera código con IA de forma aislada. No hay aprendizaje colectivo: el error que cometió un desarrollador lo repetirá otro. Los prompts exitosos se pierden. Los patrones de fallo —como que la IA genera SQL injection consistentemente— nunca se identifican. Documentar transforma el uso individual de IA en conocimiento del equipo.</p>
+
 <h2>Qué documentar</h2>
-<ol><li>El requerimiento</li><li>El contexto entregado</li><li>Los prompts utilizados</li><li>La respuesta generada</li><li>Cambios aceptados (y por qué)</li><li>Cambios rechazados (y por qué)</li><li>Pruebas realizadas</li><li>Errores encontrados</li><li>Conclusión</li></ol>
+<ol>
+<li>El requerimiento</li>
+<li>El contexto entregado</li>
+<li>Los prompts utilizados</li>
+<li>La respuesta generada</li>
+<li>Cambios aceptados (y por qué)</li>
+<li>Cambios rechazados (y por qué)</li>
+<li>Pruebas realizadas</li>
+<li>Errores encontrados</li>
+<li>Conclusión</li>
+</ol>
+
+<h3>Plantilla de registro</h3>
+<pre><code>## Registro de uso de IA
+**Fecha:** 2026-07-01
+**Requerimiento:** Función que valida formato de email
+**Prompt:** "Escribe una función en Python que valide..."
+**Respuesta IA:** [pegar código generado]
+**Cambios aceptados:** Se usó la validación de dominio
+**Cambios rechazados:** No se usó la expresion regular (demasiado permisiva)
+**Pruebas:** Caso feliz, email inválido, string vacío
+**Errores:** La función original no detectaba emails sin TLD
+**Conclusión:** Prompt válido, pero requiere revisión de seguridad</code></pre>
+
+<h2>Comparación: Con documentación vs. Sin documentación</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Sin documentación</th><th>Con documentación</th></tr>
+</thead>
+<tbody>
+<tr><td>Trazabilidad</td><td>No se sabe qué generó la IA</td><td>Cada línea de IA está marcada</td></tr>
+<tr><td>Reproducibilidad</td><td>No se puede regenerar</td><td>Se puede regenerar con el mismo prompt</td></tr>
+<tr><td>Aprendizaje</td><td>Cada error se repite</td><td>Los errores se registran y evitan</td></tr>
+<tr><td>Incorporación al equipo</td><td>Cada uno usa IA a su manera</td><td>Prácticas estandarizadas</td></tr>
+<tr><td>Auditoría</td><td>Imposible</td><td>Completa y rastreable</td></tr>
+<tr><td>Mejora de prompts</td><td>No hay registro de qué funcionó</td><td>Banco de prompts efectivos</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Flujo de documentación de uso de IA</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;max-width:700px;margin:0 auto;">
+    <div style="background:#2563eb;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">1. Requerimiento</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">→</div>
+    <div style="background:#2563eb;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">2. Prompt</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">→</div>
+    <div style="background:#f59e0b;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">3. Respuesta IA</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">→</div>
+    <div style="background:#22c55e;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">4. ✅ Aceptado</div>
+    <div style="background:#ef4444;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;">5. ❌ Rechazado</div>
+  </div>
+  <div style="margin-top:15px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
+    <div style="background:#f1f5f9;padding:8px 14px;border-radius:6px;font-size:0.85rem;">📝 Pruebas realizadas</div>
+    <div style="background:#f1f5f9;padding:8px 14px;border-radius:6px;font-size:0.85rem;">🐛 Errores encontrados</div>
+    <div style="background:#f1f5f9;padding:8px 14px;border-radius:6px;font-size:0.85rem;">💡 Conclusión</div>
+  </div>
+  <p style="margin-top:12px;color:#64748b;font-size:0.85rem;">Cada interacción relevante con IA debe seguir este flujo de documentación. El registro permite trazabilidad y mejora continua.</p>
+</div>
+
+<div class="highlight">
+<strong>Consejo del instructor:</strong> No necesitas documentar cada prompt trivial. Establece un umbral: documenta toda función que vaya a producción, toda lógica compleja, y todo código que haya requerido cambios significativos después de la generación. El resto puede documentarse con un simple comentario <code># Generado por IA - revisado [fecha]</code>.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>No documentar nada:</strong> El error más común. La memoria humana no es confiable para recordar qué generó la IA</li>
+<li><strong>Documentar solo los prompts exitosos:</strong> Los errores son igual de importantes para evitar repetirlos</li>
+<li><strong>Documentación excesiva:</strong> Documentar cada interacción trivial genera fatiga y se abandona rápido</li>
+<li><strong>No compartir la documentación:</strong> La documentación individual no sirve; debe ser accesible al equipo</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Usar un formato estándar:</strong> Plantilla uniforme para todo el equipo facilita la búsqueda y comparación</li>
+<li><strong>Documentar cerca del código:</strong> Comentarios en el código + registro externo para decisiones más complejas</li>
+<li><strong>Incluir el prompt original:</strong> Guardar el texto exacto del prompt permite reproducir y mejorar</li>
+<li><strong>Registrar también los rechazos:</strong> Saber qué no funcionó es tan valioso como saber qué funcionó</li>
+<li><strong>Revisar los registros periódicamente:</strong> Cada sprint, revisa los patrones de error para ajustar prompts y procesos</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Genera con IA una función que lea un archivo CSV y calcule el promedio de una columna. Luego completa el siguiente registro de documentación:</p>
+<ol>
+<li>¿Qué prompt usaste exactamente?</li>
+<li>¿Qué cambios hiciste al código generado?</li>
+<li>¿Qué pruebas escribiste?</li>
+<li>¿Encontraste algún error en el código original de la IA?</li>
+<li>¿Aceptarías este código en producción? ¿Por qué?</li>
+</ol>
+<p>Usa la plantilla de registro proporcionada en esta lección.</p>
+
+<h2>Mini reto</h2>
+<p>Revisa el historial de tus últimas 5 interacciones con una IA generadora de código. Para cada una, completa un registro usando la plantilla de 9 pasos. Al final, responde: ¿qué patrón de error se repite? ¿Qué tipo de prompts funcionan mejor? Este análisis es el primer paso para crear una guía de prompts efectiva para tu equipo.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>Documentar el uso de IA proporciona trazabilidad, reproducibilidad y mejora continua</li>
+<li>El registro debe incluir: requerimiento, contexto, prompts, respuesta, cambios, pruebas, errores y conclusión</li>
+<li>Documentar también los rechazos es tan importante como documentar los aciertos</li>
+<li>La documentación debe ser accesible al equipo, no individual</li>
+<li>Revisar los registros periódicamente permite identificar patrones y mejorar el proceso</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

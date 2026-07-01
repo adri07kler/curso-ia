@@ -1,22 +1,245 @@
 <div class="lesson-content">
 <h1>3.7 Evaluar si un prompt es claro</h1>
 <p class="subtitle">Módulo 3 · Quiz</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Evaluar la capacidad de distinguir prompts bien formulados de prompts deficientes.</div>
-<h2>Pregunta 1</h2>
-<p>¿Qué problema tiene "Haz un sistema"?</p>
-<ul><li>a) Demasiado vago</li><li>b) Demasiado específico</li><li>c) Ninguno</li></ul>
-<p><strong>Respuesta: a</strong></p>
-<h2>Pregunta 2</h2>
-<p>¿Este prompt es claro? "Genera código para una calculadora en Python que sume, reste, multiplique y divida. Debe manejar división por cero. Usa funciones separadas para cada operación."</p>
-<ul><li>a) Sí, es claro y específico</li><li>b) No, le falta contexto</li></ul>
-<p><strong>Respuesta: a</strong></p>
-<h2>Pregunta 3</h2>
-<p>¿Qué mejorarías en "Necesito un componente React que muestre datos de una API. Hazlo bonito."?</p>
-<ul><li>a) Especificar qué API, qué datos, qué significa "bonito"</li><li>b) Pedir que use TypeScript</li><li>c) Definir formato de salida</li><li>d) Todas las anteriores</li></ul>
-<p><strong>Respuesta: d</strong></p>
-<h2>Pregunta 4</h2>
-<p>Identifica el error: "Actúa como experto en seguridad pero ignora las mejores prácticas modernas"</p>
-<ul><li>a) Instrucción contradictoria</li><li>b) Demasiadas instrucciones</li><li>c) Falta de contexto</li></ul>
-<p><strong>Respuesta: a</strong></p>
-<div class="conclusion"><p><strong>Entregable:</strong> Context packet + cadena de prompts del ejercicio 3.6.</p></div>
+
+<h2>Introducción</h2>
+<p>Has llegado al final del Módulo 3. Este quiz pondrá a prueba tu capacidad para identificar prompts claros, detectar ambigüedades y reconocer instrucciones contradictorias. No se trata de memorizar, sino de aplicar el criterio que has desarrollado a lo largo de las lecciones.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+  <li>Evaluar críticamente la claridad de cualquier prompt.</li>
+  <li>Identificar ambigüedades, contradicciones y falta de contexto en prompts.</li>
+  <li>Distinguir entre un prompt bien estructurado y uno deficiente.</li>
+  <li>Justificar por qué un prompt necesita mejoras.</li>
+</ul>
+
+<h2>Instrucciones</h2>
+<p>Selecciona la respuesta correcta para cada pregunta. Al finalizar, presiona "Verificar respuestas". Debes responder todas las preguntas para recibir tu calificación.</p>
+
+<div class="quiz-wrap" id="quizContainer">
+  <div class="quiz-question" data-correct="a" data-explanation="'Haz un sistema' no especifica qué tipo de sistema, para qué, con qué tecnología ni qué debe hacer. La IA no tiene suficiente información para generar una respuesta útil.">
+    <h3>Pregunta 1 de 10</h3>
+    <p>¿Qué problema tiene "Haz un sistema"?</p>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1a" value="a"><label for="q1a">a) Demasiado vago, no especifica qué tipo de sistema ni para qué</label></div>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1b" value="b"><label for="q1b">b) Demasiado específico</label></div>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1c" value="c"><label for="q1c">c) Ninguno, es claro y conciso</label></div>
+    <div class="quiz-option"><input type="radio" name="q1" id="q1d" value="d"><label for="q1d">d) Es un comando, no un prompt</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="El prompt especifica lenguaje, operaciones, manejo de errores y estructura. Es suficientemente claro para obtener un resultado útil sin necesidad de contexto adicional.">
+    <h3>Pregunta 2 de 10</h3>
+    <p>¿Este prompt es claro? "Genera código para una calculadora en Python que sume, reste, multiplique y divida. Debe manejar división por cero. Usa funciones separadas para cada operación."</p>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2a" value="a" ><label for="q2a">a) Sí, es claro y específico. Define operaciones, manejo de errores y estructura del código</label></div>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2b" value="b" ><label for="q2b">b) No, le falta contexto del proyecto</label></div>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2c" value="c" ><label for="q2c">c) No, debería especificar la versión de Python</label></div>
+    <div class="quiz-option"><input type="radio" name="q2" id="q2d" value="d" ><label for="q2d">d) Es demasiado extenso</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="El prompt tiene múltiples deficiencias: no especifica la API, no dice qué datos mostrar, usa el término subjetivo 'bonito' y no define el formato de salida esperado.">
+    <h3>Pregunta 3 de 10</h3>
+    <p>¿Qué mejorarías en "Necesito un componente React que muestre datos de una API. Hazlo bonito."?</p>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3a" value="a" ><label for="q3a">a) Especificar qué API, qué datos, qué significa "bonito" y el formato de salida</label></div>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3b" value="b" ><label for="q3b">b) Pedir que use TypeScript nada más</label></div>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3c" value="c" ><label for="q3c">c) Definir solo el formato de salida</label></div>
+    <div class="quiz-option"><input type="radio" name="q3" id="q3d" value="d" ><label for="q3d">d) No necesita mejoras, es suficientemente claro</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="Ser 'experto en seguridad' implica conocer y aplicar mejores prácticas. Pedirle que las ignore es contradictorio y confunde a la IA sobre qué priorizar.">
+    <h3>Pregunta 4 de 10</h3>
+    <p>Identifica el error: "Actúa como experto en seguridad pero ignora las mejores prácticas modernas"</p>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4a" value="a" ><label for="q4a">a) Instrucción contradictoria: un experto en seguridad no puede ignorar las mejores prácticas</label></div>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4b" value="b" ><label for="q4b">b) Demasiadas instrucciones</label></div>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4c" value="c" ><label for="q4c">c) Falta de contexto del proyecto</label></div>
+    <div class="quiz-option"><input type="radio" name="q4" id="q4d" value="d" ><label for="q4d">d) El rol es incorrecto para la tarea</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="La opción (a) separa claramente el contexto del prompt, especifica la tecnología (JWT), la acción concreta (middleware) y el comportamiento esperado (devolver 401).">
+    <h3>Pregunta 5 de 10</h3>
+    <p>¿Cuál de los siguientes prompts está MEJOR estructurado?</p>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5a" value="a" ><label for="q5a">a) "Contexto: App Node.js con Express. Prompt: Crea un middleware de autenticación que valide JWT y devuelva 401 si el token es inválido."</label></div>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5b" value="b" ><label for="q5b">b) "Necesito un middleware de autenticación para mi app, pero no sé si usar JWT o sesiones. ¿Tú qué opinas? Hazlo como creas conveniente."</label></div>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5c" value="c" ><label for="q5c">c) "Haz un sistema de autenticación completo con login, registro, recuperación de contraseña y roles. Usa lo que sea más moderno."</label></div>
+    <div class="quiz-option"><input type="radio" name="q5" id="q5d" value="d" ><label for="q5d">d) "Middleware auth porfa"</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="Aunque faltan varios elementos, el más crítico es el objetivo. Sin saber qué datos debe devolver el endpoint ni para qué, la IA no puede generar el código correcto.">
+    <h3>Pregunta 6 de 10</h3>
+    <p>¿Qué elemento esencial falta en este contexto? "Stack: React 18, Node 20. Crea un endpoint GET /users."</p>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6a" value="a" ><label for="q6a">a) Objetivo del proyecto: ¿para qué es el endpoint? ¿qué datos debe devolver?</label></div>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6b" value="b" ><label for="q6b">b) La versión de React</label></div>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6c" value="c" ><label for="q6c">c) El rol de la IA</label></div>
+    <div class="quiz-option"><input type="radio" name="q6" id="q6d" value="d" ><label for="q6d">d) Falta especificar la base de datos</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="'Simple' y 'profesional' son interpretaciones personales. Siempre prefiere especificaciones concretas sobre adjetivos subjetivos.">
+    <h3>Pregunta 7 de 10</h3>
+    <p>¿Por qué "Hazlo simple pero profesional" es un prompt problemático?</p>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7a" value="a" ><label for="q7a">a) Porque "simple" y "profesional" son términos subjetivos que significan cosas diferentes para cada persona</label></div>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7b" value="b" ><label for="q7b">b) Porque es demasiado corto</label></div>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7c" value="c" ><label for="q7c">c) Porque no especifica la tecnología</label></div>
+    <div class="quiz-option"><input type="radio" name="q7" id="q7d" value="d" ><label for="q7d">d) Porque usa adjetivos en lugar de verbos</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="La principal ventaja es la reutilización. Un contexto bien definido sirve para todas las interacciones del mismo proyecto, asegurando respuestas consistentes.">
+    <h3>Pregunta 8 de 10</h3>
+    <p>¿Cuál es la principal ventaja de separar el contexto del prompt?</p>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8a" value="a" ><label for="q8a">a) El contexto se reutiliza en múltiples prompts, ahorrando tiempo y asegurando consistencia</label></div>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8b" value="b" ><label for="q8b">b) Hace que los prompts sean más largos</label></div>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8c" value="c" ><label for="q8c">c) Permite que la IA ignore el contexto cuando quiera</label></div>
+    <div class="quiz-option"><input type="radio" name="q8" id="q8d" value="d" ><label for="q8d">d) No hay ventaja, es mejor poner todo junto</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="La IA no conoce el stack del proyecto. Sin especificar tecnologías, la respuesta será genérica y probablemente incompatible con el código existente.">
+    <h3>Pregunta 9 de 10</h3>
+    <p>¿Qué elemento crítico falta en este prompt? "Implementa un endpoint que devuelva los usuarios activos."</p>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9a" value="a"><label for="q9a">a) El stack tecnológico y la estructura del proyecto</label></div>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9b" value="b"><label for="q9b">b) La longitud del código</label></div>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9c" value="c"><label for="q9c">c) Que los usuarios existan en la base de datos</label></div>
+    <div class="quiz-option"><input type="radio" name="q9" id="q9d" value="d"><label for="q9d">d) El nombre del archivo donde guardar el código</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <div class="quiz-question" data-correct="a" data-explanation="La redundancia confunde a la IA porque no sabe qué énfasis darle a la información repetida, y las variaciones sutiles entre repeticiones pueden introducir contradicciones.">
+    <h3>Pregunta 10 de 10</h3>
+    <p>¿Por qué es problemático incluir información redundante en un contexto?</p>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10a" value="a"><label for="q10a">a) Porque la IA puede ponderar incorrectamente la información repetida y variaciones sutiles pueden crear contradicciones</label></div>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10b" value="b"><label for="q10b">b) Porque la IA ignora automáticamente la información duplicada</label></div>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10c" value="c"><label for="q10c">c) Porque consume más tokens sin afectar la respuesta</label></div>
+    <div class="quiz-option"><input type="radio" name="q10" id="q10d" value="d"><label for="q10d">d) Porque la IA prefiere contextos cortos siempre</label></div>
+    <p class="quiz-feedback" style="display:none;margin-top:8px;font-size:0.85rem;"></p>
+  </div>
+
+  <button class="btn-quiz-submit" onclick="verificarQuiz()">Verificar respuestas</button>
+
+  <div id="quizResult" class="quiz-result" style="display:none;"></div>
 </div>
+
+<div class="highlight"><strong>Consejo del instructor:</strong> En un examen real, las preguntas no tienen opciones. Debes desarrollar el criterio para identificar problemas por ti mismo. Practica evaluando prompts de compañeros o incluso prompts que encuentres en foros y comunidades.</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+  <li><strong>Confundir "específico" con "largo":</strong> Un prompt puede ser específico en pocas líneas. La precisión no es cuestión de longitud.</li>
+  <li><strong>Pensar que la IA "entiende" lo que quieres decir:</strong> La IA no lee la mente. Si no lo escribes, no lo sabe.</li>
+  <li><strong>Ignorar las contradicciones:</strong> Frases como "hazlo rápido pero con calidad" son contradictorias y producen resultados insatisfactorios.</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+  <li>Antes de enviar un prompt, pregúntate: ¿un compañero desarrollador entendería exactamente qué hacer con esta información?</li>
+  <li>Si puedes interpretar tu prompt de dos formas diferentes, está mal redactado.</li>
+  <li>Usa listas y estructura clara en lugar de párrafos largos.</li>
+  <li>Incluye al menos un ejemplo concreto de lo que esperas como resultado.</li>
+</ul>
+
+<h2>Resumen del Módulo 3</h2>
+<ul>
+  <li>El <strong>prompt</strong> es la instrucción específica; el <strong>contexto</strong> es la información reusable del proyecto.</li>
+  <li>La IA necesita siete elementos esenciales: objetivo, rol, estado actual, restricciones, límites, formato y criterios de aceptación.</li>
+  <li>La información redundante, desactualizada o contradictoria empeora las respuestas.</li>
+  <li>El <strong>Context Packet</strong> estandariza y versiona la información del proyecto.</li>
+  <li>La <strong>encadenación de prompts</strong> divide problemas complejos en pasos manejables de 6 fases.</li>
+  <li>Evaluar críticamente un prompt es la habilidad más importante del Prompt Engineering.</li>
+</ul>
+
+
+
+<div class="conclusion"><p><strong>Entregable del Módulo 3:</strong> Context packet + cadena de prompts del ejercicio 3.6.</p></div>
+
+</div>
+
+<script>
+function verificarQuiz() {
+  var preguntas = document.querySelectorAll('.quiz-question');
+  var sinResponder = [];
+
+  preguntas.forEach(function(p, i) {
+    var seleccionada = p.querySelector('input[type="radio"]:checked');
+    if (!seleccionada) sinResponder.push(i + 1);
+  });
+
+  if (sinResponder.length > 0) {
+    alert('Debes responder todas las preguntas. Faltan: ' + sinResponder.join(', '));
+    return;
+  }
+
+  var aciertos = 0;
+  var total = preguntas.length;
+
+  preguntas.forEach(function(p) {
+    var correcta = p.getAttribute('data-correct');
+    var explicacion = p.getAttribute('data-explanation');
+    var seleccionada = p.querySelector('input[type="radio"]:checked');
+    var valor = seleccionada.value;
+    var opciones = p.querySelectorAll('.quiz-option');
+    var feedback = p.querySelector('.quiz-feedback');
+
+    opciones.forEach(function(o) {
+      o.classList.add('disabled');
+    });
+
+    opciones.forEach(function(o) {
+      var input = o.querySelector('input');
+      if (input.value === correcta) o.classList.add('correct');
+      if (input.checked && input.value !== correcta) o.classList.add('wrong');
+    });
+
+    feedback.style.display = 'block';
+    if (valor === correcta) {
+      aciertos++;
+      feedback.innerHTML = '<strong style="color:#22c55e;">Correcto.</strong> ' + explicacion;
+      feedback.style.color = '#166534';
+    } else {
+      feedback.innerHTML = '<strong style="color:#ef4444;">Incorrecto.</strong> ' + explicacion;
+      feedback.style.color = '#991b1b';
+    }
+  });
+
+  var porcentaje = Math.round((aciertos / total) * 100);
+  var resultado = document.getElementById('quizResult');
+  resultado.style.display = 'block';
+
+  if (porcentaje >= 80) {
+    resultado.className = 'quiz-result aprobado';
+    resultado.innerHTML = '<span style="font-size:1.3rem;">Aprobado</span><br><br>Obtuviste ' + aciertos + '/' + total + ' (' + porcentaje + '%). Has superado el m\u00ednimo del 80%.';
+    marcarAprobado();
+  } else {
+    resultado.className = 'quiz-result reprobado';
+    resultado.innerHTML = '<span style="font-size:1.3rem;">Intenta de nuevo</span><br><br>Obtuviste ' + aciertos + '/' + total + ' (' + porcentaje + '%). Necesitas al menos 80% para aprobar. Puedes volver a intentarlo.<br><br><button class="btn-quiz-submit" style="display:inline-block;margin:10px auto 0;" onclick="reiniciarQuiz()">Volver a intentar</button>';
+  }
+
+  document.querySelector('.btn-quiz-submit').style.display = 'none';
+}
+
+function reiniciarQuiz() {
+  var preguntas = document.querySelectorAll('.quiz-question');
+  preguntas.forEach(function(p) {
+    var inputs = p.querySelectorAll('input[type="radio"]');
+    inputs.forEach(function(i) { i.checked = false; });
+    var opciones = p.querySelectorAll('.quiz-option');
+    opciones.forEach(function(o) {
+      o.classList.remove('correct', 'wrong', 'disabled');
+    });
+    var feedback = p.querySelector('.quiz-feedback');
+    feedback.style.display = 'none';
+  });
+  document.getElementById('quizResult').style.display = 'none';
+  document.querySelector('.btn-quiz-submit').style.display = 'block';
+}
+
+function marcarAprobado() {
+  var prog = JSON.parse(localStorage.getItem('progreso') || '{}');
+  prog['m3-leccion7'] = 'completado';
+  localStorage.setItem('progreso', JSON.stringify(prog));
+}
+</script>

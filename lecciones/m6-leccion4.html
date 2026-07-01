@@ -1,10 +1,173 @@
 <div class="lesson-content">
 <h1>6.4 Crear una cadena de prompts</h1>
 <p class="subtitle">Módulo 6 · Ejercicio</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Diseñar una cadena de prompts para implementar el proyecto paso a paso.</div>
-<h2>Actividad</h2>
-<ol><li>Divide el proyecto en al menos 6 pasos atómicos</li><li>Para cada paso, escribe un prompt específico</li><li>Cada prompt debe usar el resultado del anterior</li></ol>
-<h2>Cadena mínima sugerida</h2>
-<ol><li>Analiza el requerimiento y detecta ambigüedades</li><li>Convierte en especificación técnica clara</li><li>Propón plan de implementación por pasos</li><li>Implementa paso 1 (modelo de datos)</li><li>Implementa paso 2 (API/lógica)</li><li>Implementa paso 3 (interfaz de usuario)</li><li>Genera pruebas para validar</li><li>Revisa críticamente el resultado</li></ol>
+
+<h2>Introducción</h2>
+<p>Un prompt aislado puede generar código útil, pero una cadena de prompts bien diseñada puede generar un sistema completo. La clave está en dividir el trabajo en pasos atómicos donde cada prompt recibe el resultado del anterior, construyendo incrementalmente hasta obtener la solución final.</p>
+<p>En proyectos reales, intentar generar todo el código en un solo prompt produce resultados de baja calidad: la IA pierde el contexto, omite detalles importantes y genera código inconsistente. Una cadena de prompts divide la complejidad en partes manejables que la IA puede procesar con precisión.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Dividir un proyecto en pasos atómicos adecuados para prompts individuales</li>
+<li>Escribir prompts específicos que aprovechen el resultado del paso anterior</li>
+<li>Diseñar una secuencia lógica de generación que minimice iteraciones</li>
+<li>Incluir criterios de validación en cada paso de la cadena</li>
+</ul>
+
+<h2>Desarrollo del contenido</h2>
+
+<h3>¿Por qué una cadena de prompts?</h3>
+<p>Una cadena de prompts (<em>prompt chaining</em>) es una secuencia de instrucciones donde la salida de cada paso se convierte en entrada del siguiente. Esto permite:</p>
+<ul>
+<li><strong>Dividir la complejidad:</strong> Cada prompt resuelve un problema pequeño y específico</li>
+<li><strong>Mantener el contexto:</strong> Cada paso sabe exactamente qué se generó antes</li>
+<li><strong>Revisar y corregir:</strong> Puedes validar paso a paso, no al final</li>
+<li><strong>Reutilizar pasos:</strong> Un buen prompt de modelo de datos sirve para múltiples proyectos</li>
+</ul>
+
+<h3>Estructura de una cadena de prompts efectiva</h3>
+<p>Cada eslabón de la cadena debe incluir:</p>
+<ol>
+<li><strong>Contexto necesario:</strong> El resultado del paso anterior (o el context packet)</li>
+<li><strong>Instrucción específica:</strong> Qué debe hacer la IA en este paso exacto</li>
+<li><strong>Criterio de validación:</strong> Cómo saber si el resultado es correcto</li>
+<li><strong>Formato de salida esperado:</strong> Cómo debe entregar el resultado para el siguiente paso</li>
+</ol>
+
+<h3>Cadena sugerida para el proyecto final</h3>
+<p>Para nuestra aplicación de tareas, la cadena mínima sugerida es:</p>
+
+<div class="highlight">
+<strong>Paso 1:</strong> Analiza el requerimiento y detecta ambigüedades<br>
+<strong>Paso 2:</strong> Convierte en especificación técnica clara<br>
+<strong>Paso 3:</strong> Propón plan de implementación por pasos<br>
+<strong>Paso 4:</strong> Implementa paso 1 (modelo de datos)<br>
+<strong>Paso 5:</strong> Implementa paso 2 (API/lógica)<br>
+<strong>Paso 6:</strong> Implementa paso 3 (interfaz de usuario)<br>
+<strong>Paso 7:</strong> Genera pruebas para validar<br>
+<strong>Paso 8:</strong> Revisa críticamente el resultado
+</div>
+
+<h3>Ejemplo de un eslabón bien construido</h3>
+<p>Compara un prompt genérico vs. un prompt dentro de una cadena:</p>
+<p><strong>❌ Prompt aislado:</strong></p>
+<div class="highlight" style="border-left-color:#ef4444;">"Crea el modelo de datos para una app de tareas"</div>
+<p><strong>✅ Prompt en cadena (Paso 4):</strong></p>
+<div class="highlight" style="border-left-color:#22c55e;">"Basándote en la especificación técnica del Paso 2 y el plan del Paso 3, implementa el modelo de datos de la aplicación. Usa JavaScript vanilla con localStorage. Define las estructuras de: Proyecto, Tarea, Etiqueta. Incluye validación básica y métodos CRUD. El código debe ser funcional y listo para usar en el siguiente paso."</div>
+
+<h2>Comparación: Prompt único vs. Cadena de prompts</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Prompt único</th><th>Cadena de prompts</th></tr>
+</thead>
+<tbody>
+<tr><td>Complejidad por prompt</td><td>Alta (todo en uno)</td><td>Baja (un tema por prompt)</td></tr>
+<tr><td>Contexto disponible</td><td>Solo el del prompt inicial</td><td>Se acumula paso a paso</td></tr>
+<tr><td>Capacidad de revisión</td><td>Al final, todo o nada</td><td>Paso a paso, corregir sobre la marcha</td></tr>
+<tr><td>Calidad del código</td><td>Inconsistente, mezcla patrones</td><td>Consistente, cada paso refina</td></tr>
+<tr><td>Iteraciones necesarias</td><td>Muchas (regenerar todo)</td><td>Pocas (regenerar solo el paso fallido)</td></tr>
+<tr><td>Trazabilidad</td><td>Baja (qué salió de dónde)</td><td>Alta (cada paso documentado)</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Flujo de una cadena de prompts</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;max-width:500px;margin:0 auto;">
+    <div style="background:#2563eb;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">📦 Context packet + requerimiento</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">↓</div>
+    <div style="background:#f59e0b;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">Paso 1: Analizar requerimiento</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">↓</div>
+    <div style="background:#f59e0b;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">Paso 2: Especificación técnica</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">↓</div>
+    <div style="background:#f59e0b;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">Paso 3: Plan de implementación</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">↓</div>
+    <div style="background:#22c55e;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">Pasos 4-6: Implementación</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">↓</div>
+    <div style="background:#8b5cf6;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">Paso 7: Pruebas</div>
+    <div style="font-size:1.2rem;color:#94a3b8;">↓</div>
+    <div style="background:#2563eb;color:#fff;padding:8px 16px;border-radius:8px;font-weight:bold;width:100%;">Paso 8: Revisión crítica</div>
+  </div>
+  <p style="margin-top:12px;color:#64748b;font-size:0.85rem;">Cada flecha representa la entrega del resultado del paso anterior como contexto del siguiente.</p>
+</div>
+
+<h2>Ejemplo de cadena de prompts en otros contextos</h2>
+<ul>
+<li><strong>Automatización:</strong> (1) Analizar estructura de correos → (2) Diseñar parser → (3) Implementar conexión IMAP → (4) Implementar clasificador → (5) Generar reporte de resultados</li>
+<li><strong>API REST:</strong> (1) Definir endpoints → (2) Diseñar modelos → (3) Implementar controladores → (4) Implementar validación → (5) Escribir tests de integración</li>
+<li><strong>Script de datos:</strong> (1) Analizar formato de entrada → (2) Diseñar pipeline de limpieza → (3) Implementar transformaciones → (4) Implementar exportación → (5) Validar con datos de prueba</li>
+</ul>
+
+<div class="highlight">
+<strong>💡 Consejo del instructor:</strong> No intentes que la IA genere todo en una sola respuesta. Es como pedirle a un arquitecto que construya una casa sin planos. Divide el proyecto en pasos tan pequeños que cada uno pueda validarse independientemente. Si un paso tuviera más de 50 líneas de código, probablemente es demasiado grande — divídelo en dos.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Pasos demasiado grandes:</strong> Un prompt que intenta generar toda la interfaz de usuario de una sola vez</li>
+<li><strong>No pasar contexto entre pasos:</strong> Cada prompt empieza desde cero y el código se vuelve inconsistente</li>
+<li><strong>Saltarse la validación intermedia:</strong> Llegar al paso 8 y descubrir que el paso 1 estaba mal</li>
+<li><strong>Orden incorrecto:</strong> Implementar UI antes que la lógica de negocio</li>
+<li><strong>Prompts redundantes:</strong> Pedir lo mismo en diferentes pasos porque no se confía en el resultado anterior</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Diseñar la cadena antes de ejecutarla:</strong> Planifica todos los pasos antes de escribir el primer prompt</li>
+<li><strong>Cada paso debe tener una salida tangible:</strong> Código, documento, decisión — algo que se pueda revisar</li>
+<li><strong>Incluir validación en cada paso:</strong> "Verifica que el modelo de datos soporta todos los casos del requerimiento"</li>
+<li><strong>Numerar los pasos:</strong> Para trazabilidad y referencia en correcciones</li>
+<li><strong>Documentar por qué cada paso es necesario:</strong> Ayuda a identificar pasos redundantes o faltantes</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<ol>
+<li>Divide el proyecto en al menos 6 pasos atómicos</li>
+<li>Para cada paso, escribe un prompt específico</li>
+<li>Cada prompt debe usar el resultado del anterior</li>
+</ol>
+
+<h2>Mini reto</h2>
+<p>Pide a una IA que diseñe una cadena de prompts para un proyecto diferente (elige uno: generador de menús semanales, analizador de currículums, o chatbot de soporte técnico). Evalúa la cadena propuesta: ¿los pasos son atómicos? ¿Cada prompt incluye criterios de validación? ¿La secuencia es lógica? Mejora la cadena con tus conocimientos y documenta los cambios.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>Una cadena de prompts divide un proyecto grande en pasos pequeños y manejables</li>
+<li>Cada paso recibe el resultado del anterior como contexto</li>
+<li>Los pasos deben ser atómicos: cada uno genera una salida revisable</li>
+<li>La validación intermedia evita arrastrar errores a través de toda la cadena</li>
+<li>Una cadena bien diseñada produce código más consistente y requiere menos iteraciones</li>
+<li>Planificar la cadena antes de ejecutarla es tan importante como los prompts mismos</li>
+</ul>
+
+
+
 <p><strong>Entrega:</strong> Cadena de prompts documentada.</p>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

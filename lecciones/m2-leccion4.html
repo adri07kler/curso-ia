@@ -9,4 +9,110 @@
 <div class="highlight"><strong>Contraseña incorrecta:</strong><br>Given: Un usuario registrado con correo "a@b.com"<br>When: El usuario ingresa una contraseña incorrecta<br>Then: El sistema muestra "Contraseña incorrecta" y no inicia sesión</div>
 <div class="highlight"><strong>Cuenta bloqueada:</strong><br>Given: Un usuario ha fallado 3 intentos de inicio de sesión<br>When: El usuario intenta iniciar sesión nuevamente<br>Then: El sistema muestra "Cuenta bloqueada por 30 minutos"</div>
 <p>Los criterios de aceptación son directamente convertibles en pruebas automatizadas.</p>
+
+<h2>Introducción</h2>
+<p>Los criterios de aceptación son la "línea de meta" de cada requerimiento funcional. Definen las condiciones precisas que deben cumplirse para que una funcionalidad se considere terminada y correcta. En esta lección aprenderás a redactar criterios de aceptación usando el formato Given-When-Then del desarrollo guiado por comportamiento (BDD), la técnica más utilizada en la industria para alinear a desarrolladores, testers y stakeholders sobre lo que realmente significa "funciona".</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Comprender qué son los criterios de aceptación y por qué son necesarios</li>
+<li>Identificar la estructura Given-When-Then y sus componentes</li>
+<li>Redactar criterios de aceptación claros, objetivos y comprobables</li>
+<li>Aplicar el formato BDD a diferentes escenarios funcionales</li>
+<li>Analizar un requerimiento funcional y derivar sus criterios de aceptación</li>
+<li>Evaluar si un criterio de aceptación es verificable o subjetivo</li>
+</ul>
+
+<h2>Desarrollo: Criterios de aceptación en profundidad</h2>
+
+<h3>¿Por qué son importantes los criterios de aceptación?</h3>
+<p>Sin criterios de aceptación, cada persona involucrada en el proyecto tiene una definición diferente de "terminado". El desarrollador cree que está listo porque la función corre, el tester lo rechaza porque no maneja un caso borde, y el cliente pregunta por una funcionalidad que nunca se mencionó. Los criterios de aceptación ponen a todos en la misma página: son un contrato que define cuándo una historia de usuario o requerimiento está completo.</p>
+
+<h3>El formato Given-When-Then</h3>
+<p>Originado en la metodología BDD (Behavior-Driven Development), este formato estructura cada criterio en tres partes. <strong>Given</strong> establece el contexto inicial: el estado del sistema antes de la acción. <strong>When</strong> describe la acción o evento que dispara el comportamiento. <strong>Then</strong> especifica el resultado esperado, incluyendo cambios de estado, respuestas del sistema y efectos secundarios observables. Cada criterio debe ser una sentencia atómica: un escenario, un resultado.</p>
+
+<h3>De requerimiento a criterios</h3>
+<p>Un solo requerimiento funcional puede tener múltiples criterios de aceptación. Por ejemplo, para "RF-001: Inicio de sesión", los criterios incluyen: éxito, contraseña incorrecta, correo no registrado, cuenta bloqueada, sesión expirada. Cada uno es un escenario Given-When-Then independiente. La regla general: al menos un criterio para el camino feliz y uno para cada condición de error identificable.</p>
+
+<h3>Criterios de aceptación vs casos de prueba</h3>
+<p>Los criterios de aceptación describen <strong>qué</strong> debe pasar desde la perspectiva del usuario. Los casos de prueba describen <strong>cómo</strong> verificarlo a nivel técnico, incluyendo datos específicos, pasos detallados y aserciones de código. Los criterios son insumo directo para los casos de prueba: cada criterio se traduce en una o más pruebas automatizadas.</p>
+
+<h2>Ejemplos adicionales</h2>
+
+<div class="highlight"><strong>Registro de usuario exitoso:</strong><br>Given: Un visitante con correo "nuevo@correo.com" y contraseña "MiPass123"<br>When: El visitante completa el formulario de registro y envía<br>Then: El sistema crea la cuenta, envía un correo de verificación y redirige a "Verifica tu correo"</div>
+
+<div class="highlight"><strong>Búsqueda sin resultados:</strong><br>Given: Un catálogo con productos de electrónica y hogar<br>When: El usuario busca "zapatos"<br>Then: El sistema muestra "No se encontraron productos para 'zapatos'" y sugiere categorías disponibles</div>
+
+<h2>Comparación: Criterios de aceptación vs Casos de prueba</h2>
+<table><thead><tr><th>Aspecto</th><th>Criterio de aceptación</th><th>Caso de prueba</th></tr></thead><tbody>
+<tr><td>Propósito</td><td>Definir cuándo algo está terminado</td><td>Verificar técnicamente que funciona</td></tr>
+<tr><td>Audiencia</td><td>Stakeholders, equipo completo</td><td>Desarrolladores, testers</td></tr>
+<tr><td>Formato</td><td>Given-When-Then (lenguaje natural)</td><td>Pasos, datos, aserciones (lenguaje técnico)</td></tr>
+<tr><td>Granularidad</td><td>Un escenario por criterio</td><td>Múltiples variaciones por criterio</td></tr>
+<tr><td>Ejemplo</td><td>Given usuario registrado... Then ve el dashboard</td><td>POST /login {email, pass} → 200 + token JWT</td></tr>
+</tbody></table>
+
+<h2>💡 Consejo del instructor</h2>
+<div class="highlight"><strong>💡 Consejo profesional:</strong> No intentes escribir todos los criterios de aceptación de una sola vez. Comienza con el "camino feliz" (el escenario donde todo sale bien), luego agrega un criterio para cada condición de error que identifiques. Una buena técnica es preguntar: "¿Qué podría hacer que esto falle?" y escribir un criterio para cada respuesta. Con el tiempo, desarrollarás un instinto para identificar escenarios relevantes sin necesidad de enumerarlos todos.</div>
+
+<h2>⚠ Errores frecuentes</h2>
+<ul>
+<li><strong>Criterios subjetivos:</strong> Escribir "la página debe verse bien" no es verificable. En su lugar: "los elementos deben alinearse en una cuadrícula de 3 columnas en pantallas mayores a 768px".</li>
+<li><strong>Mezclar múltiples escenarios en un criterio:</strong> "Cuando el usuario inicia sesión, si es admin ve el panel, si es usuario ve el dashboard, si está bloqueado ve un mensaje". Son tres criterios, no uno.</li>
+<li><strong>Olvidar el contexto:</strong> Un criterio sin Given no tiene punto de partida. El sistema debe saber en qué estado está antes de ejecutar la acción.</li>
+<li><strong>Describir la implementación, no el comportamiento:</strong> "El sistema debe consultar la BD y comparar el hash" en lugar de "el sistema debe validar las credenciales".</li>
+<li><strong>No incluir el resultado negativo:</strong> Solo escribir qué pasa cuando funciona, omitiendo qué pasa cuando algo sale mal.</li>
+</ul>
+
+<h2>✔ Buenas prácticas</h2>
+<ul>
+<li><strong>Un criterio, un escenario:</strong> Cada criterio debe probar exactamente una cosa. Si necesitas "y" o "además", probablemente son dos criterios.</li>
+<li><strong>Usa datos concretos:</strong> En lugar de "un usuario válido", usa "un usuario con correo a@b.com y pass 12345678". Los datos concretos eliminan ambigüedad.</li>
+<li><strong>Redacta en tiempo presente:</strong> "When el usuario ingresa" no "When el usuario haya ingresado". El presente es más directo y fácil de leer.</li>
+<li><strong>Deriva criterios del RF:</strong> Cada requerimiento funcional debe tener al menos un criterio de aceptación. Si un RF no tiene criterios, está incompleto.</li>
+<li><strong>Revisa criterios con el equipo:</strong> Un criterio que el desarrollador interpreta diferente al tester necesita reescribirse. La revisión en equipo es parte del proceso.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Toma el siguiente requerimiento funcional: "RF-004: El sistema debe permitir a los usuarios recuperar su contraseña mediante correo electrónico". Redacta al menos 5 criterios de aceptación en formato Given-When-Then que cubran: solicitud exitosa, correo no registrado, enlace expirado, token inválido y límite de intentos diarios. Cada criterio debe ser atómico y verificable.</p>
+
+<h2>Mini reto</h2>
+<p>Revisa los criterios de aceptación que escribiste para la actividad práctica y tradúcelos a casos de prueba automatizados conceptuales. Para cada criterio, describe: (1) la petición o acción a ejecutar, (2) el resultado esperado, (3) cómo verificarlo mediante una aserción. Este ejercicio te prepara para implementar pruebas automatizadas reales a partir de tus criterios.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>Los criterios de aceptación definen objetivamente cuándo un requerimiento está cumplido.</li>
+<li>El formato Given-When-Then estructura cada criterio en contexto, acción y resultado.</li>
+<li>Un requerimiento funcional puede tener múltiples criterios: feliz y de error.</li>
+<li>Los criterios de aceptación son insumo directo para pruebas automatizadas.</li>
+<li>Deben ser atómicos (un escenario por criterio), concretos y verificables.</li>
+<li>La revisión con el equipo asegura que todos interpretan lo mismo.</li>
+</ul>
+
+<div class="conclusion"><p><strong>Conclusión:</strong> Los criterios de aceptación convierten requerimientos abstractos en condiciones comprobables. Son el puente entre "esto es lo que quiero" y "esto es lo que funciona". Invertir en redactarlos bien es la mejor inversión en calidad que puedes hacer: cada criterio claro es una prueba automatizada que no tendrás que depurar.</p></div>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube el archivo con el resultado de tu Actividad Práctica o Mini Reto y escribe una breve reflexión sobre lo que aprendiste.</p>
+  <div class="evidence-form" id="evidenceForm-m2-l4">
+    <div class="evidence-field">
+      <label for="fileInput-m2-l4">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m2-l4" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m2-l4">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m2-l4" rows="4" maxlength="500" oninput="actualizarContador('m2-l4')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m2-l4">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m2-l4')">Enviar Evidencia</button>
+    <div id="msg-m2-l4" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m2-l4" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m2-l4"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m2-l4"></blockquote>
+  </div>
+</div>
 </div>

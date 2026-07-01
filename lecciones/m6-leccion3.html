@@ -1,8 +1,184 @@
 <div class="lesson-content">
 <h1>6.3 Crear el contexto para la IA</h1>
 <p class="subtitle">Módulo 6 · Ejercicio</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Construir el context packet que se usará con la IA.</div>
-<h2>Actividad</h2>
-<ol><li>Define el objetivo y rol esperado de la IA</li><li>Describe el contexto del proyecto</li><li>Establece restricciones técnicas</li><li>Define criterios de aceptación</li><li>Especifica qué no debe hacer la IA</li></ol>
+
+<h2>Introducción</h2>
+<p>Una IA sin contexto es como un desarrollador que llega a un proyecto nuevo sin leer la documentación: puede escribir código, pero será genérico, incorrecto o irrelevante. El <em>context packet</em> es el documento que le entrega a la IA toda la información necesaria para generar código alineado con tu proyecto.</p>
+<p>En esta lección construirás el context packet para el proyecto final del curso, usando la plantilla de la Lección 3.4. Un buen contexto es la diferencia entre código que "funciona" y código que "resuelve el problema correcto".</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Definir el objetivo y rol que debe asumir la IA en un proyecto</li>
+<li>Describir el contexto del proyecto de manera estructurada y completa</li>
+<li>Establecer restricciones técnicas claras para guiar las decisiones de la IA</li>
+<li>Definir criterios de aceptación que la IA pueda usar como guía</li>
+<li>Especificar límites explícitos sobre lo que la IA no debe hacer</li>
+</ul>
+
+<h2>Desarrollo del contenido</h2>
+
+<h3>¿Qué es un context packet?</h3>
+<p>Un context packet es un documento estructurado que se entrega a la IA junto con cada prompt para garantizar que el código generado sea consistente con el proyecto. No es un prompt en sí mismo, sino el "manual de bienvenida" del proyecto. Cada prompt que escribas hará referencia a este contexto.</p>
+
+<h3>Componentes del context packet</h3>
+
+<h4>1. Objetivo y rol de la IA</h4>
+<p>Define qué esperas de la IA y cómo debe comportarse. Ejemplo para nuestro proyecto:</p>
+<div class="highlight"><strong>Rol:</strong> Asistente de desarrollo senior especializado en aplicaciones web con JavaScript, HTML/CSS y localStorage.<br>
+<strong>Objetivo:</strong> Generar código funcional y bien estructurado para una aplicación web de gestión de tareas personales, siguiendo las restricciones técnicas y criterios de aceptación definidos.</div>
+
+<h4>2. Contexto del proyecto</h4>
+<p>Describe el proyecto en detalle. Incluye el propósito, los usuarios, las funcionalidades principales y la arquitectura general.</p>
+<div class="highlight"><strong>Nombre:</strong> TaskFlow — Gestor de tareas personales<br>
+<strong>Propósito:</strong> Aplicación web que permite a usuarios organizar tareas en proyectos, asignar etiquetas, establecer prioridades y fechas de vencimiento, con recordatorios y dashboard de estadísticas.<br>
+<strong>Usuarios:</strong> Usuarios individuales (sin colaboración multi-usuario)<br>
+<strong>Stack técnico:</strong> HTML5, CSS3, JavaScript vanilla, localStorage para persistencia</div>
+
+<h4>3. Restricciones técnicas</h4>
+<p>Las restricciones le indican a la IA qué no puede usar, qué debe priorizar y cómo debe estructurar el código.</p>
+<ul>
+<li>Sin frameworks externos (React, Vue, Angular)</li>
+<li>Sin librerías de terceros (no npm, no CDN externo excepto para iconos)</li>
+<li>Persistencia únicamente con localStorage</li>
+<li>Diseño responsive (mobile-first)</li>
+<li>Código en español (nombres de variables, funciones, comentarios)</li>
+<li>Accesibilidad básica (etiquetas semánticas, ARIA donde aplique)</li>
+</ul>
+
+<h4>4. Criterios de aceptación</h4>
+<p>Son la guía que la IA usará para saber si su código es correcto. Deben ser específicos y verificables.</p>
+<div class="highlight">✅ El usuario puede crear, editar y eliminar proyectos<br>
+✅ El usuario puede crear tareas dentro de un proyecto con título, prioridad y fecha<br>
+✅ Las tareas se ordenan por prioridad (alta primero) y luego por fecha de vencimiento<br>
+✅ El dashboard muestra: total de tareas, tareas completadas, tareas por prioridad<br>
+✅ Los recordatorios se muestran como notificaciones en el navegador</div>
+
+<h4>5. Qué no debe hacer la IA</h4>
+<p>Los límites son tan importantes como las instrucciones. Indican a la IA dónde detenerse.</p>
+<div class="highlight">🔴 La IA NO debe:<br>
+- Implementar autenticación de usuarios (está fuera de alcance)<br>
+- Usar base de datos externa o APIs de terceros<br>
+- Generar código de backend (es 100% frontend)<br>
+- Agregar funcionalidades no especificadas en los requerimientos<br>
+- Optimizar prematuramente (rendimiento antes que funcionalidad)</div>
+
+<h2>Comparación: Sin contexto vs. Con context packet</h2>
+<table>
+<thead>
+<tr><th>Aspecto</th><th>Sin contexto</th><th>Con context packet</th></tr>
+</thead>
+<tbody>
+<tr><td>Consistencia del código</td><td>Variable, mezcla estilos</td><td>Uniforme, sigue convenciones</td></tr>
+<tr><td>Tecnologías usadas</td><td>La IA elige lo que "cree" mejor</td><td>Restringido al stack definido</td></tr>
+<tr><td>Nombres de variables</td><td>En inglés (default de la IA)</td><td>En español (según restricción)</td></tr>
+<tr><td>Funcionalidades extra</td><td>Agrega features no solicitadas</td><td>Se limita a lo especificado</td></tr>
+<tr><td>Iteraciones necesarias</td><td>Muchas (corregir desviaciones)</td><td>Pocas (alineado desde el inicio)</td></tr>
+<tr><td>Calidad del resultado</td><td>Impredecible</td><td>Predecible y controlada</td></tr>
+</tbody>
+</table>
+
+<h2>Diagrama: Estructura del context packet</h2>
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin:15px 0;text-align:center;font-size:0.9rem;">
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:650px;margin:0 auto;">
+    <div style="background:#2563eb;color:#fff;padding:12px 18px;border-radius:8px;font-weight:bold;width:100%;">📦 CONTEXT PACKET</div>
+    <div style="background:#3b82f6;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;width:45%;min-width:140px;">🎯 Rol y objetivo</div>
+    <div style="background:#3b82f6;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;width:45%;min-width:140px;">📋 Contexto del proyecto</div>
+    <div style="background:#f59e0b;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;width:45%;min-width:140px;">🔒 Restricciones técnicas</div>
+    <div style="background:#22c55e;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;width:45%;min-width:140px;">✅ Criterios de aceptación</div>
+    <div style="background:#ef4444;color:#fff;padding:10px 16px;border-radius:8px;font-weight:bold;width:45%;min-width:140px;">🚫 Límites (qué NO hacer)</div>
+  </div>
+  <p style="margin-top:12px;color:#64748b;font-size:0.85rem;">Cada sección del context packet cumple una función específica. Juntas forman una guía completa para la IA.</p>
+</div>
+
+<h2>Ejemplo de context packet en acción</h2>
+<p>Sin context packet, si pides "crea una función para guardar tareas", la IA podría generar:</p>
+<div class="highlight" style="border-left-color:#ef4444;"><pre><code>// Sin contexto — la IA asume MongoDB, async/await y npm
+const mongoose = require('mongoose');
+async function saveTask(taskData) {
+  const task = new Task(taskData);
+  return await task.save();
+}</code></pre></div>
+<p>Con context packet (JavaScript vanilla + localStorage), la misma petición genera:</p>
+<div class="highlight" style="border-left-color:#22c55e;"><pre><code>// Con contexto — alineado al stack del proyecto
+function guardarTarea(tarea) {
+  const tareas = JSON.parse(localStorage.getItem('tareas') || '[]');
+  tareas.push(tarea);
+  localStorage.setItem('tareas', JSON.stringify(tareas));
+}</code></pre></div>
+
+<div class="highlight">
+<strong>💡 Consejo del instructor:</strong> El context packet es el documento más valioso de tu flujo de trabajo con IA. Invierte tiempo en hacerlo completo y preciso. Un context packet bien escrito puede reducir las iteraciones de 10 a 2 o 3. Cuando veas que la IA se desvía, no arregles el prompt — arregla el context packet.
+</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+<li><strong>Contexto demasiado corto:</strong> "Haz una app de tareas" no es un context packet</li>
+<li><strong>Olvidar restricciones técnicas:</strong> La IA usará React si no le dices que no</li>
+<li><strong>No definir el "qué no hacer":</strong> La IA agregará funcionalidades que no pediste</li>
+<li><strong>Contexto contradictorio:</strong> Decir "sin frameworks" y luego "usar componentes reutilizables" sin aclarar</li>
+<li><strong>No actualizar el contexto:</strong> El context packet debe evolucionar con el proyecto</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+<li><strong>Escribir el contexto en un archivo separado:</strong> Para reutilizarlo en múltiples prompts</li>
+<li><strong>Ser específico en las restricciones:</strong> "localStorage" no "persistencia"</li>
+<li><strong>Incluir ejemplos de código esperado:</strong> La IA entiende mejor con ejemplos</li>
+<li><strong>Revisar el contexto periódicamente:</strong> Lo que no funciona se ajusta</li>
+<li><strong>Compartir el contexto con el equipo:</strong> Todos usan la misma guía para prompts consistentes</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<ol>
+<li>Define el objetivo y rol esperado de la IA</li>
+<li>Describe el contexto del proyecto</li>
+<li>Establece restricciones técnicas</li>
+<li>Define criterios de aceptación</li>
+<li>Especifica qué no debe hacer la IA</li>
+</ol>
+
+<h2>Mini reto</h2>
+<p>Pide a una IA que genere un context packet para el proyecto de la idea que trabajaste en lecciones anteriores. Luego evalúa el resultado: ¿qué secciones incluyó? ¿Qué información crucial omitió? Compara el context packet generado por la IA con el que tú escribiste y documenta las diferencias. ¿Cuál es más completo y por qué?</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>El context packet es el documento que guía a la IA durante todo el proyecto</li>
+<li>Debe incluir: rol, contexto, restricciones técnicas, criterios de aceptación y límites</li>
+<li>Un buen contexto reduce drásticamente las iteraciones necesarias</li>
+<li>Las restricciones técnicas evitan que la IA use tecnologías no autorizadas</li>
+<li>Los límites ("qué no hacer") son tan importantes como las instrucciones positivas</li>
+<li>El context packet debe actualizarse a medida que el proyecto evoluciona</li>
+</ul>
+
+
+
 <p><strong>Entrega:</strong> Context packet completo usando la plantilla de la Lección 3.4.</p>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
 </div>

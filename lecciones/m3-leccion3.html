@@ -1,10 +1,168 @@
 <div class="lesson-content">
 <h1>3.3 Qué información sobra o confunde</h1>
 <p class="subtitle">Módulo 3 · Video</p>
+
 <div class="highlight"><strong>Objetivo:</strong> Identificar información irrelevante o contraproducente que empeora las respuestas de la IA.</div>
+
+<h2>Introducción</h2>
+<p>Si dar poca información es malo, dar demasiada o información incorrecta puede ser peor. La IA procesa todo lo que recibe y, si incluyes ruido, ese ruido contaminará la respuesta. Saber qué eliminar es tan importante como saber qué incluir.</p>
+<p>En esta lección aprenderás a identificar los tipos de información que debes excluir de tus prompts y contextos para obtener respuestas más precisas y útiles.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+  <li>Identificar información irrelevante que degrada las respuestas de la IA.</li>
+  <li>Reconocer instrucciones contradictorias y roles ambiguos.</li>
+  <li>Evaluar críticamente cada línea de contexto con la pregunta "¿esto ayuda a la IA a hacer su tarea?"</li>
+  <li>Depurar prompts existentes eliminando elementos que confunden a la IA.</li>
+</ul>
+
 <h2>Información que sobra</h2>
-<ul><li>Historia del proyecto no relevante para la tarea actual</li><li>Detalles personales del equipo</li><li>Información duplicada o contradictoria</li><li>Especificaciones de versiones anteriores no actualizadas</li><li>Código no relacionado con la tarea</li></ul>
+<ul>
+  <li>Historia del proyecto no relevante para la tarea actual</li>
+  <li>Detalles personales del equipo</li>
+  <li>Información duplicada o contradictoria</li>
+  <li>Especificaciones de versiones anteriores no actualizadas</li>
+  <li>Código no relacionado con la tarea</li>
+</ul>
+
 <h2>Información que confunde</h2>
-<ul><li>Instrucciones contradictorias ("hazlo simple" pero "implementa todos los patrones")</li><li>Roles ambiguos ("actúa como experto pero no tomes decisiones")</li><li>Demasiados ejemplos irrelevantes</li></ul>
+<ul>
+  <li>Instrucciones contradictorias ("hazlo simple" pero "implementa todos los patrones")</li>
+  <li>Roles ambiguos ("actúa como experto pero no tomes decisiones")</li>
+  <li>Demasiados ejemplos irrelevantes</li>
+</ul>
+
 <div class="highlight"><strong>Regla:</strong> Cada línea de contexto debe responder a "¿esto ayuda a la IA a hacer su tarea?" Si no, elimínala.</div>
+
+<h2>Desglose detallado</h2>
+
+<h3>Información redundante</h3>
+<p>Repetir la misma información de diferentes formas no ayuda a la IA; al contrario, puede confundirla si las repeticiones no son exactamente iguales. La IA puede ponderar incorrectamente la información repetida.</p>
+<p><strong>Ejemplo de redundancia:</strong> "El proyecto usa React 18. Trabajamos con React 18. La versión de React es 18." Basta con decirlo una vez.</p>
+
+<h3>Información desactualizada</h3>
+<p>Si migraste de MySQL a PostgreSQL pero en el contexto aún aparece MySQL, la IA generará código incompatible. Mantén el contexto sincronizado con la realidad del proyecto.</p>
+
+<h3>Instrucciones contradictorias</h3>
+<p>Son especialmente dañinas porque la IA no sabe qué priorizar. Puede ignorar ambas, combinarlas incorrectamente o decidir arbitrariamente.</p>
+<p><strong>Ejemplo:</strong> "Hazlo rápido y sin deuda técnica" Rápido y sin deuda técnica son objetivos opuestos.</p>
+
+<h3>Roles ambiguos</h3>
+<p>Un rol contradictorio paraliza a la IA. Si le pides que sea "experto pero que no decida", estás anulando su capacidad de acción.</p>
+<p><strong>Ejemplo claro:</strong> "Eres un asesor senior de seguridad. Tu trabajo es recomendar, no implementar. Señala los riesgos y sugiere soluciones."</p>
+
+<h2>Tabla comparativa: Prompt limpio vs Prompt ruidoso</h2>
+<div style="overflow-x:auto;">
+  <table style="width:100%;border-collapse:collapse;margin:15px 0;">
+    <thead>
+      <tr style="background:#eef2ff;">
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Aspecto</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Prompt ruidoso</th>
+        <th style="padding:12px;border:1px solid #d1d5db;text-align:left;">Prompt limpio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;">Longitud</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Largo, con párrafos innecesarios</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Conciso, cada línea aporta</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;">Claridad</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Mensajes contradictorios</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Instrucciones coherentes</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;">Precisión</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Baja, la IA se pierde en el ruido</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">Alta, la IA entiende exactamente qué hacer</td>
+      </tr>
+      <tr>
+        <td style="padding:10px;border:1px solid #d1d5db;">Tokens útiles</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">30-40% del total</td>
+        <td style="padding:10px;border:1px solid #d1d5db;">90-100% del total</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<h2>Ejemplos reales</h2>
+
+<h3>Ejemplo 1: Prompt ruidoso</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Hola, soy Juan, tengo 3 perros y trabajo desde casa. Estoy haciendo un proyecto para mi tía que tiene una pastelería. La pastelería se llama "Dulce Tentación" y está en la calle 52. La página necesita un catálogo de productos, carrito de compras y pasarela de pago. Usa React que es lo que estoy aprendiendo. También me gusta el helado de chocolate. Hazlo sencillo pero que tenga todo lo necesario. No uses librerías externas porque no sé instalarlas. Pero que se vea profesional. Ah, y que sea responsive. El dominio va a ser dulcetentacion.com pero aún no lo compro. Los colores de la pastelería son rosa y blanco. Mi tía quiere vender pasteles, galletas y brownies. Los precios van de $5 a $50. Quiero que puedas registrarte con email y Google. También notificaciones cuando haya un pedido nuevo.</code></pre>
+
+<h3>Ejemplo 2: Mismo proyecto, prompt limpio</h3>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>Objetivo: Tienda online para pastelería "Dulce Tentación"
+Rol: Desarrollador frontend con experiencia en React
+Stack: React 18, CSS puro (sin librerías externas)
+Colores: Rosa (#f9a8d4) y blanco (#ffffff)
+Requerimientos:
+- Catálogo con pasteles, galletas y brownies ($5-$50)
+- Carrito de compras
+- Pasarela de pago
+- Registro con email y Google (simulado)
+- Notificaciones de pedido (simuladas)
+- Diseño responsive
+Restricción: Sin librerías externas de UI, sin backend real
+Formato: Código completo del frontend con datos mock</code></pre>
+
+<div class="highlight"><strong>Consejo del instructor:</strong> Antes de enviar un prompt, léelo en voz alta. Si hay frases que no aportan directamente a la tarea, elimínalas. Cada palabra que conserves debe tener un propósito.</div>
+
+<h2>Errores frecuentes</h2>
+<ul>
+  <li><strong>Incluir contexto de sesiones anteriores:</strong> Si cambias de tema, no arrastres el historial previo. La IA puede mezclar conceptos de ambas conversaciones.</li>
+  <li><strong>Usar calificativos subjetivos:</strong> "bonito", "profesional", "moderno" significan cosas diferentes para cada persona. Prefiere descripciones concretas: "con bordes redondeados de 8px, sombra suave, colores azul y blanco".</li>
+  <li><strong>Poner reglas y excepciones en el mismo párrafo:</strong> Separa "qué debe hacer" de "qué no debe hacer" en secciones distintas para evitar contradicciones.</li>
+</ul>
+
+<h2>Buenas prácticas</h2>
+<ul>
+  <li>Aplica la regla de "una línea, un propósito": cada línea debe aportar información única.</li>
+  <li>Usa secciones separadas para reglas, restricciones y excepciones.</li>
+  <li>Reemplaza adjetivos subjetivos por especificaciones medibles.</li>
+  <li>Mantén un archivo de contexto limpio y actualizado, revisándolo semanalmente.</li>
+  <li>Si un prompt tiene más de 15 líneas, probablemente contiene ruido. Depúralo.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Toma el siguiente prompt ruidoso y transfórmalo en un prompt limpio y estructurado:</p>
+<pre style="background:#f8fafc;padding:15px;border-radius:8px;border:1px solid #e2e8f0;"><code>"Necesito una app de tareas. Soy diseñador gráfico pero estoy aprendiendo a programar. La app debe ser como Trello pero más simple. Mi amigo Pedro también va a ayudar pero él sabe Vue. Quiero que uses React porque es más popular. Los colores me gustan azules. Que tenga drag and drop. También oscuro porfa. Hazlo bien porque lo voy a presentar en mi trabajo. No quiero que tenga errores. Las tareas deben tener título, descripción y fecha. Categorías: pendiente, en progreso, terminado. Guarda en localStorage."</code></pre>
+
+<h2>Mini reto</h2>
+<p>Revisa el último prompt que le enviaste a una IA. Identifica al menos tres elementos que sobran o confunden. Reescríbelo aplicando lo aprendido y compara las respuestas. ¿Mejoró la calidad?</p>
+
+<h2>Resumen</h2>
+<ul>
+  <li>La información redundante, desactualizada o contradictoria empeora las respuestas de la IA.</li>
+  <li>Los roles ambiguos y las instrucciones contradictorias paralizan a la IA.</li>
+  <li>Cada línea debe pasar la prueba: ¿esto ayuda a la IA a hacer su tarea?</li>
+  <li>Reemplaza adjetivos subjetivos por especificaciones concretas.</li>
+  <li>Un prompt limpio es más corto, más claro y produce mejores resultados.</li>
+</ul>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube tu evidencia de la actividad práctica:</p>
+  <div class="evidence-form" id="evidenceForm-m3-l2">
+    <div class="evidence-field">
+      <label for="fileInput-m3-l2">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m3-l2" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m3-l2">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m3-l2" rows="4" maxlength="500" oninput="actualizarContador('m3-l2')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m3-l2">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m3-l2')">Enviar Evidencia</button>
+    <div id="msg-m3-l2" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m3-l2" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m3-l2"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m3-l2"></blockquote>
+  </div>
+</div>
+
+

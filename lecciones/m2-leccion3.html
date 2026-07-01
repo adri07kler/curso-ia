@@ -17,4 +17,109 @@ con su correo electrónico y contraseña.
 <tr><td>"Los usuarios pueden subir archivos"</td><td>"Pueden subir PDF e imágenes (jpg, png) de hasta 10MB"</td></tr>
 <tr><td>"Debe haber seguridad"</td><td>"Debe usar HTTPS, bcrypt, JWT con expiración de 1 hora"</td></tr>
 </tbody></table>
+
+<h2>Introducción</h2>
+<p>Los requerimientos funcionales son la columna vertebral de todo proyecto de software. Definen <em>qué</em> debe hacer el sistema: cada función, cada regla de negocio, cada interacción esperada. En esta lección aprenderás a redactar requerimientos funcionales con la claridad y precisión necesarias para que un equipo de desarrollo (humano o IA) los entienda sin ambigüedad. Dominar esta habilidad es clave para reducir iteraciones, evitar malentendidos y entregar software que realmente resuelva el problema planteado.</p>
+
+<h2>Objetivos de aprendizaje</h2>
+<p>Al finalizar esta lección el estudiante será capaz de:</p>
+<ul>
+<li>Comprender la diferencia entre requerimientos funcionales y no funcionales</li>
+<li>Identificar las características de un requerimiento funcional bien redactado</li>
+<li>Redactar requerimientos funcionales claros, verificables y completos</li>
+<li>Aplicar el formato estándar de identificación RF-XXX para documentar requerimientos</li>
+<li>Analizar requerimientos vagos y transformarlos en especificaciones accionables</li>
+<li>Evaluar la calidad de un conjunto de requerimientos funcionales</li>
+</ul>
+
+<h2>Desarrollo: Cómo escribir requerimientos funcionales de calidad</h2>
+
+<h3>¿Qué es un requerimiento funcional?</h3>
+<p>Un requerimiento funcional describe una capacidad o comportamiento específico que el sistema debe tener. Responde a la pregunta: <strong>"¿Qué debe hacer el sistema?"</strong>. Ejemplos: "el sistema debe enviar un correo de bienvenida", "el sistema debe calcular el total del carrito", "el sistema debe permitir filtrar productos por categoría".</p>
+
+<h3>Identificación y nomenclatura</h3>
+<p>Cada requerimiento funcional debe tener un identificador único. El formato más común es <strong>RF-XXX</strong> (Requerimiento Funcional + número secuencial). Esto permite trazabilidad: en pruebas, en código, en documentación. Un RF-001 en la especificación debe corresponder a una prueba RF-001-TEST y a un commit que haga referencia a RF-001.</p>
+
+<h3>Estructura de un requerimiento funcional</h3>
+<p>Un requerimiento funcional bien escrito incluye: (1) identificador único, (2) título descriptivo, (3) descripción detallada del comportamiento esperado, (4) condiciones y restricciones, (5) criterios de aceptación implícitos o explícitos. No debe incluir detalles de implementación: <em>cómo</em> se implementa es decisión del equipo técnico; <em>qué</em> debe hacer es responsabilidad del requerimiento.</p>
+
+<h3>Requerimientos funcionales vs no funcionales</h3>
+<p>Mientras los funcionales describen <strong>comportamientos</strong>, los no funcionales describen <strong>cualidades</strong> del sistema: rendimiento (&lt;500ms), seguridad (HTTPS, bcrypt), escalabilidad (soportar 10,000 usuarios concurrentes), disponibilidad (99.9% uptime). Ambos tipos son necesarios, pero esta lección se enfoca en los funcionales.</p>
+
+<h2>Ejemplos adicionales</h2>
+
+<div class="highlight"><strong>RF-002 — Registro de usuario:</strong><br>El sistema debe permitir que un visitante se registre proporcionando: nombre completo, correo electrónico válido y una contraseña de al menos 8 caracteres.<br>- El sistema debe enviar un correo de verificación al registro exitoso<br>- El sistema no debe permitir registros con correos duplicados<br>- El sistema debe mostrar "Correo ya registrado" si el correo existe</div>
+
+<div class="highlight"><strong>RF-003 — Búsqueda de productos:</strong><br>El sistema debe permitir buscar productos por nombre, categoría y rango de precio.<br>- Los resultados deben mostrar nombre, precio, imagen y calificación<br>- La búsqueda debe devolver resultados en menos de 2 segundos<br>- Si no hay resultados, mostrar "No se encontraron productos"</div>
+
+<h2>Comparación: Requerimiento funcional vs no funcional</h2>
+<table><thead><tr><th>Aspecto</th><th>Funcional</th><th>No funcional</th></tr></thead><tbody>
+<tr><td>Qué describe</td><td>Comportamiento del sistema</td><td>Cualidad del sistema</td></tr>
+<tr><td>Ejemplo</td><td>"El sistema debe enviar un email de confirmación"</td><td>"El email debe entregarse en menos de 5 segundos"</td></tr>
+<tr><td>Verificación</td><td>Prueba funcional (se envió / no se envió)</td><td>Prueba de rendimiento (medir tiempo)</td></tr>
+<tr><td>Prioridad</td><td>MVP obligatorio</td><td>Mejora progresiva</td></tr>
+</tbody></table>
+
+<h2>💡 Consejo del instructor</h2>
+<div class="highlight"><strong>💡 Consejo profesional:</strong> Al escribir requerimientos funcionales, usa siempre el verbo "debe" (must en inglés). Esto indica obligación. Frases como "puede", "sería bueno" o "idealmente" generan ambigüedad. Un requerimiento funcional no es negociable: o se cumple o no se cumple. Si algo es opcional, documéntalo como "deseable" en una sección aparte, no como RF.</div>
+
+<h2>⚠ Errores frecuentes</h2>
+<ul>
+<li><strong>Mezclar implementación con especificación:</strong> Escribir "el sistema debe usar una base de datos MongoDB" en lugar de "el sistema debe almacenar usuarios y productos". La IA o el equipo decidirán la tecnología.</li>
+<li><strong>Requerimientos imposibles de verificar:</strong> Frases como "el sistema debe ser intuitivo" son subjetivas. En su lugar: "el sistema debe permitir completar el registro en menos de 3 pasos".</li>
+<li><strong>Requerimientos demasiado grandes:</strong> Un RF que describe un flujo completo de 10 pasos es difícil de probar. Divide en RF más pequeños y específicos.</li>
+<li><strong>Olvidar condiciones de error:</strong> Solo describir el camino feliz. Un buen RF incluye qué pasa cuando algo falla.</li>
+<li><strong>Escribir para ti mismo:</strong> Usar jerga interna o sobrentender conocimiento del negocio. Un RF debe ser comprensible para cualquier persona del equipo, incluyendo nuevos integrantes.</li>
+</ul>
+
+<h2>✔ Buenas prácticas</h2>
+<ul>
+<li><strong>Usa numeración única:</strong> Identifica cada RF con un código como RF-001, RF-002. Facilita trazabilidad en pruebas y desarrollo.</li>
+<li><strong>Escribe en voz activa:</strong> "El sistema debe mostrar" en lugar de "debe ser mostrado por el sistema". Es más directo y claro.</li>
+<li><strong>Incluye ejemplos concretos:</strong> Un RF sobre formatos de fecha debe decir "dd/mm/aaaa" no "formato estándar de fecha".</li>
+<li><strong>Revisa con pares:</strong> Pide a otro miembro del equipo que lea el RF y lo interprete. Si interpreta algo diferente, tu RF no es claro.</li>
+<li><strong>Mantén un glosario:</strong> Si usas términos del negocio, defínelos. "Cliente premium", "orden cancelada", "inventario disponible" pueden significar cosas distintas para diferentes personas.</li>
+</ul>
+
+<h2>Actividad práctica</h2>
+<p>Imagina que trabajas en un equipo que desarrolla una aplicación de delivery de comida. Redacta 5 requerimientos funcionales para la funcionalidad de "seguimiento de pedido en tiempo real". Cada RF debe incluir: identificador, título, descripción detallada y condiciones de error. Aplica las características de claridad, verificabilidad, completitud, consistencia y necesidad que viste en esta lección.</p>
+
+<h2>Mini reto</h2>
+<p>Toma un requerimiento vago como "El sistema debe tener un buen sistema de notificaciones" y transfórmalo en al menos 4 requerimientos funcionales específicos y verificables. Incluye notificaciones push, email, SMS e in-app. Define para cada uno: cuándo se dispara, qué contenido muestra, y qué ocurre si el canal de notificación falla.</p>
+
+<h2>Resumen</h2>
+<ul>
+<li>Los requerimientos funcionales definen <em>qué</em> debe hacer el sistema, no <em>cómo</em>.</li>
+<li>Deben ser claros, verificables, completos, consistentes y necesarios.</li>
+<li>Usa identificadores RF-XXX para trazabilidad entre requerimientos, pruebas y código.</li>
+<li>Incluye siempre condiciones de error y caminos alternativos.</li>
+<li>Separa requerimientos funcionales de no funcionales: comportamientos vs cualidades.</li>
+<li>Un RF bien escrito reduce iteraciones, evita malentendidos y acelera el desarrollo.</li>
+</ul>
+
+<div class="conclusion"><p><strong>Conclusión:</strong> La calidad de tus requerimientos funcionales determina la calidad del software que recibirás. Invertir tiempo en escribirlos bien es la forma más efectiva de ahorrar tiempo en desarrollo, pruebas y correcciones. Un requerimiento claro es el mejor regalo que puedes darle a tu equipo.</p></div>
+
+<div class="evidence-section">
+  <h2>📤 Entrega de Evidencia</h2>
+  <p>Sube el archivo con el resultado de tu Actividad Práctica o Mini Reto y escribe una breve reflexión sobre lo que aprendiste.</p>
+  <div class="evidence-form" id="evidenceForm-m2-l3">
+    <div class="evidence-field">
+      <label for="fileInput-m2-l3">Selecciona tu archivo (.pdf, .docx, .zip, .png, .jpg, .jpeg):</label>
+      <input type="file" id="fileInput-m2-l3" accept=".pdf,.docx,.zip,.png,.jpg,.jpeg">
+    </div>
+    <div class="evidence-field">
+      <label for="reflection-m2-l3">¿Qué aprendiste al realizar esta actividad?</label>
+      <textarea id="reflection-m2-l3" rows="4" maxlength="500" oninput="actualizarContador('m2-l3')" placeholder="Escribe tu reflexión aquí..."></textarea>
+      <div class="char-counter"><span id="counter-m2-l3">0</span> / 500 caracteres</div>
+    </div>
+    <button class="btn-evidencia" onclick="enviarEvidencia('m2-l3')">Enviar Evidencia</button>
+    <div id="msg-m2-l3" class="evidence-msg"></div>
+  </div>
+  <div id="evidenceSubmitted-m2-l3" class="evidence-submitted" style="display:none;">
+    <p><strong>✅ Evidencia enviada correctamente</strong></p>
+    <p><strong>Archivo:</strong> <span id="fileName-m2-l3"></span></p>
+    <p><strong>Tu reflexión:</strong></p>
+    <blockquote id="savedReflection-m2-l3"></blockquote>
+  </div>
+</div>
 </div>
